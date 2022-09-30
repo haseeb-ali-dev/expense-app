@@ -1,6 +1,8 @@
+import Navbar from 'components/Navbar'
+
 const App = () => (
   <div>
-    <h1>Expense App</h1>
+    <Navbar />
   </div>
 )
 
