@@ -1,0 +1,10 @@
+.resturant-box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.resturant-label{
+  margin: 8px 10px;
+}

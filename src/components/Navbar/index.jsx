@@ -11,7 +11,7 @@ const index = () => {
     <div className={navClass} id='myTopnav'>
       <a href='#home' className='active'>Expense App</a>
       <a href='#news'>Orders</a>
-      <a href='#contact'>Profile</a>
+      <a href='#contact'>Create New</a>
       <button type='button' className={iconClass} onClick={() => setResponsive(!responsive)}>
         <img src={Toggler} alt='toggler' />
       </button>

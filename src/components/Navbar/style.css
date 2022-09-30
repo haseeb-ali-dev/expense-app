@@ -33,11 +33,13 @@
   }
 
   .topnav button.icon {
+    border: none;
     float: right;
     display: block;
-    padding-top: 6px;
-    background-color: Transparent;
-    background-repeat: no-repeat;
+    text-align: center;
+    padding-top: 4px;
+    text-decoration: none;
+    background-color: white;
   }
 }
 
