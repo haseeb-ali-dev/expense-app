@@ -3,30 +3,38 @@ import { useState } from 'react'
 import Button from 'components/Button'
 import Input from 'components/Input'
 
-// import { createDoc } from 'Database'
+import { addItem } from 'api/items'
+import { ADD_NEW_ITEM } from 'store/items'
+import { useDispatch } from 'react-redux'
 
 import 'components/ItemForm/style.css'
 
-const ItemForm = ({ setItems }) => {
+const ItemForm = () => {
   const initialValues = { name: '', price: '' }
+
+  const dispatch = useDispatch()
 
   const [values, setValues] = useState(initialValues)
 
   const handleChange = (e) => setValues({ ...values, [e.target.name]: e.target.value.trim() })
 
-  const addToDB = () => {
-    // createDoc('values', values)
+  const addToDB = async () => {
+    try {
+      await addItem(values).then(() => alert('Added Succesfully'))
+      dispatch(ADD_NEW_ITEM({ item: values }))
+    } catch (error) {
+      // console.log('Error in adding doc: ', error)
+    }
   }
 
-  const addItem = (e) => {
+  const submitHandler = (e) => {
     e.preventDefault()
-    setItems(prevItems => [values, ...prevItems])
     addToDB()
     setValues(initialValues)
   }
 
   return (
-    <form onSubmit={addItem} className='item-box'>
+    <form onSubmit={submitHandler} className='item-box'>
       <Input type='text' name='name' required placeholder='Enter Name' onChange={handleChange} value={values.name} />
       <Input type='number' name='price' required placeholder='Enter Price' onChange={handleChange} value={values.price} />
       <Button className='success' text='+ Add' type='submit' />
