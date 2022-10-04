@@ -6,7 +6,7 @@ const Items = ({ items }) => (
     <legend>Items</legend>
     {items.length === 0
       ? <h3 className='no-items'>No items exists</h3>
-      : items.map(item => <ListItem item={item} />)}
+      : items.map(item => <ListItem item={item} key={item.name} />)}
   </fieldset>
 )
 
