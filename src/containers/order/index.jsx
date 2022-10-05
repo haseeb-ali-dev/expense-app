@@ -12,6 +12,7 @@ const Order = () => (
     <Resturant />
     <ItemForm />
     <Items />
+    <Button text='Save' className='success save-btn' disabled />
     <Link to='/person' className='add-person-btn'>
       <Button text='Add Person -->' />
     </Link>

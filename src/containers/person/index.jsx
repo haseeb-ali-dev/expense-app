@@ -1,25 +1,15 @@
-import ItemForm from 'components/ItemForm'
-
-import 'containers/order/style.css'
-import Resturant from 'components/Resturant'
-import Items from 'components/Items'
+import 'containers/person/style.css'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
 import Button from 'components/Button'
+import PersonOrder from 'components/PersonOrder'
 
-const Persons = () => {
-  const [items, setItems] = useState([])
-
-  return (
-    <div className='persons-box'>
-      <Resturant />
-      <ItemForm setItems={setItems} />
-      <Items items={items} />
-      <Link to='/person'>
-        <Button text='Add Person -->' />
-      </Link>
-    </div>
-  )
-}
+const Persons = () => (
+  <div className='persons-box'>
+    <PersonOrder />
+    <Link to='/person' className='next-btn'>
+      <Button text='Next ->' />
+    </Link>
+  </div>
+)
 
 export default Persons

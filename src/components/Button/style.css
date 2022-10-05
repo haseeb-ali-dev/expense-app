@@ -27,7 +27,11 @@
   color: rgb(27, 26, 26);
 }
 
-.button:hover{
+.button:hover {
   font-size: 12px;
   font-weight: bold;
+}
+
+.button:disabled {
+  cursor: not-allowed;
 }

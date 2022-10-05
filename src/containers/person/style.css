@@ -1,19 +1,16 @@
-.order-box {
+.persons-box {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding-block: 10px;
   width: 100%;
 }
 
-.add-person-btn {
+.next-btn{
   text-decoration: none;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-}
-
-.save-btn {
-  width: max-content;
 }
