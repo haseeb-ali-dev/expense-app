@@ -1,0 +1,15 @@
+.add-person-btn {
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.save-btn {
+  width: max-content;
+}
+
+.disabled {
+  pointer-events: none;
+}

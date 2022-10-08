@@ -1,12 +1,18 @@
-import 'components/PersonItems/style.css'
+import { useSelector } from 'react-redux'
+import ListItem from 'components/ListItem'
 
-const PersonItems = () => (
-  <fieldset className='items-box'>
-    <legend>Selected Items</legend>
-    {/* {items.length === 0
-      ? <h3 className='no-items'>Loading items.......</h3>
-      : items.map(item => <h1>{item}</h1>)} */}
-  </fieldset>
-)
+const personItems = () => {
+  const { items } = useSelector(state => state.person)
+  const itemList = (
+    <fieldset className='border border-2 p-2'>
+      <legend className='float-none w-auto px-1 fs-5'>Selected Items</legend>
+      {items.map(item => <div className='d-inline-flex m-1 border py-1 px-2' key={item.name}><ListItem item={item} /></div>)}
+    </fieldset>
+  )
 
-export default PersonItems
+  return (
+    <div>{items.length !== 0 && itemList}</div>
+  )
+}
+
+export default personItems

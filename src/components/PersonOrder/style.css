@@ -1,9 +1,0 @@
-.personorder-box{
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-
-.personorder-label{
-  margin: 8px 10px;
-}

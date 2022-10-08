@@ -1,0 +1,23 @@
+.person-item-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.person-name-label{
+  margin: 8px 10px;
+}
+
+.save-btn{
+  width: max-content;
+}
+
+.selection-box{
+  width: max-content;
+}
+
+.no-menu{
+  font-weight: lighter;
+  font-style: italic;
+}

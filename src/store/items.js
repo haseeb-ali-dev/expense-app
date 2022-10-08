@@ -9,8 +9,8 @@ const slice = createSlice({
       items.splice(0, items.length)
       items.push(...action.payload.items)
     },
-    ADD_NEW_ITEMS: (items, action) => {
-      items.push(...action.payload.item)
+    ADD_NEW_ITEM: (items, action) => {
+      items.push(action.payload.item)
     },
   },
 })

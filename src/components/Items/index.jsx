@@ -1,26 +1,27 @@
 import 'components/Items/style.css'
-import ListItem from 'components/Items/ListItem'
-import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
-import { getItems } from 'api/items'
-import { ADD_ALL_ITEMS } from 'store/items'
+import ListItem from 'components/ListItem'
+import { useSelector } from 'react-redux'
+// import { useEffect } from 'react'
+// import { getItems } from 'api/items'
+// import { ADD_ALL_ITEMS } from 'store/items'
 
 const Items = () => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const items = useSelector(state => state.items)
 
-  const getAllItems = async () => {
-    try {
-      const res = await getItems()
-      dispatch(ADD_ALL_ITEMS({ items: res }))
-    } catch (error) {
-      // console.log('Getting users error: ', error)
-    }
-  }
+  // const getAllItems = async () => {
+  //   try {
+  //     // const res = await getItems()
+  //     dispatch(ADD_ALL_ITEMS({ items }))
+  //   } catch (error) {
+  //     // console.log('Getting users error: ', error)
+  //   }
+  // }
 
-  useEffect(() => {
-    getAllItems()
-  }, [items])
+  // useEffect(() => {
+  //   // getAllItems()
+  //   dispatch(ADD_ALL_ITEMS({ items }))
+  // }, [items])
 
   return (
     <fieldset className='items-box'>

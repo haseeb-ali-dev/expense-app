@@ -1,21 +1,20 @@
+import ItemActions from 'components/ItemActions'
 import ItemForm from 'components/ItemForm'
-
-import 'containers/order/style.css'
-import Resturant from 'components/Resturant'
 import Items from 'components/Items'
 
-import { Link } from 'react-router-dom'
-import Button from 'components/Button'
+import 'containers/order/style.css'
 
 const Order = () => (
-  <div className='order-box'>
-    <Resturant />
-    <ItemForm />
-    <Items />
-    <Button text='Save' className='success save-btn' disabled />
-    <Link to='/person' className='add-person-btn'>
-      <Button text='Add Person -->' />
-    </Link>
+  <div className='container-fluid pb-3'>
+    <div className='d-grid gap-3' style={{ gridTemplateColumns: '1fr 2fr' }}>
+      <div className='bg-light border rounded-3'>
+
+        <ItemForm />
+        <Items />
+        <ItemActions />
+      </div>
+      <div className='bg-light border rounded-3' />
+    </div>
   </div>
 )
 
