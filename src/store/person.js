@@ -21,15 +21,18 @@ const slice = createSlice({
     ADD_PERSON_ITEM: (person, action) => {
       person.items.push(action.payload.item)
     },
-    ADD_PERSON: (person, action) => {
-      person.name = action.payload.name
+    ADD_PERSON_TOTAL: (person, action) => {
       person.total = action.payload.total
-      person.paid = action.payload.paid
-      person.items = action.payload.items
+      return person
+    },
+    RESET_PERSON: (person) => {
+      person = personInitialState
       return person
     },
   },
 })
 
-export const { ADD_PERSON, ADD_PERSON_NAME, ADD_PERSON_ITEM } = slice.actions
+export const {
+  ADD_PERSON_TOTAL, ADD_PERSON_NAME, ADD_PERSON_ITEM, RESET_PERSON,
+} = slice.actions
 export default slice.reducer

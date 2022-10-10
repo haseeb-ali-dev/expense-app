@@ -1,6 +1,6 @@
 import Navbar from 'components/Navbar2'
 import Order from 'containers/order2'
-import Person from 'containers/person'
+import Payment from 'containers/payment'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 const app = () => (
@@ -9,7 +9,7 @@ const app = () => (
     <Routes>
       <Route path='/' element={<Order />} />
       <Route path='/orders' element={<Order />} />
-      <Route path='/payment' element={<Person />} />
+      <Route path='/payment' element={<Payment />} />
     </Routes>
   </Router>
 )

@@ -4,15 +4,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import SelectBox from 'components/SelectBox'
 import PersonName from 'components/PersonName'
 
-import { ADD_PERSON_ITEM } from 'store/person'
+import { ADD_PERSON_ITEM, ADD_PERSON_TOTAL } from 'store/person'
 
-const PersonItemForm = () => {
+const PersonItemForm = ({ total, setTotal }) => {
   const dispatch = useDispatch()
   const { items: menuItems } = useSelector(state => state.menu)
   const { items } = useSelector(state => state.person)
 
   const [options, setOptions] = useState()
-  // const [total, setTotal] = useState(0)
 
   useEffect(() => {
     const updatedItems = menuItems.map(({ name, price }) => ({
@@ -25,7 +24,12 @@ const PersonItemForm = () => {
 
   const handleChange = (e) => {
     const item = e.target.value
-    return item !== '' && dispatch(ADD_PERSON_ITEM({ item: JSON.parse(item) }))
+    if (item !== '') {
+      const itemJson = JSON.parse(item)
+      dispatch(ADD_PERSON_ITEM({ item: itemJson }))
+      dispatch(ADD_PERSON_TOTAL({ total: parseFloat(itemJson.price) + total }))
+      setTotal(prevTotal => prevTotal + parseFloat(itemJson.price))
+    }
   }
 
   return (

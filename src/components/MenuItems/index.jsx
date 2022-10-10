@@ -1,4 +1,3 @@
-import 'components/Items/style.css'
 import { useSelector } from 'react-redux'
 import ListItem from 'components/ListItem'
 

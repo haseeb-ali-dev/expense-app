@@ -1,22 +1,20 @@
 import { useSelector } from 'react-redux'
-
-import 'components/PersonList/style.css'
 import ListItem from 'components/ListItem'
 
 const PersonList = () => {
   const persons = useSelector(state => state.personList)
+  const personList = persons.map((person, idx) => (
+    <div className='mt-2 me-1 border py-1 px-2 row' key={`person-${idx.toString()}`}>
+      <div className='col'><small className='text-muted'>Name:</small> {person.name}</div>
+      <div className='col'><small className='text-muted'>Total:</small> {person.total}</div>
+      <div className='col'>
+        {person.items.map(item => <ListItem item={item} key={item.name} />)}
+      </div>
+    </div>
+  ))
+
   return (
-    persons.length === 0
-      ? <h6>loading</h6>
-      : persons.map((person, idx) => (
-        <div className='person-list-box' key={`person-${idx.toString()}`}>
-          <h5>Name: {person.name}</h5>
-          <h6>Total: {person.total}</h6>
-          {
-            person.items.map((item, index) => <ListItem item={item} key={`item-${index.toString()}`} />)
-          }
-        </div>
-      ))
+    <div>{persons.length !== 0 && personList}</div>
   )
 }
 
