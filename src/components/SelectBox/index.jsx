@@ -1,7 +1,7 @@
 const SelectBox = ({
-  name, required, options = [], onChange = null,
+  name, required, options = [], onChange = null, value = '',
 }) => (
-  <select name={name} className='form-control' required={required} onChange={onChange}>
+  <select name={name} className='form-control' required={required} onChange={onChange} value={value}>
     <option value=''>Please select a option</option>
     {options.length > 0
       && options.map((option, index) => (

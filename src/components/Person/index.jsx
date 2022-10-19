@@ -23,7 +23,9 @@ const personDetails = () => {
     <div className='p-3'>
       <PersonForm total={total} setTotal={setTotal} />
       <PersonItems />
-      {flag && <button type='button' className='btn btn-sm btn-success float-end' onClick={addToPersons}>Add person</button>}
+      <div className='mt-2 text-center'>
+        {flag && <button type='button' className='btn btn-sm btn-success' onClick={addToPersons}>Add person</button>}
+      </div>
       <div className='mt-1'>
         <PersonList />
       </div>

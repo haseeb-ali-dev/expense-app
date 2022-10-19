@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { ADD_RESTURANT } from 'store/menu'
+import { UPDATE_RESTURANT } from 'store/order'
 
 const resturantForm = () => {
   const dispatch = useDispatch()
-  const { resturant } = useSelector(state => state.menu)
+  const { resturant } = useSelector(state => state.order)
   const addResturant = (e) => {
     const name = e.target.value
-    dispatch(ADD_RESTURANT({ name: name.length === 0 ? 'Auto Generated Resturant1' : name }))
+    dispatch(UPDATE_RESTURANT({ name: name.length === 0 ? 'Auto Generated Resturant1' : name }))
   }
   return (
     <div className='mb-2'>

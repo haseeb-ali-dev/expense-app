@@ -12,6 +12,7 @@ const PersonItemForm = ({ total, setTotal }) => {
   const { items } = useSelector(state => state.person)
 
   const [options, setOptions] = useState()
+  const [selected, setSelected] = useState('')
 
   useEffect(() => {
     const updatedItems = menuItems.map(({ name, price }) => ({
@@ -29,6 +30,7 @@ const PersonItemForm = ({ total, setTotal }) => {
       dispatch(ADD_PERSON_ITEM({ item: itemJson }))
       dispatch(ADD_PERSON_TOTAL({ total: parseFloat(itemJson.price) + total }))
       setTotal(prevTotal => prevTotal + parseFloat(itemJson.price))
+      setSelected('')
     }
   }
 
@@ -36,7 +38,7 @@ const PersonItemForm = ({ total, setTotal }) => {
     <div className='row'>
       <PersonName />
       <div className='col-sm-6'>
-        <SelectBox name='items' options={options} onChange={handleChange} />
+        <SelectBox name='items' options={options} onChange={handleChange} value={selected} />
       </div>
     </div>
   )

@@ -1,11 +1,14 @@
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Menu from 'components/Menu'
 import Person from 'components/Person'
+import { UPDATE_GRAND } from 'store/order'
 
 const Order = () => {
+  const dispatch = useDispatch()
   const styling = { gridTemplateColumns: '1fr 2fr' }
   const personList = useSelector(state => state.personList)
+  const updateGrand = () => dispatch(UPDATE_GRAND({ personList }))
 
   return (
     <div className='container-fluid pb-3'>
@@ -17,7 +20,7 @@ const Order = () => {
           <Person />
         </div>
       </div>
-      {personList.length > 0 && <Link to='/payment' className='btn btn-primary rounded-pill float-end m-2'>Proceed to payment section -&gt;</Link>}
+      {personList.length > 0 && <Link to='/payment' className='btn btn-primary rounded-pill float-end m-2' onClick={updateGrand}>Proceed to payment section -&gt;</Link>}
     </div>
   )
 }
