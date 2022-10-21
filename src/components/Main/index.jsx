@@ -13,27 +13,23 @@ import OrdersList from 'containers/ordersList'
 import Payment from 'containers/payment'
 
 const main = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [currentUser, setCurrentUser] = useState('')
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    const user = auth.currentUser
+    return !!user
+  })
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const { uid } = user
-        setIsLoggedIn(true)
-        setCurrentUser(uid)
-      }
-    })
+    onAuthStateChanged(auth, (user) => (user ? setIsLoggedIn(!isLoggedIn) : null))
   }, [])
 
   return (
     <Router>
-      <Navbar currentUser={currentUser} />
+      <Navbar />
       <Routes>
-        <Route path='/' element={isLoggedIn ? <OrdersList /> : <Navigate to='/auth' />} />
-        <Route path='/create' element={<Order />} />
+        <Route path='/' element={<OrdersList />} />
+        <Route path='/create' element={isLoggedIn ? <Order /> : <Navigate to='/auth' />} />
         <Route path='/payment' element={<Payment />} />
-        <Route path='/auth' element={isLoggedIn ? <Navigate to='/' /> : <Auth />} />
+        <Route path='/auth' element={<Auth />} />
       </Routes>
     </Router>
   )

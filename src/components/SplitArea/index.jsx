@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import { addOrder } from 'api/order'
 import { UPDATE_RECEIVERS } from 'store/order'
 
 const splitArea = () => {
+  const redirect = useNavigate()
   const dispatch = useDispatch()
   const persons = useSelector(state => state.personList)
   const order = useSelector(state => state.order)
@@ -15,6 +17,7 @@ const splitArea = () => {
   const saveOrder = async e => {
     e.preventDefault()
     await addOrder(order).then(() => console.log('order added successfully!')).then(() => console.log(order))
+    redirect('/')
   }
 
   useEffect(() => {
