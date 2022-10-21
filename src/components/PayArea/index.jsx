@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { PAY_AMOUNTS } from 'store/personList'
-
 import { UPDATE_PERSONS } from 'store/order'
 
 const payArea = () => {

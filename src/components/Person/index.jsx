@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+
 import { ADD_PERSON } from 'store/personList'
 import { RESET_PERSON } from 'store/person'
 

@@ -1,8 +1,10 @@
-import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { UPDATE_GRAND } from 'store/order'
+
 import Menu from 'components/Menu'
 import Person from 'components/Person'
-import { UPDATE_GRAND } from 'store/order'
 
 const Order = () => {
   const dispatch = useDispatch()

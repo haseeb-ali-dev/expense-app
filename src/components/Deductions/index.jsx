@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ADD_DEDUCTION, UPDATE_GRAND } from 'store/order'
+
 import { APPLY_DEDUCTIONS } from 'store/personList'
+import { ADD_DEDUCTION, UPDATE_GRAND } from 'store/order'
 
 const deductions = () => {
   const dispatch = useDispatch()

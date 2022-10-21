@@ -1,5 +1,7 @@
 import { useState } from 'react'
+
 import { signedIn, signedUp } from 'api/auth'
+
 import 'containers/auth/style.css'
 
 const auth = () => {

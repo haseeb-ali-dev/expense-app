@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+
 import ListItem from 'components/ListItem'
 
 const PersonList = () => {

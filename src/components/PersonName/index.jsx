@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
+
 import { ADD_PERSON_NAME } from 'store/person'
 
 const personName = () => {

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { addOrder } from 'api/order'
-
 import { UPDATE_RECEIVERS } from 'store/order'
 
 const splitArea = () => {
