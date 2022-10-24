@@ -10,9 +10,9 @@ const splitArea = () => {
   const dispatch = useDispatch()
   const persons = useSelector(state => state.personList)
   const order = useSelector(state => state.order)
+  const { ableToSave } = useSelector(state => state.menu)
 
   const [receivers, setReceivers] = useState([])
-  const [disabled, setDisabled] = useState(true)
 
   const saveOrder = async e => {
     e.preventDefault()
@@ -26,7 +26,6 @@ const splitArea = () => {
 
   useEffect(() => {
     dispatch(UPDATE_RECEIVERS({ receivers }))
-    setDisabled(!disabled)
   }, [receivers])
 
   return (
@@ -66,7 +65,7 @@ const splitArea = () => {
           </tfoot>
         </table>
         <div className='text-end'>
-          <button type='submit' className='btn btn-sm btn-success rounded-pill' disabled={disabled}>Save</button>
+          <button type='submit' className='btn btn-sm btn-success rounded-pill' disabled={!ableToSave}>Save</button>
         </div>
       </form>
     </div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { PAY_AMOUNTS } from 'store/personList'
+import { UPDATE_ABLE_TO_SAVE } from 'store/menu'
 import { UPDATE_PERSONS } from 'store/order'
 
 const payArea = () => {
@@ -19,10 +20,10 @@ const payArea = () => {
   const payAndSplit = e => {
     e.preventDefault()
     dispatch(PAY_AMOUNTS({ paidAmounts }))
+    dispatch(UPDATE_ABLE_TO_SAVE())
   }
 
   useEffect(() => {
-    console.log(persons)
     dispatch(UPDATE_PERSONS({ persons }))
   }, [paidAmounts, persons])
 

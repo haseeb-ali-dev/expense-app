@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const menuInitialState = {
   resturant: '',
   items: [],
-
+  ableToSave: false,
 }
 
 const slice = createSlice({
@@ -24,8 +24,14 @@ const slice = createSlice({
       menu.items = filteredItems
       return menu
     },
+    UPDATE_ABLE_TO_SAVE: (menu) => {
+      menu.ableToSave = true
+      return menu
+    },
   },
 })
 
-export const { ADD_RESTURANT, ADD_ITEM, REMOVE_ITEM } = slice.actions
+export const {
+  ADD_RESTURANT, ADD_ITEM, REMOVE_ITEM, UPDATE_ABLE_TO_SAVE,
+} = slice.actions
 export default slice.reducer
