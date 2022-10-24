@@ -18,8 +18,14 @@ const slice = createSlice({
     ADD_ITEM: (menu, action) => {
       menu.items.push(action.payload.item)
     },
+    REMOVE_ITEM: (menu, action) => {
+      const { name, price } = action.payload
+      const filteredItems = menu.items.filter(el => el.name !== name && el.price !== price)
+      menu.items = filteredItems
+      return menu
+    },
   },
 })
 
-export const { ADD_RESTURANT, ADD_ITEM } = slice.actions
+export const { ADD_RESTURANT, ADD_ITEM, REMOVE_ITEM } = slice.actions
 export default slice.reducer
