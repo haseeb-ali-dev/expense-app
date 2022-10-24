@@ -21,6 +21,12 @@ const slice = createSlice({
     ADD_PERSON_ITEM: (person, action) => {
       person.items.push(action.payload.item)
     },
+    REMOVE_PERSON_ITEM: (person, action) => {
+      const { name, price } = action.payload
+      const filteredItems = person.items.filter(el => el.name !== name && el.price !== price)
+      person.items = filteredItems
+      return person
+    },
     ADD_PERSON_TOTAL: (person, action) => {
       person.total = action.payload.total
       return person
@@ -33,6 +39,6 @@ const slice = createSlice({
 })
 
 export const {
-  ADD_PERSON_TOTAL, ADD_PERSON_NAME, ADD_PERSON_ITEM, RESET_PERSON,
+  ADD_PERSON_TOTAL, ADD_PERSON_NAME, ADD_PERSON_ITEM, RESET_PERSON, REMOVE_PERSON_ITEM,
 } = slice.actions
 export default slice.reducer
