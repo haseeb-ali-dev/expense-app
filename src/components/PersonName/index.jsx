@@ -8,7 +8,7 @@ import { getUsers } from 'api/auth'
 
 const personName = () => {
   const dispatch = useDispatch()
-  const [users, setUsers] = useState()
+  const [users, setUsers] = useState([])
   const { name: nameOfPerson } = useSelector(state => state.person)
   const persons = useSelector(state => state.personList)
 
@@ -18,17 +18,19 @@ const personName = () => {
   }
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      const fetchedUsers = await getUsers()
+    const fetchUsers = async (personsList) => {
+      const fetchedUsers = personsList.length === 0 ? await getUsers() : personsList
       const updatedUsers = fetchedUsers.map(({ name }) => ({
         name,
         value: name,
         disabled: persons.some(person => (person.name === name)),
       }))
-      setUsers(updatedUsers)
+      // eslint-disable-next-line array-callback-return, max-len
+      const filteredUsers = updatedUsers.filter(user => persons.every(person => (person.name !== user.name)))
+      setUsers(personsList.length === 0 ? updatedUsers : filteredUsers)
     }
-    fetchUsers()
-  }, [])
+    fetchUsers(users)
+  }, [persons])
 
   return (
     <>
