@@ -36,8 +36,14 @@ const slice = createSlice({
         return person
       })
     },
+    RESET_PERSON_LIST: (personList) => {
+      personList = []
+      return personList
+    },
   },
 })
 
-export const { ADD_PERSON, APPLY_DEDUCTIONS, PAY_AMOUNTS } = slice.actions
+export const {
+  ADD_PERSON, APPLY_DEDUCTIONS, PAY_AMOUNTS, RESET_PERSON_LIST,
+} = slice.actions
 export default slice.reducer

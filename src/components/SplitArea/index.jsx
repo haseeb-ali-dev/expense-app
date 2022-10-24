@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { addOrder } from 'api/order'
-import { UPDATE_RECEIVERS } from 'store/order'
+import { RESET_ORDER, UPDATE_RECEIVERS } from 'store/order'
+import { RESET_PERSON_LIST } from 'store/personList'
 
 const splitArea = () => {
   const redirect = useNavigate()
@@ -16,7 +17,11 @@ const splitArea = () => {
 
   const saveOrder = async e => {
     e.preventDefault()
-    await addOrder(order).then(() => console.log('order added successfully!')).then(() => console.log(order))
+    await addOrder(order).then(() => console.log('order added successfully!')).then(() => {
+      console.log(order)
+      dispatch(RESET_PERSON_LIST())
+      dispatch(RESET_ORDER())
+    })
     redirect('/')
   }
 
