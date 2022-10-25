@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import Deductions from 'components/Deductions'
 import PayArea from 'components/PayArea'
 import SplitArea from 'components/SplitArea'
@@ -18,6 +20,7 @@ const paymentSection = () => {
           <SplitArea />
         </div>
       </div>
+      <Link to='/create' className='btn btn-secondary rounded-pill float-start m-2'>Back</Link>
     </div>
   )
 }

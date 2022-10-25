@@ -1,13 +1,13 @@
 import { useDispatch } from 'react-redux'
 
-import { SHOW_MODAL } from 'store/modal'
+import { SET_MODAL_ORDER, SHOW_MODAL } from 'store/modal'
 
 import ListItem from 'components/ListItem'
 
-const orderListItem = ({ order, openModal = null, showDetails = false }) => {
+const orderListItem = ({ order, showDetails = false }) => {
   const dispatch = useDispatch()
   const viewOrder = (detailedOrder) => {
-    openModal(detailedOrder)
+    dispatch(SET_MODAL_ORDER({ order: detailedOrder }))
     dispatch(SHOW_MODAL())
   }
 

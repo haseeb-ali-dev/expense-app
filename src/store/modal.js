@@ -3,6 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const modalInitialState = {
   show: false,
+  modalItem: {},
+  modalOrder: {},
 }
 
 const slice = createSlice({
@@ -17,8 +19,18 @@ const slice = createSlice({
       modal = modalInitialState
       return modal
     },
+    SET_MODAL_ITEM: (modal, action) => {
+      modal.modalItem = action.payload.item
+      return modal
+    },
+    SET_MODAL_ORDER: (modal, action) => {
+      modal.modalOrder = action.payload.order
+      return modal
+    },
   },
 })
 
-export const { SHOW_MODAL, HIDE_MODAL } = slice.actions
+export const {
+  SHOW_MODAL, HIDE_MODAL, SET_MODAL_ITEM, SET_MODAL_ORDER, SET_MODAL_PERSON,
+} = slice.actions
 export default slice.reducer

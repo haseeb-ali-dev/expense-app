@@ -8,10 +8,9 @@ import Modal from 'components/Modal'
 import OrderListItem from 'components/OrderListItem'
 
 const ordersList = () => {
-  const { show } = useSelector(state => state.modal)
+  const { show, modalOrder } = useSelector(state => state.modal)
   const [orders, setOrders] = useState([])
   const [fetched, setFetched] = useState(false)
-  const [modalOrder, setModalOrder] = useState()
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -22,13 +21,7 @@ const ordersList = () => {
     fetchOrders()
   }, [])
 
-  const ordersListing = orders.map(order => (
-    <OrderListItem
-      order={order}
-      openModal={setModalOrder}
-      key={order.id}
-    />
-  ))
+  const ordersListing = orders.map(order => <OrderListItem order={order} key={order.id} />)
   const displayOrders = (
     <div className='d-inline-flex flex-wrap p-2'>
       {ordersListing}

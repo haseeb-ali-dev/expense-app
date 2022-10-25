@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
 
@@ -36,6 +37,11 @@ const slice = createSlice({
         return person
       })
     },
+    REMOVE_PERSON_ITEM: (personList, action) => {
+      const { personIdx, itemIdx } = action.payload
+      personList[personIdx].items.splice(itemIdx, 1)
+      if (personList[personIdx].items.length === 0) personList.splice(personIdx, 1)
+    },
     RESET_PERSON_LIST: (personList) => {
       personList = []
       return personList
@@ -44,6 +50,6 @@ const slice = createSlice({
 })
 
 export const {
-  ADD_PERSON, APPLY_DEDUCTIONS, PAY_AMOUNTS, RESET_PERSON_LIST,
+  ADD_PERSON, APPLY_DEDUCTIONS, PAY_AMOUNTS, RESET_PERSON_LIST, REMOVE_PERSON_ITEM,
 } = slice.actions
 export default slice.reducer

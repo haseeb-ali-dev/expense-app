@@ -1,23 +1,20 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react'
 
 import EditItemForm from 'components/ItemForm/edit'
 import ListItem from 'components/ListItem'
 import Modal from 'components/Modal'
 
 import { REMOVE_ITEM } from 'store/menu'
-import { SHOW_MODAL } from 'store/modal'
+import { SET_MODAL_ITEM, SHOW_MODAL } from 'store/modal'
 
 const menuItems = () => {
   const dispatch = useDispatch()
   const { items } = useSelector(state => state.menu)
-  const { show: showModal } = useSelector(state => state.modal)
-
-  const [modalItem, setModalItem] = useState(null)
+  const { show: showModal, modalItem } = useSelector(state => state.modal)
 
   const removeItem = (item) => dispatch(REMOVE_ITEM(item))
   const editItem = (item) => {
-    setModalItem(item)
+    dispatch(SET_MODAL_ITEM({ item }))
     dispatch(SHOW_MODAL())
   }
 
