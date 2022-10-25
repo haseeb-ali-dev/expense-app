@@ -27,7 +27,7 @@ const personName = () => {
       }))
       // eslint-disable-next-line array-callback-return, max-len
       const filteredUsers = updatedUsers.filter(user => persons.every(person => (person.name !== user.name)))
-      setUsers(personsList.length === 0 ? updatedUsers : filteredUsers)
+      setUsers(filteredUsers)
     }
     fetchUsers(users)
   }, [persons])

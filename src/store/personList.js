@@ -39,6 +39,7 @@ const slice = createSlice({
     },
     REMOVE_PERSON_ITEM: (personList, action) => {
       const { personIdx, itemIdx } = action.payload
+      personList[personIdx].total -= personList[personIdx].items[itemIdx].price
       personList[personIdx].items.splice(itemIdx, 1)
       if (personList[personIdx].items.length === 0) personList.splice(personIdx, 1)
     },
