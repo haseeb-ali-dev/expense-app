@@ -6,6 +6,7 @@ import personListReducer from 'store/personList'
 import menuReducer from 'store/menu'
 import orderReducer from 'store/order'
 import userReducer from 'store/user'
+import modalReducer from 'store/modal'
 
 export default () => configureStore({
   reducer: {
@@ -15,5 +16,6 @@ export default () => configureStore({
     personList: personListReducer,
     order: orderReducer,
     user: userReducer,
+    modal: modalReducer,
   },
 })

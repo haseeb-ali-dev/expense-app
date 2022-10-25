@@ -24,6 +24,13 @@ const slice = createSlice({
       menu.items = filteredItems
       return menu
     },
+    UPDATE_ITEM: (menu, action) => {
+      const { name, price } = action.payload.original
+      const found = menu.items.find(item => item.name === name && item.price === price)
+      found.name = action.payload.updated.name
+      found.price = action.payload.updated.price
+      return menu
+    },
     UPDATE_ABLE_TO_SAVE: (menu) => {
       menu.ableToSave = true
       return menu
@@ -32,6 +39,6 @@ const slice = createSlice({
 })
 
 export const {
-  ADD_RESTURANT, ADD_ITEM, REMOVE_ITEM, UPDATE_ABLE_TO_SAVE,
+  ADD_RESTURANT, ADD_ITEM, REMOVE_ITEM, UPDATE_ABLE_TO_SAVE, UPDATE_ITEM,
 } = slice.actions
 export default slice.reducer

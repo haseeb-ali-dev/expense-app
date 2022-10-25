@@ -1,14 +1,25 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
 
+import EditItemForm from 'components/ItemForm/edit'
 import ListItem from 'components/ListItem'
+import Modal from 'components/Modal'
 
 import { REMOVE_ITEM } from 'store/menu'
+import { SHOW_MODAL } from 'store/modal'
 
 const menuItems = () => {
   const dispatch = useDispatch()
   const { items } = useSelector(state => state.menu)
+  const { show: showModal } = useSelector(state => state.modal)
+
+  const [modalItem, setModalItem] = useState(null)
 
   const removeItem = (item) => dispatch(REMOVE_ITEM(item))
+  const editItem = (item) => {
+    setModalItem(item)
+    dispatch(SHOW_MODAL())
+  }
 
   return (
     <fieldset className='border p-2'>
@@ -18,9 +29,11 @@ const menuItems = () => {
         : items.map((item, index) => (
           <div className='d-flex flex-row align-items-center' key={`item-${index.toString()}`}>
             <button type='button' className='btn btn-sm btn-outline-danger rounded-circle me-1' onClick={() => removeItem(item)}>X</button>
+            <button type='button' className='btn btn-sm btn-outline-success rounded-circle me-1' onClick={() => editItem(item)}>E</button>
             <ListItem item={item} />
           </div>
         ))}
+      {showModal && <Modal html={<EditItemForm item={modalItem} />} />}
     </fieldset>
   )
 }
