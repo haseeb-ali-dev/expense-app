@@ -3,7 +3,7 @@ import { signOut } from 'firebase/auth'
 
 import { auth } from 'Database'
 
-const navbar = () => {
+const navbar = ({ haveUser }) => {
   const redirect = useNavigate()
   const signedOut = () => {
     signOut(auth)
@@ -17,7 +17,11 @@ const navbar = () => {
           <li className='nav-item'><Link to='/' className='nav-link active'>Expense App</Link></li>
           <li className='nav-item'><Link to='/' className='nav-link'>All Orders</Link></li>
           <li className='nav-item'><Link to='/create' className='nav-link'>New Order</Link></li>
-          <li className='nav-item'><button type='button' onClick={signedOut} className='nav-link'>Signout</button></li>
+          <li className='nav-item'>
+            {haveUser
+              ? <button type='button' onClick={signedOut} className='nav-link'>Signout</button>
+              : <Link to='/auth' className='nav-link'>Login</Link>}
+          </li>
         </ul>
       </header>
       <div className='d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-1 mb-1 border-top' />

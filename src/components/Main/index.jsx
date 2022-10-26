@@ -24,7 +24,7 @@ const main = () => {
 
   return (
     <Router>
-      <Navbar />
+      <Navbar haveUser={isLoggedIn} />
       <Routes>
         <Route path='/' element={<OrdersList />} />
         <Route path='/create' element={isLoggedIn ? <Order /> : <Navigate to='/auth' />} />

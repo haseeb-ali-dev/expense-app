@@ -53,6 +53,7 @@ const orderListItem = ({ order, showDetails = false }) => {
           <p> <span className='text-muted'>Tip: PKR/-</span> {order.grand}</p>
           <p> <span className='text-muted'>Tax: PKR/-</span> {order.grand}</p>
           <p> <span className='text-muted'>Delivery: PKR/-</span> {order.grand}</p>
+          {(!showDetails && order.settleUp) && <small className='text-muted fst-italic text-end'>settled up</small>}
         </div>
         {showDetails && order.persons.map((person, idx) => (
           <div className='mt-2 mx-1 border py-1 px-2 d-flex flex-column bg-light flex-wrap' key={`person-${idx.toString()}`}>
