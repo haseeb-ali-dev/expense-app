@@ -9,7 +9,9 @@ import Person from 'components/Person'
 const Order = () => {
   const dispatch = useDispatch()
   const styling = { gridTemplateColumns: '1fr 2fr' }
+  const { resturant } = useSelector(state => state.order)
   const personList = useSelector(state => state.personList)
+  const flag = personList.length > 0 && resturant !== ''
   const updateGrand = () => dispatch(UPDATE_GRAND({ personList }))
 
   return (
@@ -22,7 +24,7 @@ const Order = () => {
           <Person />
         </div>
       </div>
-      {personList.length > 0 && <Link to='/payment' className='btn btn-primary rounded-pill float-end m-2' onClick={updateGrand}>Proceed to payment section -&gt;</Link>}
+      {flag && <Link to='/payment' className='btn btn-primary rounded-pill float-end m-2' onClick={updateGrand}>Proceed to payment section -&gt;</Link>}
     </div>
   )
 }
