@@ -9,6 +9,9 @@ import SelectBox from 'components/SelectBox'
 import { ADD_PERSON_ITEM, REMOVE_PERSON_ITEM } from 'store/personList'
 import { HIDE_MODAL, SET_MODAL_ITEM_LIST } from 'store/modal'
 
+import editIcon from 'assets/icons/edit.svg'
+import removeIcon from 'assets/icons/remove.svg'
+
 const PersonList = () => {
   const dispatch = useDispatch()
   const persons = useSelector(state => state.personList)
@@ -52,12 +55,16 @@ const PersonList = () => {
             <span className='border border-2 rounded-end rounded-4 p-1'>
               <ListItem item={item} />
             </span>
-            <button type='button' className='btn btn-sm btn-danger rounded-start rounded-4 opacity-50' onClick={() => removePersonItem(index1, index2)}>x</button>
+            <button type='button' className='btn btn-sm border-secondary rounded-start rounded-4' onClick={() => removePersonItem(index1, index2)}>
+              <img src={removeIcon} alt='+' />
+            </button>
           </div>
         ))}
       </div>
       <div className='col-sm-1'>
-        <button type='button' className='btn btn-sm btn-success rounded-circle' onClick={() => addPeronItem(index1)}>+</button>
+        <button type='button' className='btn btn-sm' onClick={() => addPeronItem(index1)}>
+          <img src={editIcon} alt='+' />
+        </button>
       </div>
     </div>
   ))

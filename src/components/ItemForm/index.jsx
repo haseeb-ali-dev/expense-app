@@ -3,6 +3,8 @@ import { useState } from 'react'
 
 import { ADD_ITEM } from 'store/menu'
 
+import plusIcon from 'assets/icons/plus.svg'
+
 const itemForm = () => {
   const dispatch = useDispatch()
   const initialItem = { name: '', price: '' }
@@ -25,7 +27,9 @@ const itemForm = () => {
           <label className='form-label'>Price</label>
           <input type='number' name='price' className='form-control' placeholder='Enter Price' required onChange={handleChange} value={item.price} />
         </div>
-        <button type='submit' className='btn btn-success rounded-circle mt-auto ms-3'>+</button>
+        <button type='submit' className='btn btn-sm btn-success rounded-circle mt-auto ms-3'>
+          <img src={plusIcon} alt='+' />
+        </button>
       </div>
     </form>
   )

@@ -7,6 +7,9 @@ import Modal from 'components/Modal'
 import { REMOVE_ITEM } from 'store/menu'
 import { SET_MODAL_ITEM, SHOW_MODAL } from 'store/modal'
 
+import removeIcon from 'assets/icons/remove.svg'
+import editIcon from 'assets/icons/edit2.svg'
+
 const menuItems = () => {
   const dispatch = useDispatch()
   const { items } = useSelector(state => state.menu)
@@ -25,8 +28,12 @@ const menuItems = () => {
         ? <h3 className='fw-lighter fst-italic fs-5'>No items.......</h3>
         : items.map((item, index) => (
           <div className='d-flex flex-row align-items-center' key={`item-${index.toString()}`}>
-            <button type='button' className='btn btn-sm btn-outline-danger rounded-circle me-1' onClick={() => removeItem(item)}>X</button>
-            <button type='button' className='btn btn-sm btn-outline-success rounded-circle me-1' onClick={() => editItem(item)}>E</button>
+            <button type='button' className='btn btn-sm mx-0' onClick={() => removeItem(item)}>
+              <img src={removeIcon} alt='X' />
+            </button>
+            <button type='button' className='btn btn-sm me-1' onClick={() => editItem(item)}>
+              <img src={editIcon} alt='E' />
+            </button>
             <ListItem item={item} />
           </div>
         ))}

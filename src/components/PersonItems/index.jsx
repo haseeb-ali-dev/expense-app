@@ -4,6 +4,8 @@ import ListItem from 'components/ListItem'
 
 import { REMOVE_PERSON_ITEM } from 'store/person'
 
+import removeIcon from 'assets/icons/remove.svg'
+
 const personItems = () => {
   const dispatch = useDispatch()
   const { items } = useSelector(state => state.person)
@@ -15,7 +17,9 @@ const personItems = () => {
       {items.map(item => (
         <div className='d-inline-flex mx-2 my-1 border p-2 position-relative' key={item.name}>
           <ListItem item={item} />
-          <button type='button' className='btn btn-sm btn-danger position-absolute top-0 start-100 translate-middle rounded-circle' onClick={() => removePersonItem(item)}>X</button>
+          <button type='button' className='btn btn-sm bg-light position-absolute top-0 start-100 translate-middle rounded-circle' onClick={() => removePersonItem(item)}>
+            <img src={removeIcon} alt='x' />
+          </button>
         </div>
       ))}
     </fieldset>
