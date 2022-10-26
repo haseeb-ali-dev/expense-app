@@ -1,27 +1,30 @@
 /* eslint-disable no-nested-ternary */
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { getOrders } from 'api/order'
 
 import Modal from 'components/Modal'
 import OrderListItem from 'components/OrderListItem'
+import { ADD_ORDER_LIST } from 'store/orderList'
 
 const ordersList = () => {
+  const dispatch = useDispatch()
   const { show, modalOrder } = useSelector(state => state.modal)
-  const [orders, setOrders] = useState([])
+  const orderList = useSelector(state => state.orderList)
+
   const [fetched, setFetched] = useState(false)
 
   useEffect(() => {
     const fetchOrders = async () => {
       const fetchedOrders = await getOrders()
       setFetched(!fetched)
-      setOrders(fetchedOrders)
+      dispatch(ADD_ORDER_LIST({ list: fetchedOrders }))
     }
     fetchOrders()
   }, [])
 
-  const ordersListing = orders.map(order => <OrderListItem order={order} key={order.id} />)
+  const ordersListing = orderList.map(order => <OrderListItem order={order} key={order.id} />)
   const displayOrders = (
     <div className='d-inline-flex flex-wrap p-2'>
       {ordersListing}
@@ -37,7 +40,7 @@ const ordersList = () => {
   )
   const noOrders = <p className='text-center h6'>No order found!</p>
 
-  return fetched ? (orders.length === 0 ? noOrders : displayOrders) : loading
+  return fetched ? (orderList.length === 0 ? noOrders : displayOrders) : loading
 }
 
 export default ordersList

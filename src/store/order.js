@@ -10,6 +10,7 @@ const orderInitialState = {
   delivery: 0,
   persons: [],
   receivers: [],
+  settleUp: false,
 }
 
 const slice = createSlice({

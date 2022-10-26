@@ -51,13 +51,11 @@ const PersonList = () => {
       <div className='col-md-3'><small className='text-muted'>Total:</small> PKR/- {person.total}</div>
       <div className='col-md-5'>
         {person.items.map((item, index2) => (
-          <div className='btn-group py-1' key={`person-item-${index2.toString()}`} role='group'>
-            <span className='border border-2 rounded-end rounded-4 p-1'>
-              <ListItem item={item} />
-            </span>
-            <button type='button' className='btn btn-sm border-secondary rounded-start rounded-4' onClick={() => removePersonItem(index1, index2)}>
-              <img src={removeIcon} alt='+' />
+          <div className='d-flex flex-row align-items-center' key={`person-item-${index2.toString()}`} role='group'>
+            <button type='button' className='btn btn-sm' onClick={() => removePersonItem(index1, index2)}>
+              <img src={removeIcon} alt='x' />
             </button>
+            <ListItem item={item} />
           </div>
         ))}
       </div>

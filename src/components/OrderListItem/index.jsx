@@ -1,16 +1,46 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-param-reassign */
 import { useDispatch } from 'react-redux'
-
-import { SET_MODAL_ORDER, SHOW_MODAL } from 'store/modal'
+import { useState } from 'react'
 
 import ListItem from 'components/ListItem'
 
+import { HIDE_MODAL, SET_MODAL_ORDER, SHOW_MODAL } from 'store/modal'
+import { settleUp } from 'api/order'
+import { UPDATE_ORDER_PERSONS } from 'store/orderList'
+
 const orderListItem = ({ order, showDetails = false }) => {
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
+
   const viewOrder = (detailedOrder) => {
     dispatch(SET_MODAL_ORDER({ order: detailedOrder }))
     dispatch(SHOW_MODAL())
   }
 
+  const settleUpOrder = async (orderId) => {
+    const answer = confirm('Confirm to settle up!')
+    if (answer) {
+      setLoading(true)
+      const newPersons = order.persons.map(({
+        paid, receivable, payable, total, items, name,
+      }) => {
+        paid = total
+        receivable = 0
+        payable = 0
+        return {
+          items, name, paid, receivable, payable, total,
+        }
+      })
+      await settleUp(orderId, newPersons).then(() => {
+        setLoading(false)
+        dispatch(UPDATE_ORDER_PERSONS({ orderId, persons: newPersons }))
+        dispatch(HIDE_MODAL())
+        console.log('Accounts are setlled up!')
+      })
+    }
+  }
   return (
     <div className='border border-1 rounded-2 m-1 p-2'>
       <div className='d-flex w-100 justify-content-between'>
@@ -45,6 +75,19 @@ const orderListItem = ({ order, showDetails = false }) => {
           </div>
         ))}
       </div>
+      {showDetails
+        && (
+          <div className='w-100 text-end mt-1 p-1'>
+            {!order.settleUp ? (
+              <button type='button' className='btn btn-outline-success rounded-pill' onClick={() => settleUpOrder(order.id)}>
+                {loading && <span className='spinner-border spinner-border-sm mx-1' role='status' aria-hidden='true' />}
+                {loading ? 'Settling Up...' : 'Settle Up'}
+              </button>
+            ) : (
+              <p className='m-0 fst-italic'>Accounts are Settled Up!!</p>
+            )}
+          </div>
+        )}
       {!showDetails
         && (
           <div className='w-100 mt-1 text-end p-1'>
