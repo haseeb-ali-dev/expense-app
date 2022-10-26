@@ -37,6 +37,11 @@ const slice = createSlice({
         return person
       })
     },
+    ADD_PERSON_ITEM: (personList, action) => {
+      const { personIdx, item } = action.payload
+      personList[personIdx].total += parseFloat(item.price)
+      personList[personIdx].items.push(item)
+    },
     REMOVE_PERSON_ITEM: (personList, action) => {
       const { personIdx, itemIdx } = action.payload
       personList[personIdx].total -= personList[personIdx].items[itemIdx].price
@@ -51,6 +56,6 @@ const slice = createSlice({
 })
 
 export const {
-  ADD_PERSON, APPLY_DEDUCTIONS, PAY_AMOUNTS, RESET_PERSON_LIST, REMOVE_PERSON_ITEM,
+  ADD_PERSON, APPLY_DEDUCTIONS, PAY_AMOUNTS, RESET_PERSON_LIST, ADD_PERSON_ITEM, REMOVE_PERSON_ITEM,
 } = slice.actions
 export default slice.reducer
