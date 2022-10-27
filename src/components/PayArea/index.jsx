@@ -24,7 +24,8 @@ const payArea = () => {
   }
 
   useEffect(() => {
-    dispatch(UPDATE_PERSONS({ persons }))
+    const users = persons.map(p => p.name)
+    dispatch(UPDATE_PERSONS({ persons, users }))
   }, [paidAmounts, persons])
 
   const handleBlur = e => {

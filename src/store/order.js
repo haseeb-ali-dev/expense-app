@@ -10,6 +10,7 @@ const orderInitialState = {
   delivery: 0,
   persons: [],
   receivers: [],
+  users: [],
   settleUp: false,
 }
 
@@ -43,6 +44,7 @@ const slice = createSlice({
     },
     UPDATE_PERSONS: (order, action) => {
       order.persons = [...action.payload.persons]
+      order.users = [...action.payload.users]
       return order
     },
     UPDATE_RESTURANT: (order, action) => {

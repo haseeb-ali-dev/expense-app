@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { ADD_ORDER_LIST } from 'store/orderList'
-import { getOrders } from 'api/order'
+import { getUserOrders } from 'api/order'
 
 import Loader from 'components/Loader'
 import Modal from 'components/Modal'
@@ -13,17 +13,18 @@ const ordersList = () => {
   const dispatch = useDispatch()
   const { show, modalOrder } = useSelector(state => state.modal)
   const orderList = useSelector(state => state.orderList)
+  const { name } = useSelector(state => state.user)
 
   const [fetched, setFetched] = useState(false)
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const fetchedOrders = await getOrders()
+      const fetchedOrders = await getUserOrders(name)
       setFetched(!fetched)
       dispatch(ADD_ORDER_LIST({ list: fetchedOrders }))
     }
     fetchOrders()
-  }, [])
+  }, [name])
 
   const ordersListing = orderList.map(order => <OrderListItem order={order} key={order.id} />)
   const displayOrders = (

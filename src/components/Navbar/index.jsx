@@ -1,13 +1,18 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { signOut } from 'firebase/auth'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { auth } from 'Database'
+import { RESET_USER } from 'store/user'
 
-const navbar = ({ haveUser }) => {
+const navbar = () => {
   const redirect = useNavigate()
+  const dispatch = useDispatch()
+  const { isLogged } = useSelector(state => state.user)
   const signedOut = () => {
     signOut(auth)
     redirect('/auth')
+    dispatch(RESET_USER())
   }
 
   return (
@@ -18,7 +23,7 @@ const navbar = ({ haveUser }) => {
           <li className='nav-item'><Link to='/' className='nav-link'>All Orders</Link></li>
           <li className='nav-item'><Link to='/create' className='nav-link'>New Order</Link></li>
           <li className='nav-item'>
-            {haveUser
+            {isLogged
               ? <button type='button' onClick={signedOut} className='nav-link'>Signout</button>
               : <Link to='/auth' className='nav-link'>Login</Link>}
           </li>
