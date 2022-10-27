@@ -24,11 +24,11 @@ const slice = createSlice({
         const remaining = person.total - person.paid
         if (remaining > 0) {
           person.receivable = 0
-          person.payable = Math.abs(remaining)
+          person.payable = Math.abs(remaining.toFixed(2))
         }
         if (remaining < 0) {
           person.payable = 0
-          person.receivable = Math.abs(remaining)
+          person.receivable = Math.abs(remaining.toFixed(2))
         }
         if (remaining === 0) {
           person.payable = 0

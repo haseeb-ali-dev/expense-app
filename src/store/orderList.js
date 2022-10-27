@@ -8,6 +8,7 @@ const slice = createSlice({
   reducers: {
     ADD_ORDER_LIST: (orderList, action) => {
       orderList = action.payload.list
+      orderList.sort((a, b) => a.resturant.localeCompare(b.resturant))
       return orderList
     },
     UPDATE_ORDER_PERSONS: (orderList, action) => {

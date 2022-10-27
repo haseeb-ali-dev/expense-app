@@ -2,11 +2,12 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { ADD_ORDER_LIST } from 'store/orderList'
 import { getOrders } from 'api/order'
 
+import Loader from 'components/Loader'
 import Modal from 'components/Modal'
 import OrderListItem from 'components/OrderListItem'
-import { ADD_ORDER_LIST } from 'store/orderList'
 
 const ordersList = () => {
   const dispatch = useDispatch()
@@ -31,13 +32,7 @@ const ordersList = () => {
       {show && <Modal html={<OrderListItem order={modalOrder} showDetails />} />}
     </div>
   )
-  const loading = (
-    <div className='d-flex align-items-center justify-content-center'>
-      <div className='spinner-grow text-primary' role='status'>
-        <span className='visually-hidden'>Loading...</span>
-      </div>
-    </div>
-  )
+  const loading = <Loader />
   const noOrders = <p className='text-center h6'>No order found!</p>
 
   return fetched ? (orderList.length === 0 ? noOrders : displayOrders) : loading

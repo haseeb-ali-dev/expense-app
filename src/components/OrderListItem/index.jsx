@@ -50,9 +50,9 @@ const orderListItem = ({ order, showDetails = false }) => {
         <div className='mt-2 mx-1 border py-1 px-2 d-flex flex-column bg-light'>
           <p className='fs-5 p-1'>Summary</p>
           <p> <span className='text-muted'>Grand: PKR/-</span> {order.grand}</p>
-          <p> <span className='text-muted'>Tip: PKR/-</span> {order.grand}</p>
-          <p> <span className='text-muted'>Tax: PKR/-</span> {order.grand}</p>
-          <p> <span className='text-muted'>Delivery: PKR/-</span> {order.grand}</p>
+          <p> <span className='text-muted'>Tip: PKR/-</span> {order.tip}</p>
+          <p> <span className='text-muted'>Tax: </span> {order.tax} %</p>
+          <p> <span className='text-muted'>Delivery: PKR/-</span> {order.delivery}</p>
           {(!showDetails && order.settleUp) && <small className='text-muted fst-italic text-end'>settled up</small>}
         </div>
         {showDetails && order.persons.map((person, idx) => (

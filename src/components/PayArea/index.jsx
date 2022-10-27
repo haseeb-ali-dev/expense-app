@@ -29,7 +29,7 @@ const payArea = () => {
 
   const handleBlur = e => {
     const value = e.target.value === '' ? 0 : parseFloat(e.target.value)
-    setRemain(remain - value)
+    setRemain(prevRemain => prevRemain.toFixed(2) - value)
     setPaidAmounts({
       ...paidAmounts,
       [e.target.name]: value,
@@ -67,7 +67,7 @@ const payArea = () => {
           </tbody>
           <tfoot>
             <tr>
-              <td colSpan='3' className='text-end'><strong>Remaining: </strong>PKR/- {remain}</td>
+              <td colSpan='3' className='text-end'><strong>Remaining: </strong>PKR/- {remain.toFixed(2)}</td>
             </tr>
           </tfoot>
         </table>

@@ -1,6 +1,6 @@
 import ReactDom from 'react-dom'
 import { useDispatch } from 'react-redux'
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 
 import { HIDE_MODAL } from 'store/modal'
 

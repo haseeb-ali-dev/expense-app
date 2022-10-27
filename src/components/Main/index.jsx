@@ -7,31 +7,43 @@ import { useEffect, useState } from 'react'
 import { auth } from 'Database'
 
 import Auth from 'containers/auth'
+import Loader from 'components/Loader'
 import Navbar from 'components/Navbar'
 import Order from 'containers/order'
 import OrdersList from 'containers/ordersList'
 import Payment from 'containers/payment'
 
 const main = () => {
+  const [authChecked, setAuthChecked] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     const user = auth.currentUser
     return !!user
   })
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => (user ? setIsLoggedIn(!isLoggedIn) : null))
+    onAuthStateChanged(auth, (user) => {
+      if (user) setIsLoggedIn(!isLoggedIn)
+      setAuthChecked(true)
+    })
   }, [])
 
   return (
     <Router>
-      <Navbar haveUser={isLoggedIn} />
-      <Routes>
-        <Route path='/' element={<OrdersList />} />
-        <Route path='/create' element={isLoggedIn ? <Order /> : <Navigate to='/auth' />} />
-        <Route path='/payment' element={<Payment />} />
-        <Route path='/auth' element={<Auth />} />
-      </Routes>
+      {authChecked
+        ? (
+          <>
+            <Navbar haveUser={isLoggedIn} />
+            <Routes>
+              <Route path='/' element={<OrdersList />} />
+              <Route path='/create' element={isLoggedIn ? <Order /> : <Navigate to='/auth' />} />
+              <Route path='/payment' element={<Payment />} />
+              <Route path='/auth' element={<Auth />} />
+            </Routes>
+          </>
+        )
+        : <Loader />}
     </Router>
   )
 }
+
 export default main

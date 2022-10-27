@@ -1,0 +1,13 @@
+import refReducer from './ref'
+import personReducer from './person'
+import personListReducer from './personList'
+import menuReducer from './menu'
+import orderReducer from './order'
+import userReducer from './user'
+import modalReducer from './modal'
+import orderListReducer from './orderList'
+
+export {
+  refReducer, personReducer, personListReducer, menuReducer,
+  orderReducer, userReducer, modalReducer, orderListReducer,
+}
