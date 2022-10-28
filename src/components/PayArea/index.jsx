@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { PAY_AMOUNTS } from 'store/personList'
+import { PAY_AMOUNTS, SPLIT } from 'store/personList'
 import { UPDATE_ABLE_TO_SAVE } from 'store/menu'
 import { UPDATE_PERSONS } from 'store/order'
 
@@ -9,24 +9,23 @@ const payArea = () => {
   const dispatch = useDispatch()
   const persons = useSelector(state => state.personList)
   const order = useSelector(state => state.order)
-
+  const { ableToSave } = useSelector(state => state.menu)
   const [remain, setRemain] = useState(0)
   const [paidAmounts, setPaidAmounts] = useState({})
 
-  useEffect(() => {
-    setRemain(order.grand)
-  }, [order.grand])
-
-  const payAndSplit = e => {
-    e.preventDefault()
-    dispatch(PAY_AMOUNTS({ paidAmounts }))
-    dispatch(UPDATE_ABLE_TO_SAVE())
-  }
+  useEffect(() => setRemain(order.grand), [order.grand])
 
   useEffect(() => {
     const users = persons.map(p => p.name)
     dispatch(UPDATE_PERSONS({ persons, users }))
   }, [paidAmounts, persons])
+
+  const payAndSplit = e => {
+    e.preventDefault()
+    dispatch(PAY_AMOUNTS({ paidAmounts }))
+    dispatch(UPDATE_ABLE_TO_SAVE())
+    dispatch(SPLIT())
+  }
 
   const handleBlur = e => {
     const value = e.target.value === '' ? 0 : parseFloat(e.target.value)
@@ -60,7 +59,15 @@ const payArea = () => {
                   <td>{person.name}</td>
                   <td>{person.total}</td>
                   <td>
-                    <input className='form-control form-control-sm' type='number' onBlur={handleBlur} onFocus={handleFocus} min='0' name={person.name} step={0.01} />
+                    <input
+                      className='form-control form-control-sm'
+                      type='number'
+                      onBlur={handleBlur}
+                      onFocus={handleFocus}
+                      min='0'
+                      name={person.name}
+                      step={0.01}
+                    />
                   </td>
                 </tr>
               ))
@@ -73,7 +80,7 @@ const payArea = () => {
           </tfoot>
         </table>
         <div className='text-end'>
-          <button type='submit' className='btn btn-success btn-sm rounded-pill' disabled={!(remain === 0)}>Pay and Split</button>
+          {!ableToSave && <button type='submit' className='btn btn-success btn-sm rounded-pill' disabled={remain !== 0}>Pay and Split</button>}
         </div>
       </form>
     </div>

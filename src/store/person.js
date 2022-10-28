@@ -6,8 +6,10 @@ const personInitialState = {
   total: 0,
   paid: 0,
   items: [],
-  payable: 0,
-  receivable: 0,
+  balance: 0,
+  tempBalance: 0,
+  to: [],
+  from: [],
 }
 
 const slice = createSlice({

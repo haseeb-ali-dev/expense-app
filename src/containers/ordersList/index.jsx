@@ -16,6 +16,7 @@ const ordersList = () => {
   const { name } = useSelector(state => state.user)
 
   const [fetched, setFetched] = useState(false)
+  const [ordersss, setOrdersss] = useState(orderList)
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -26,7 +27,11 @@ const ordersList = () => {
     fetchOrders()
   }, [name])
 
-  const ordersListing = orderList.map(order => <OrderListItem order={order} key={order.id} />)
+  useEffect(() => {
+    setOrdersss(orderList)
+  }, [orderList])
+
+  const ordersListing = ordersss.map(order => <OrderListItem order={order} key={order.id} />)
   const displayOrders = (
     <div className='d-inline-flex flex-wrap p-2'>
       {ordersListing}

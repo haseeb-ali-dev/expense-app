@@ -1,46 +1,28 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth'
-import { db, auth } from 'Database'
-import {
-  collection, addDoc, getDocs,
-} from 'firebase/firestore'
+import { auth, db } from 'Database'
+import { addDoc, collection, getDocs } from 'firebase/firestore'
 
 export const usersCollection = collection(db, 'users')
 
 export const signedUp = async (email, password, name) => {
   await createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const { user } = userCredential
+    .then(({ user }) => {
       addDoc(usersCollection, { email, name })
       updateProfile(user, {
         displayName: name,
-      }).then(() => {
-        console.log('Profile updated')
-      }).catch((error) => {
-        const { code, message } = error
-        return { code, message }
-      })
-      return user
+      }).then(() => user)
+        .catch(({ code, message }) => ({ code, message }))
     })
-    .catch((error) => {
-      const { code, message } = error
-      return { code, message }
-    })
+    .catch(({ code, message }) => ({ code, message }))
 }
 
 export const signedIn = async (email, password) => {
   await signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const { user } = userCredential
-      return user
-    })
-    .catch((error) => {
-      const { code, message } = error
-      return { code, message }
-    })
+    .then(userCredential => userCredential.user)
+    .catch(({ code, message }) => ({ code, message }))
 }
 
 export const getUsers = async () => {
   const querySnapshot = await getDocs(usersCollection)
-  const allUsers = querySnapshot.docs.map(document => ({ id: document.id, ...document.data() }))
-  return allUsers
+  return querySnapshot.docs.map(document => ({ id: document.id, ...document.data() }))
 }

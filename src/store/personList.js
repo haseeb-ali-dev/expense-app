@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
 /* eslint-disable max-len */
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
@@ -21,21 +23,40 @@ const slice = createSlice({
       const { paidAmounts } = action.payload
       personList.map(person => {
         person.paid = parseFloat(paidAmounts[person.name].toFixed(2))
-        const remaining = person.total - person.paid
-        if (remaining > 0) {
-          person.receivable = 0
-          person.payable = Math.abs(remaining.toFixed(2))
-        }
-        if (remaining < 0) {
-          person.payable = 0
-          person.receivable = Math.abs(remaining.toFixed(2))
-        }
-        if (remaining === 0) {
-          person.payable = 0
-          person.receivable = 0
-        }
+        const remaining = person.paid - person.total
+        person.balance = parseFloat(remaining.toFixed(2))
+        person.tempBalance = parseFloat(remaining.toFixed(2))
         return person
       })
+    },
+    SPLIT: (personList) => {
+      personList.map(p1 => {
+        if (p1.tempBalance > 0) {
+          personList.map(p2 => {
+            if (p2.name !== p1.name && p2.tempBalance < 0) {
+              const temp = p1.tempBalance + p2.tempBalance
+              if (temp < 0) {
+                if (p1.tempBalance !== 0) {
+                  p2.to.push({ amount: Math.abs(p1.tempBalance), name: p1.name })
+                  p1.from.push({ amount: Math.abs(p1.tempBalance), name: p2.name })
+                }
+                p2.tempBalance = temp
+                p1.tempBalance = 0
+              } else {
+                if (p2.tempBalance !== 0) {
+                  p2.to.push({ amount: Math.abs(p2.tempBalance), name: p1.name })
+                  p1.from.push({ amount: Math.abs(p2.tempBalance), name: p2.name })
+                }
+                p1.tempBalance = temp
+                p2.tempBalance = 0
+              }
+            }
+            return p2
+          })
+        }
+        return p1
+      })
+      return personList
     },
     ADD_PERSON_ITEM: (personList, action) => {
       const { personIdx, item } = action.payload
@@ -56,6 +77,6 @@ const slice = createSlice({
 })
 
 export const {
-  ADD_PERSON, APPLY_DEDUCTIONS, PAY_AMOUNTS, RESET_PERSON_LIST, ADD_PERSON_ITEM, REMOVE_PERSON_ITEM,
+  ADD_PERSON, APPLY_DEDUCTIONS, PAY_AMOUNTS, RESET_PERSON_LIST, ADD_PERSON_ITEM, REMOVE_PERSON_ITEM, SPLIT,
 } = slice.actions
 export default slice.reducer

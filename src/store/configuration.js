@@ -1,14 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import {
-  refReducer, personReducer, personListReducer, menuReducer,
+  ref, personReducer, personListReducer, menuReducer,
   orderReducer, userReducer, modalReducer, orderListReducer,
 } from 'store'
 
 export default () => configureStore({
   reducer: {
     menu: menuReducer,
-    ref: refReducer,
+    ref,
     person: personReducer,
     personList: personListReducer,
     order: orderReducer,

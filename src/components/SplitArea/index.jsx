@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+/* eslint-disable array-callback-return */
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { addOrder } from 'api/order'
-import { RESET_ORDER, UPDATE_RECEIVERS } from 'store/order'
+import { RESET_ORDER } from 'store/order'
 import { RESET_PERSON_LIST } from 'store/personList'
+import { UPDATE_ABLE_TO_SAVE } from 'store/menu'
 
 const splitArea = () => {
   const redirect = useNavigate()
@@ -13,25 +14,15 @@ const splitArea = () => {
   const order = useSelector(state => state.order)
   const { ableToSave } = useSelector(state => state.menu)
 
-  const [receivers, setReceivers] = useState([])
-
   const saveOrder = async e => {
     e.preventDefault()
     await addOrder(order).then(() => console.log('order added successfully!')).then(() => {
-      console.log(order)
       dispatch(RESET_PERSON_LIST())
       dispatch(RESET_ORDER())
+      dispatch(UPDATE_ABLE_TO_SAVE())
     })
     redirect('/')
   }
-
-  useEffect(() => {
-    setReceivers(() => persons.filter(person => person.payable === 0 && person.receivable !== 0))
-  }, [persons])
-
-  useEffect(() => {
-    dispatch(UPDATE_RECEIVERS({ receivers }))
-  }, [receivers])
 
   return (
     <div className='p-3'>
@@ -42,8 +33,8 @@ const splitArea = () => {
               <th scope='col'>Name</th>
               <th scope='col'>Total<small className='text-muted'> (PKR)</small></th>
               <th scope='col'>Paid<small className='text-muted'> (PKR)</small></th>
-              <th scope='col'>Receivable<small className='text-muted'> (PKR)</small></th>
-              <th scope='col'>Payable<small className='text-muted'> (PKR)</small></th>
+              <th scope='col'>Bal<small className='text-muted'> (PKR)</small></th>
+              <th scope='col'>Spliter</th>
             </tr>
           </thead>
           <tbody className='table-group-divider'>
@@ -53,11 +44,22 @@ const splitArea = () => {
                   <td>{person.name}</td>
                   <td>{person.total}</td>
                   <td>{person.paid}</td>
-                  <td className='text-success'>{person.receivable}</td>
-                  <td className='text-danger'>{person.payable}
-                    {(person.payable !== 0 && receivers.length !== 0)
-                      ? ` to ${receivers.map(r => ` ${r.name} `)}`
-                      : ''}
+                  <td className={person.balance > 0 ? 'text-success' : 'text-danger'}>
+                    {person.balance > 0 ? `+${person.balance}` : person.balance}
+                  </td>
+                  <td>
+                    {person.to.length > 0
+                      && (
+                        <ul className='list-group'>
+                          {person.to.map(r => <li className='list-group-item bg-light fst-italic p-0' key={r.name}>{r.amount} Rs. to {r.name}</li>)}
+                        </ul>
+                      )}
+                    {person.from.length > 0
+                      && (
+                        <ul className='list-group'>
+                          {person.from.map(s => <li className='list-group-item bg-light fst-italic p-0' key={s.name}>{s.amount} Rs. from {s.name}</li>)}
+                        </ul>
+                      )}
                   </td>
                 </tr>
               ))

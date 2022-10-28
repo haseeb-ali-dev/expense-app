@@ -12,11 +12,11 @@ const slice = createSlice({
       return orderList
     },
     UPDATE_ORDER_PERSONS: (orderList, action) => {
-      const { orderId, persons } = action.payload
+      const { orderId, persons, all } = action.payload
       const orderIndex = orderList.findIndex(el => el.id === orderId)
       orderList[orderIndex].persons = persons
       orderList[orderIndex].receivers = []
-      orderList[orderIndex].settleUp = true
+      orderList[orderIndex].settleUp = all
       return orderList
     },
     RESET_ORDER_LIST: (orderList) => {

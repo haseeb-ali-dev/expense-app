@@ -9,10 +9,13 @@ const navbar = () => {
   const redirect = useNavigate()
   const dispatch = useDispatch()
   const { isLogged } = useSelector(state => state.user)
-  const signedOut = () => {
-    signOut(auth)
-    redirect('/auth')
-    dispatch(RESET_USER())
+
+  const signedOut = async () => {
+    await signOut(auth)
+      .then(() => {
+        redirect('/auth')
+        dispatch(RESET_USER())
+      })
   }
 
   return (

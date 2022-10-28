@@ -1,5 +1,5 @@
 import {
-  collection, addDoc, getDocs, doc, updateDoc, query, where,
+  collection, addDoc, getDocs, doc, updateDoc, query, where, deleteDoc,
 } from 'firebase/firestore'
 import { db } from 'Database'
 
@@ -15,6 +15,10 @@ export const getOrders = async () => {
   return allOrders
 }
 
+export const removeOrder = async (orderId) => {
+  await deleteDoc(doc(db, 'orders', orderId))
+}
+
 export const getUserOrders = async (name) => {
   const queryResyult = query(orderCollection, where('users', 'array-contains', name))
   const querySnapshot = await getDocs(queryResyult)
@@ -22,8 +26,8 @@ export const getUserOrders = async (name) => {
   return userOrders
 }
 
-export const settleUp = async (orderId, persons) => {
+export const settleUp = async (orderId, persons, perPerson) => {
   const order = doc(db, 'orders', orderId)
-  await updateDoc(order, { persons, receivers: [], settleUp: true })
+  await updateDoc(order, { persons, settleUp: perPerson })
   return order
 }

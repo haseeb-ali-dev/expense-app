@@ -9,15 +9,15 @@ const auth = () => {
   const redirect = useNavigate()
   const [haveAccount, setHaveAccount] = useState(true)
 
-  const signup = e => {
+  const signup = async e => {
     e.preventDefault()
-    signedUp(e.target.email.value, e.target.password.value, e.target.full_name.value)
-    redirect('/')
+    await signedUp(e.target.email.value, e.target.password.value, e.target.full_name.value)
+      .then(() => redirect('/create'))
   }
-  const signin = e => {
+  const signin = async e => {
     e.preventDefault()
-    signedIn(e.target.email.value, e.target.password.value)
-    redirect('/')
+    await signedIn(e.target.email.value, e.target.password.value)
+      .then(() => redirect('/create'))
   }
   const label = haveAccount ? 'Please Sign In' : 'Create Account'
   const buttonText = haveAccount ? 'Sign In' : 'Sign Up'
@@ -38,10 +38,10 @@ const auth = () => {
         </div>
         {!haveAccount
           && (
-          <div className='form-floating  my-2'>
-            <input type='text' name='full_name' className='form-control' id='floatingPassword' placeholder='Name' />
-            <label htmlFor='floatingPassword'>Full Name</label>
-          </div>
+            <div className='form-floating  my-2'>
+              <input type='text' name='full_name' className='form-control' id='floatingPassword' placeholder='Name' />
+              <label htmlFor='floatingPassword'>Full Name</label>
+            </div>
           )}
         <button className='w-100 btn btn-primary rounded-pill' type='submit'>{buttonText}</button>
         <button className='w-100 form-control-plaintext' type='button' onClick={() => setHaveAccount(!haveAccount)}>{switchInfo}</button>

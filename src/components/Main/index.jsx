@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import {
-  BrowserRouter as Router, Routes, Route, Navigate,
+  BrowserRouter as Router, Route, Routes, Navigate,
 } from 'react-router-dom'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,15 +18,12 @@ import Payment from 'containers/payment'
 
 const main = () => {
   const dispatch = useDispatch()
-  const personList = useSelector(state => state.personList)
   const [authChecked, setAuthChecked] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    const user = auth.currentUser
-    return !!user
-  })
+  const personList = useSelector(state => state.personList)
+  const [isLoggedIn, setIsLoggedIn] = useState(() => !!auth.currentUser)
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, user => {
       if (user) {
         setIsLoggedIn(!isLoggedIn)
         dispatch(SET_GLOBAL_USER({ name: user.displayName }))

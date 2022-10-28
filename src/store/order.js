@@ -9,7 +9,6 @@ const orderInitialState = {
   tax: 0,
   delivery: 0,
   persons: [],
-  receivers: [],
   users: [],
   settleUp: false,
 }
@@ -36,10 +35,6 @@ const slice = createSlice({
     },
     UPDATE_GRAND: (order, action) => {
       order.grand = action.payload.personList.reduce((accumulator, { total }) => accumulator + total, 0)
-      return order
-    },
-    UPDATE_RECEIVERS: (order, action) => {
-      order.receivers = action.payload.receivers
       return order
     },
     UPDATE_PERSONS: (order, action) => {

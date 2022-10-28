@@ -1,4 +1,4 @@
-import refReducer from './ref'
+import * as ref from './ref'
 import personReducer from './person'
 import personListReducer from './personList'
 import menuReducer from './menu'
@@ -8,6 +8,6 @@ import modalReducer from './modal'
 import orderListReducer from './orderList'
 
 export {
-  refReducer, personReducer, personListReducer, menuReducer,
+  ref, personReducer, personListReducer, menuReducer,
   orderReducer, userReducer, modalReducer, orderListReducer,
 }
