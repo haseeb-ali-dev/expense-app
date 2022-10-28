@@ -17,6 +17,7 @@ const slice = createSlice({
     },
     ADD_ITEM: (menu, action) => {
       menu.items.push(action.payload.item)
+      menu.items.sort((a, b) => a.name.localeCompare(b.name))
     },
     REMOVE_ITEM: (menu, action) => {
       const { name, price } = action.payload

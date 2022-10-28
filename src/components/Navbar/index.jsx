@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { auth } from 'Database'
 import { RESET_USER } from 'store/user'
 
+import signOutIcon from 'assets/icons/signout.svg'
+
 const navbar = () => {
   const redirect = useNavigate()
   const dispatch = useDispatch()
-  const { isLogged } = useSelector(state => state.user)
+  const { isLogged, name } = useSelector(state => state.user)
 
   const signedOut = async () => {
     await signOut(auth)
@@ -20,17 +22,22 @@ const navbar = () => {
 
   return (
     <>
-      <header className='d-flex justify-content-start p-2 ps-3'>
+      <header className='d-flex justify-content-between p-2 ps-3'>
         <ul className='nav nav-pills'>
           <li className='nav-item'><Link to='/' className='nav-link active'>Expense App</Link></li>
           <li className='nav-item'><Link to='/' className='nav-link'>All Orders</Link></li>
           <li className='nav-item'><Link to='/create' className='nav-link'>New Order</Link></li>
-          <li className='nav-item'>
-            {isLogged
-              ? <button type='button' onClick={signedOut} className='nav-link'>Signout</button>
-              : <Link to='/auth' className='nav-link'>Login</Link>}
-          </li>
         </ul>
+        {isLogged
+          ? (
+            <div className='btn-group' role='group'>
+              <button type='button' className='btn btn-sm btn-outline-primary'><div className='mx-1'>{name}</div></button>
+              <button type='button' onClick={signedOut} className='btn btn-sm btn-danger'>
+                <img src={signOutIcon} alt='signout' />
+              </button>
+            </div>
+          )
+          : <div className='btn btn-outline-primary rounded-pill'><Link to='/auth' className='nav-link'>Login</Link></div>}
       </header>
       <div className='d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-1 mb-1 border-top' />
     </>

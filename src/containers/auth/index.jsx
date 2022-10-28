@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
-import { signedIn, signedUp } from 'api/auth'
+import { signedIn, signedUp, loginWithGoogle } from 'api/auth'
 
 import 'containers/auth/style.css'
+import googleIcon from 'assets/icons/google.svg'
 
 const auth = () => {
   const redirect = useNavigate()
@@ -18,6 +19,10 @@ const auth = () => {
     e.preventDefault()
     await signedIn(e.target.email.value, e.target.password.value)
       .then(() => redirect('/create'))
+  }
+
+  const googleLoggin = async () => {
+    await loginWithGoogle().then(() => redirect('/create'))
   }
   const label = haveAccount ? 'Please Sign In' : 'Create Account'
   const buttonText = haveAccount ? 'Sign In' : 'Sign Up'
@@ -43,7 +48,10 @@ const auth = () => {
               <label htmlFor='floatingPassword'>Full Name</label>
             </div>
           )}
-        <button className='w-100 btn btn-primary rounded-pill' type='submit'>{buttonText}</button>
+        <button className='w-100 btn btn-primary rounded-pill mb-1' type='submit'>{buttonText}</button>
+        <button className='w-100 btn btn-outline-primary rounded-pill mb-1' type='button' onClick={googleLoggin}>
+          <span className='mx-1 text-center'> <img src={googleIcon} alt='g' width={24} height={24} /></span>{buttonText} with Google
+        </button>
         <button className='w-100 form-control-plaintext' type='button' onClick={() => setHaveAccount(!haveAccount)}>{switchInfo}</button>
       </form>
     </main>
