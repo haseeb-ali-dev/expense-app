@@ -7,7 +7,7 @@ import { RESET_USER } from 'store/user'
 
 import signOutIcon from 'assets/icons/signout.svg'
 
-const navbar = () => {
+const navbar = ({ haveAccount, setHaveAccount }) => {
   const redirect = useNavigate()
   const dispatch = useDispatch()
   const { isLogged, name } = useSelector(state => state.user)
@@ -37,7 +37,11 @@ const navbar = () => {
               </button>
             </div>
           )
-          : <div className='btn btn-outline-primary rounded-pill'><Link to='/auth' className='nav-link'>Login</Link></div>}
+          : (
+            <button type='button' className='btn btn-outline-primary rounded-pill' onClick={() => setHaveAccount(!haveAccount)}>
+              {haveAccount ? 'Sign Up' : 'Login'}
+            </button>
+          )}
       </header>
       <div className='d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-1 mb-1 border-top' />
     </>

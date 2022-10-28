@@ -1,14 +1,13 @@
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
 
 import { signedIn, signedUp, loginWithGoogle } from 'api/auth'
 
 import 'containers/auth/style.css'
 import googleIcon from 'assets/icons/google.svg'
+import facebookIcon from 'assets/icons/facebook.svg'
 
-const auth = () => {
+const auth = ({ haveAccount, setHaveAccount }) => {
   const redirect = useNavigate()
-  const [haveAccount, setHaveAccount] = useState(true)
 
   const signup = async e => {
     e.preventDefault()
@@ -52,10 +51,15 @@ const auth = () => {
         <div className='w-100 text-center my-1'>
           <span className='text-muted'>--OR--</span>
         </div>
-        <button className='w-100 btn btn-outline-primary rounded-pill mb-1' type='button' onClick={googleLoggin}>
-          <span className='mx-1 text-center'> <img src={googleIcon} alt='g' width={24} height={24} /></span>{buttonText} with Google
+        <button className='w-100 btn btn-light border border-2 rounded-pill mb-1' type='button' onClick={googleLoggin}>
+          <span className='me-2 text-center'> <img src={googleIcon} alt='g' width={24} height={24} /></span>{buttonText} with Google
         </button>
-        <button className='w-100 form-control-plaintext' type='button' onClick={() => setHaveAccount(!haveAccount)}>{switchInfo}</button>
+        <button className='w-100 btn btn-primary rounded-pill mt-1' type='button' onClick={googleLoggin}>
+          <span className='me-2 text-center'> <img src={facebookIcon} alt='g' width={24} height={24} /></span>{buttonText} with Facebook
+        </button>
+        <div className='text-center'>
+          <button className='btn btn-sm p-0 m-0' type='button' onClick={() => setHaveAccount(!haveAccount)}>{switchInfo}</button>
+        </div>
       </form>
     </main>
   )

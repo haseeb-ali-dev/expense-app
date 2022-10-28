@@ -21,6 +21,7 @@ const main = () => {
   const [authChecked, setAuthChecked] = useState(false)
   const personList = useSelector(state => state.personList)
   const [isLoggedIn, setIsLoggedIn] = useState(() => !!auth.currentUser)
+  const [haveAccount, setHaveAccount] = useState(true)
 
   useEffect(() => {
     onAuthStateChanged(auth, user => {
@@ -37,7 +38,7 @@ const main = () => {
       {authChecked
         ? (
           <>
-            <Navbar />
+            <Navbar haveAccount={haveAccount} setHaveAccount={setHaveAccount} />
             <Routes>
               <Route path='/' element={isLoggedIn ? <OrdersList /> : <Navigate to='/auth' />} />
               <Route path='/create' element={isLoggedIn ? <Order /> : <Navigate to='/auth' />} />
@@ -47,7 +48,7 @@ const main = () => {
                   ? (personList.length > 0 ? <Payment /> : <Navigate to='/create' />)
                   : <Navigate to='/auth' />}
               />
-              <Route path='/auth' element={<Auth />} />
+              <Route path='/auth' element={<Auth haveAccount={haveAccount} setHaveAccount={setHaveAccount} />} />
             </Routes>
           </>
         )
