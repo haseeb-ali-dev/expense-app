@@ -28,8 +28,8 @@ const deductions = () => {
   }, [persons])
 
   return (
-    <div className='p-3'>
-      <div className='mb-3'>
+    <div className='px-3'>
+      <div className='my-3'>
         <p className='fs-4'>Deductions</p>
       </div>
       <div className='mb-3 row'>
@@ -61,7 +61,7 @@ const deductions = () => {
           </div>
         </div>
       </div>
-      <div className='mb-3 text-end'>
+      <div className='mb-1 text-end'>
         <button type='button' className='btn btn-sm btn-success rounded-pill' onClick={applyDeductions} disabled={disabled}>Apply</button>
       </div>
     </div>
