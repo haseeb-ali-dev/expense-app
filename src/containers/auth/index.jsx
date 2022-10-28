@@ -49,6 +49,9 @@ const auth = () => {
             </div>
           )}
         <button className='w-100 btn btn-primary rounded-pill mb-1' type='submit'>{buttonText}</button>
+        <div className='w-100 text-center my-1'>
+          <span className='text-muted'>--OR--</span>
+        </div>
         <button className='w-100 btn btn-outline-primary rounded-pill mb-1' type='button' onClick={googleLoggin}>
           <span className='mx-1 text-center'> <img src={googleIcon} alt='g' width={24} height={24} /></span>{buttonText} with Google
         </button>
