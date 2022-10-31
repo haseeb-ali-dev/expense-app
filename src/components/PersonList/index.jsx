@@ -28,7 +28,7 @@ const PersonList = () => {
     setEditPerson({ name: persons[personIdx].name, index: personIdx })
     const filteredItems = menuItems.filter(user => persons[personIdx].items.every(person => (person.name !== user.name)))
     const updatedItems = filteredItems.map(({ name, price }) => ({
-      name: `${name} -- PKR/- ${price}`,
+      name: `${name} -- Rs. ${price}`,
       value: JSON.stringify({ name, price }),
       disabled: false,
     }))
@@ -48,7 +48,7 @@ const PersonList = () => {
   const personList = persons.map((person, index1) => (
     <div className='mt-2 mx-1 border py-1 px-2 row bg-white' key={`person-${index1.toString()}`}>
       <div className='col-md-3'><small className='text-muted'>Name:</small> {person.name}</div>
-      <div className='col-md-3'><small className='text-muted'>Total:</small> PKR/- {person.total}</div>
+      <div className='col-md-3'><small className='text-muted'>Total:</small> Rs. {person.total}</div>
       <div className='col-md-5'>
         {person.items.map((item, index2) => (
           <div className='d-flex flex-row align-items-center' key={`person-item-${index2.toString()}`} role='group'>

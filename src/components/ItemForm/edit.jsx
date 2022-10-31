@@ -22,7 +22,7 @@ const editItemForm = ({ item }) => {
         </div>
         <div className='input-group mb-3'>
           <span className='input-group-text'>Price</span>
-          <input type='number' name='price' className='form-control' placeholder='Price in PKR' defaultValue={item.price} />
+          <input type='number' name='price' className='form-control' placeholder='Price in Rs.' defaultValue={item.price} />
         </div>
         <div className='text-end'>
           <button type='submit' className='btn btn-sm btn-outline-success rounded-pill'>Update</button>

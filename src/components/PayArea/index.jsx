@@ -48,8 +48,8 @@ const payArea = () => {
           <thead>
             <tr>
               <th scope='col'>Name</th>
-              <th scope='col'>Total<small className='text-muted'> (PKR)</small></th>
-              <th scope='col'>Paid<small className='text-muted'> (PKR)</small></th>
+              <th scope='col'>Total<small className='text-muted'> (Rs.)</small></th>
+              <th scope='col'>Paid<small className='text-muted'> (Rs.)</small></th>
             </tr>
           </thead>
           <tbody className='table-group-divider'>
@@ -75,7 +75,7 @@ const payArea = () => {
           </tbody>
           <tfoot>
             <tr>
-              <td colSpan='3' className='text-end'><strong>Remaining: </strong>PKR/- {remain.toFixed(2)}</td>
+              <td colSpan='3' className='text-end'><strong>Remaining: </strong>Rs. {remain.toFixed(2)}</td>
             </tr>
           </tfoot>
         </table>

@@ -130,10 +130,10 @@ const orderListItem = ({ order, showDetails = false }) => {
             Summary
             <button type='button' className='btn btn-sm btn-danger' onClick={deleteOrder} hidden>Del</button>
           </p>
-          <p> <span className='text-muted'>Grand: PKR/-</span> {order.grand}</p>
-          <p> <span className='text-muted'>Tip: PKR/-</span> {order.tip}</p>
+          <p> <span className='text-muted'>Grand: Rs.</span> {order.grand}</p>
+          <p> <span className='text-muted'>Tip: Rs.</span> {order.tip}</p>
           <p> <span className='text-muted'>Tax: </span> {order.tax} %</p>
-          <p> <span className='text-muted'>Delivery: PKR/-</span> {order.delivery}</p>
+          <p> <span className='text-muted'>Delivery: Rs.</span> {order.delivery}</p>
           {(!showDetails && order.settleUp) && <small className='text-muted fst-italic text-end'>settled up</small>}
           {(!showDetails && !order.settleUp && order.persons.some(p => p.balance === 0)) && <small className='text-muted fst-italic text-end'>partially settled up</small>}
         </div>
@@ -148,8 +148,8 @@ const orderListItem = ({ order, showDetails = false }) => {
                   </button>
                 )}
             </div>
-            <div><small className='text-muted'>Total: PKR/- </small> {person.total}</div>
-            <div><small className='text-muted'>Paid: PKR/- </small> {person.paid}</div>
+            <div><small className='text-muted'>Total: Rs. </small> {person.total}</div>
+            <div><small className='text-muted'>Paid: Rs. </small> {person.paid}</div>
             <div><small className='text-muted'>Balance: </small>
               <span className={person.balance > 0 ? 'text-success' : 'text-danger'}>
                 {person.balance > 0 ? `+${person.balance}` : person.balance}
@@ -163,7 +163,7 @@ const orderListItem = ({ order, showDetails = false }) => {
                     <ul className='list-group'>
                       {person.to.map((r, rIndex) => (
                         <li className='list-group-item bg-light fst-italic p-0' key={r.name}>
-                          {r.amount} Rs. to {r.name}
+                          Rs. {r.amount} to {r.name}
                           {loading ? <span className='text-danger mx-1 p-0 float-end'>...</span>
                             : (
                               <button type='button' className='btn btn-sm p-0 float-end' onClick={() => settleUpPayable(index, r, rIndex)}>
@@ -184,7 +184,7 @@ const orderListItem = ({ order, showDetails = false }) => {
                     <ul className='list-group'>
                       {person.from.map((s, sIndex) => (
                         <li className='list-group-item bg-light fst-italic p-0' key={s.name}>
-                          {s.amount} Rs. from {s.name}
+                          Rs. {s.amount} from {s.name}
                           {loading ? <span className='text-success mx-1 p-0 float-end'>...</span>
                             : (
                               <button type='button' className='btn btn-sm p-0 float-end' onClick={() => settleUpReceivable(index, s, sIndex)}>

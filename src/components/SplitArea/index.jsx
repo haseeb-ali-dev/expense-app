@@ -31,9 +31,9 @@ const splitArea = () => {
           <thead>
             <tr>
               <th scope='col'>Name</th>
-              <th scope='col'>Total<small className='text-muted'> (PKR)</small></th>
-              <th scope='col'>Paid<small className='text-muted'> (PKR)</small></th>
-              <th scope='col'>Bal<small className='text-muted'> (PKR)</small></th>
+              <th scope='col'>Total<small className='text-muted'> (Rs.)</small></th>
+              <th scope='col'>Paid<small className='text-muted'> (Rs.)</small></th>
+              <th scope='col'>Bal<small className='text-muted'> (Rs.)</small></th>
               <th scope='col'>Spliter</th>
             </tr>
           </thead>
@@ -67,7 +67,7 @@ const splitArea = () => {
           </tbody>
           <tfoot>
             <tr>
-              <td colSpan='6' className='text-end'><strong>Grand Total: </strong>PKR/- {order.grand}</td>
+              <td colSpan='6' className='text-end'><strong>Grand Total: </strong>Rs. {order.grand}</td>
             </tr>
           </tfoot>
         </table>

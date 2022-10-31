@@ -16,7 +16,7 @@ const PersonItemForm = ({ total, setTotal }) => {
 
   useEffect(() => {
     const updatedItems = menuItems.map(({ name, price }) => ({
-      name: `${name} -- PKR/- ${price}`,
+      name: `${name} -- Rs. ${price}`,
       value: JSON.stringify({ name, price }),
       disabled: items.some(item => (item.name === name && item.price === price)),
     }))

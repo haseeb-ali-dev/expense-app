@@ -22,7 +22,7 @@ const orderItems = () => {
       </div>
       <div className='text-end my-1'>
         <div className='border p-1'>
-          <span className='fs-5'>Grand Total:</span> PKR {grand}
+          <span className='fs-5'>Grand Total:</span> Rs. {grand}
         </div>
       </div>
     </div>
