@@ -1,18 +1,25 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 
-import { ADD_ITEM } from 'store/menu'
+import { ADD_ITEM, UPDATE_ITEM } from 'store/menu'
 
 import plusIcon from 'assets/icons/plus.svg'
 
 const itemForm = () => {
   const dispatch = useDispatch()
-  const initialItem = { name: '', price: '' }
+  const { items } = useSelector(state => state.menu)
+  const initialItem = { name: '', price: 0 }
   const [item, setItem] = useState(initialItem)
-  const handleChange = (e) => setItem({ ...item, [e.target.name]: e.target.value.trim() })
-  const submitHandler = (e) => {
+
+  const handleChange = e => setItem({ ...item, [e.target.name]: e.target.value.trim() })
+
+  const submitHandler = e => {
     e.preventDefault()
-    dispatch(ADD_ITEM({ item }))
+    if (items.some(({ name }) => name === item.name)) {
+      if (confirm('This menu item is already existed. Do you want update that?')) dispatch(UPDATE_ITEM({ key: item.name, updated: item }))
+    } else {
+      dispatch(ADD_ITEM({ item }))
+    }
     setItem(initialItem)
   }
 
@@ -25,7 +32,7 @@ const itemForm = () => {
       <div className='mb-2 d-flex flex-row'>
         <div className='w-100'>
           <label className='form-label'>Price</label>
-          <input type='number' name='price' className='form-control' placeholder='Enter Price' required onChange={handleChange} value={item.price} />
+          <input type='number' name='price' className='form-control' placeholder='Enter Price' min={1} required onChange={handleChange} value={item.price} />
         </div>
         <button type='submit' className='btn btn-sm btn-success rounded-circle mt-auto ms-3'>
           <img src={plusIcon} alt='+' />

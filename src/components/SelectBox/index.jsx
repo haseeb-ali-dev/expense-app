@@ -1,4 +1,4 @@
-const SelectBox = ({
+export default ({
   name, required, options = [], onChange = null, value = '',
 }) => (
   <select name={name} className='form-control' required={required} onChange={onChange} value={value}>
@@ -11,5 +11,3 @@ const SelectBox = ({
       ))}
   </select>
 )
-
-export default SelectBox

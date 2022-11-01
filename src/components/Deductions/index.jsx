@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { Delivery, Tip, Tax } from 'components'
+
 import { APPLY_DEDUCTIONS } from 'store/personList'
-import { ADD_DEDUCTION, UPDATE_GRAND } from 'store/order'
+import { UPDATE_GRAND } from 'store/order'
 
 const deductions = () => {
   const dispatch = useDispatch()
-  const { tip, tax, delivery } = useSelector(state => state.order)
-  const persons = useSelector(state => state.personList)
   const [disabled, useDisbaled] = useState(false)
+  const persons = useSelector(state => state.personList)
+  const { tip, tax, delivery } = useSelector(state => state.order)
 
-  const addTip = (e) => dispatch(ADD_DEDUCTION({ key: 'tip', value: parseFloat(e.target.value) }))
-
-  const addDelivery = (e) => dispatch(ADD_DEDUCTION({ key: 'delivery', value: parseFloat(e.target.value) }))
-
-  const addTax = (e) => dispatch(ADD_DEDUCTION({ key: 'tax', value: parseFloat(e.target.value) }))
+  useEffect(() => {
+    dispatch(UPDATE_GRAND({ personList: persons }))
+  }, [persons])
 
   const applyDeductions = () => {
     const tipAmount = tip / persons.length
@@ -23,44 +23,14 @@ const deductions = () => {
     useDisbaled(!disabled)
   }
 
-  useEffect(() => {
-    dispatch(UPDATE_GRAND({ personList: persons }))
-  }, [persons])
-
   return (
     <div className='px-3'>
       <div className='my-3'>
         <p className='fs-4'>Deductions</p>
       </div>
-      <div className='mb-3 row'>
-        <label className='col-sm-3 col-form-label'>Tip</label>
-        <div className='col-sm-9'>
-          <input type='number' className='form-control' placeholder='Enter tip amount' onChange={addTip} />
-        </div>
-      </div>
-      <div className='mb-3 row'>
-        <label className='col-sm-3 col-form-label'>Delivery</label>
-        <div className='col-sm-9'>
-          <input type='number' className='form-control' placeholder='Enter delivery charges' onChange={addDelivery} />
-        </div>
-      </div>
-      <div className='mb-3 row'>
-        <label className='col-sm-3 col-form-label'>Tax (%) </label>
-        <div className='col-sm-9 m-auto '>
-          <div className='form-check form-check-inline'>
-            <input className='form-check-input' type='radio' name='tax' value='0' onChange={addTax} />
-            <label className='form-check-label'>0 %</label>
-          </div>
-          <div className='form-check form-check-inline'>
-            <input className='form-check-input' type='radio' name='tax' value='5' onChange={addTax} />
-            <label className='form-check-label'>5 %</label>
-          </div>
-          <div className='form-check form-check-inline'>
-            <input className='form-check-input' type='radio' name='tax' value='16' onChange={addTax} />
-            <label className='form-check-label'>16 %</label>
-          </div>
-        </div>
-      </div>
+      <Tip />
+      <Delivery />
+      <Tax />
       <div className='mb-1 text-end'>
         <button type='button' className='btn btn-sm btn-success rounded-pill' onClick={applyDeductions} disabled={disabled}>Apply</button>
       </div>

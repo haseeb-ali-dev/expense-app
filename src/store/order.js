@@ -42,7 +42,7 @@ const slice = createSlice({
       order.users = [...action.payload.users]
       return order
     },
-    UPDATE_RESTURANT: (order, action) => {
+    ADD_RESTURANT: (order, action) => {
       order.resturant = action.payload.name
       return order
     },
@@ -54,6 +54,6 @@ const slice = createSlice({
 })
 
 export const {
-  ADD_DEDUCTION, UPDATE_GRAND, UPDATE_RECEIVERS, UPDATE_PERSONS, UPDATE_RESTURANT, RESET_ORDER,
+  ADD_DEDUCTION, UPDATE_GRAND, UPDATE_RECEIVERS, UPDATE_PERSONS, ADD_RESTURANT, RESET_ORDER,
 } = slice.actions
 export default slice.reducer

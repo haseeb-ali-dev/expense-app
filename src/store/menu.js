@@ -16,18 +16,15 @@ const slice = createSlice({
       return menu
     },
     ADD_ITEM: (menu, action) => {
-      menu.items.push(action.payload.item)
+      const { item: { name, price } } = action.payload
+      menu.items.push({ name, price: Number(price) })
       menu.items.sort((a, b) => a.name.localeCompare(b.name))
     },
     REMOVE_ITEM: (menu, action) => {
-      const { name, price } = action.payload
-      const filteredItems = menu.items.filter(el => el.name !== name && el.price !== price)
-      menu.items = filteredItems
-      return menu
+      menu.items.splice(action.payload.index, 1)
     },
     UPDATE_ITEM: (menu, action) => {
-      const { name, price } = action.payload.original
-      const found = menu.items.find(item => item.name === name && item.price === price)
+      const found = menu.items.find(item => item.name === action.payload.key)
       found.name = action.payload.updated.name
       found.price = action.payload.updated.price
       return menu
