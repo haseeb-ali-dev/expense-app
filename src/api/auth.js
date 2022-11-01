@@ -10,21 +10,15 @@ import {
 export const usersCollection = collection(db, 'users')
 
 export const signedUp = async (email, password, name) => {
-  await createUserWithEmailAndPassword(auth, email, password)
-    .then(({ user }) => {
-      addDoc(usersCollection, { email, name })
-      updateProfile(user, {
-        displayName: name,
-      }).then(() => user)
-        .catch(({ code, message }) => ({ code, message }))
-    })
-    .catch(({ code, message }) => ({ code, message }))
+  const { user } = await createUserWithEmailAndPassword(auth, email, password)
+  await addDoc(usersCollection, { email, name })
+  await updateProfile(user, { displayName: name })
+  return { user }
 }
 
 export const signedIn = async (email, password) => {
-  await signInWithEmailAndPassword(auth, email, password)
-    .then(userCredential => userCredential.user)
-    .catch(({ code, message }) => ({ code, message }))
+  const { user } = await signInWithEmailAndPassword(auth, email, password)
+  return user
 }
 export const loginWithGoogle = async () => {
   const provider = new GoogleAuthProvider()
