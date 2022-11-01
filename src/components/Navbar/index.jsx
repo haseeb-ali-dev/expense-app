@@ -31,14 +31,14 @@ const navbar = ({ haveAccount, setHaveAccount }) => {
         {isLogged
           ? (
             <div className='btn-group' role='group'>
-              <button type='button' className='btn btn-sm btn-outline-primary'><div className='mx-1'>{name}</div></button>
-              <button type='button' onClick={signedOut} className='btn btn-sm btn-danger'>
+              <button className='btn btn-sm btn-outline-primary'><div className='mx-1'>{name}</div></button>
+              <button onClick={signedOut} className='btn btn-sm btn-danger'>
                 <img src={signOutIcon} alt='signout' />
               </button>
             </div>
           )
           : (
-            <button type='button' className='btn btn-outline-primary rounded-pill' onClick={() => setHaveAccount(!haveAccount)}>
+            <button className='btn btn-outline-primary rounded-pill' onClick={() => setHaveAccount(!haveAccount)}>
               {haveAccount ? 'Sign Up' : 'Login'}
             </button>
           )}

@@ -4,9 +4,9 @@
 import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 
-import ListItem from 'components/ListItem'
+import Item from 'components/Item'
 
-import { HIDE_MODAL, SET_MODAL_ORDER, SHOW_MODAL } from 'store/modal'
+import { HIDE_MODAL, SET_MODAL_ORDER } from 'store/modal'
 import { settleUp, removeOrder } from 'api/order'
 import { UPDATE_ORDER_PERSONS } from 'store/orderList'
 
@@ -14,13 +14,12 @@ import settleUpIcon from 'assets/icons/settleup.svg'
 import okIcon from 'assets/icons/ok.svg'
 import ok2Icon from 'assets/icons/ok2.svg'
 
-const orderListItem = ({ order, showDetails = false }) => {
+const orderItem = ({ order, showDetails = false }) => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
 
   const viewOrder = detailedOrder => {
     dispatch(SET_MODAL_ORDER({ order: detailedOrder }))
-    dispatch(SHOW_MODAL())
   }
 
   const settleUpOrder = async (orderId) => {
@@ -128,7 +127,7 @@ const orderListItem = ({ order, showDetails = false }) => {
         <div className='mt-2 mx-1 border py-1 px-2 d-flex flex-column bg-light'>
           <p className='fs-5 p-1'>
             Summary
-            <button type='button' className='btn btn-sm btn-danger' onClick={deleteOrder} hidden>Del</button>
+            <button className='btn btn-sm btn-danger' onClick={deleteOrder} hidden>Del</button>
           </p>
           <p> <span className='text-muted'>Grand: Rs.</span> {order.grand}</p>
           <p> <span className='text-muted'>Tip: Rs.</span> {order.tip}</p>
@@ -143,7 +142,7 @@ const orderListItem = ({ order, showDetails = false }) => {
               {person.name}
               {person.balance === -2
                 && (
-                  <button type='button' className='btn btn-sm' onClick={() => settleUpPersonOrder(order.id, index)}>
+                  <button className='btn btn-sm' onClick={() => settleUpPersonOrder(order.id, index)}>
                     {loading ? <span>...</span> : <img src={settleUpIcon} alt='Settle' />}
                   </button>
                 )}
@@ -166,7 +165,7 @@ const orderListItem = ({ order, showDetails = false }) => {
                           Rs. {r.amount} to {r.name}
                           {loading ? <span className='text-danger mx-1 p-0 float-end'>...</span>
                             : (
-                              <button type='button' className='btn btn-sm p-0 float-end' onClick={() => settleUpPayable(index, r, rIndex)}>
+                              <button className='btn btn-sm p-0 float-end' onClick={() => settleUpPayable(index, r, rIndex)}>
                                 <img src={ok2Icon} alt='ok' />
                               </button>
                             )}
@@ -187,7 +186,7 @@ const orderListItem = ({ order, showDetails = false }) => {
                           Rs. {s.amount} from {s.name}
                           {loading ? <span className='text-success mx-1 p-0 float-end'>...</span>
                             : (
-                              <button type='button' className='btn btn-sm p-0 float-end' onClick={() => settleUpReceivable(index, s, sIndex)}>
+                              <button className='btn btn-sm p-0 float-end' onClick={() => settleUpReceivable(index, s, sIndex)}>
                                 <img src={okIcon} alt='ok' />
                               </button>
                             )}
@@ -199,7 +198,7 @@ const orderListItem = ({ order, showDetails = false }) => {
               )}
             <div className='fs-5 mt-2'>Items:</div>
             <div>
-              {person.items.map(item => <ListItem item={item} key={item.name} />)}
+              {person.items.map(item => <Item item={item} key={item.name} />)}
             </div>
             {person.balance === 0 && <div className='text-end'><small className='text-muted fst-italic'>settled up</small></div>}
           </div>
@@ -210,7 +209,7 @@ const orderListItem = ({ order, showDetails = false }) => {
         && (
           <div className='w-100 text-end mt-1 p-1'>
             {!order.settleUp ? (
-              <button type='button' className='btn btn-outline-success rounded-pill' onClick={() => settleUpOrder(order.id)}>
+              <button className='btn btn-outline-success rounded-pill' onClick={() => settleUpOrder(order.id)}>
                 {loading && <span className='spinner-border spinner-border-sm mx-1' role='status' aria-hidden='true' />}
                 {loading ? 'Settling Up All...' : 'Settle Up All'}
               </button>
@@ -224,7 +223,7 @@ const orderListItem = ({ order, showDetails = false }) => {
         !showDetails
         && (
           <div className='w-100 mt-1 text-end p-1'>
-            <button type='button' className='btn btn-sm btn-outline-success rounded-pill' onClick={() => viewOrder(order)}>Show Details</button>
+            <button className='btn btn-sm btn-outline-success rounded-pill' onClick={() => viewOrder(order)}>Show Details</button>
           </div>
         )
       }
@@ -232,4 +231,4 @@ const orderListItem = ({ order, showDetails = false }) => {
   )
 }
 
-export default orderListItem
+export default orderItem

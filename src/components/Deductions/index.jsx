@@ -8,9 +8,9 @@ import { UPDATE_GRAND } from 'store/order'
 
 const deductions = () => {
   const dispatch = useDispatch()
+  const { delivery, tip, tax } = useSelector(state => state.order)
   const [disabled, useDisbaled] = useState(false)
   const persons = useSelector(state => state.personList)
-  const { tip, tax, delivery } = useSelector(state => state.order)
 
   useEffect(() => {
     dispatch(UPDATE_GRAND({ personList: persons }))
@@ -28,11 +28,11 @@ const deductions = () => {
       <div className='my-3'>
         <p className='fs-4'>Deductions</p>
       </div>
-      <Tip />
-      <Delivery />
-      <Tax />
+      <Tip dispatch={dispatch} />
+      <Delivery dispatch={dispatch} />
+      <Tax dispatch={dispatch} />
       <div className='mb-1 text-end'>
-        <button type='button' className='btn btn-sm btn-success rounded-pill' onClick={applyDeductions} disabled={disabled}>Apply</button>
+        <button className='btn btn-sm btn-success rounded-pill' onClick={applyDeductions} disabled={disabled}>Apply</button>
       </div>
     </div>
   )

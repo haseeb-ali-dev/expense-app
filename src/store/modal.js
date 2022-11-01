@@ -2,42 +2,38 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const modalInitialState = {
-  show: false,
-  showList: false,
+  showItem: false,
+  showPerson: false,
+  showOrder: false,
   modalItem: {},
   modalOrder: {},
-  modalItemList: [],
+  modalPerson: { personIdx: 0, items: [] },
 }
 
 const slice = createSlice({
   name: 'modal',
   initialState: modalInitialState,
   reducers: {
-    SHOW_MODAL: (modal) => {
-      modal.show = true
-      return modal
-    },
     HIDE_MODAL: (modal) => {
       modal = modalInitialState
       return modal
     },
     SET_MODAL_ITEM: (modal, action) => {
       modal.modalItem = action.payload.item
-      return modal
+      modal.showItem = true
     },
     SET_MODAL_ORDER: (modal, action) => {
       modal.modalOrder = action.payload.order
-      return modal
     },
-    SET_MODAL_ITEM_LIST: (modal, action) => {
-      modal.showList = true
-      modal.modalItemList = action.payload.items
-      return modal
+    SET_MODAL_PERSON: (modal, action) => {
+      modal.modalPerson.items = action.payload.items
+      modal.modalPerson.personIdx = action.payload.personIdx
+      modal.showPerson = true
     },
   },
 })
 
 export const {
-  SHOW_MODAL, HIDE_MODAL, SET_MODAL_ITEM, SET_MODAL_ORDER, SET_MODAL_PERSON, SET_MODAL_ITEM_LIST,
+  HIDE_MODAL, SET_MODAL_ITEM, SET_MODAL_ORDER, SET_MODAL_PERSON,
 } = slice.actions
 export default slice.reducer

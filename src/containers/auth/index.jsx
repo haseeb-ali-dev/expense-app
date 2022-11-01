@@ -75,14 +75,14 @@ const auth = ({ haveAccount, setHaveAccount }) => {
             <div className='w-100 text-center my-1'>
               <span className='text-muted'>--OR--</span>
             </div>
-            <button className='w-100 btn btn-light border border-2 rounded-pill mb-1' type='button' onClick={googleLoggin}>
+            <button className='w-100 btn btn-light border border-2 rounded-pill mb-1' onClick={googleLoggin}>
               <span className='me-2 text-center'> <img src={googleIcon} alt='g' width={24} height={24} /></span>{buttonText} with Google
             </button>
-            <button className='w-100 btn btn-primary rounded-pill mt-1' type='button' onClick={googleLoggin}>
+            <button className='w-100 btn btn-primary rounded-pill mt-1' onClick={googleLoggin}>
               <span className='me-2 text-center'> <img src={facebookIcon} alt='g' width={24} height={24} /></span>{buttonText} with Facebook
             </button>
             <div className='text-center'>
-              <button className='btn btn-sm p-0 m-0' type='button' onClick={() => setHaveAccount(!haveAccount)}>{switchInfo}</button>
+              <button className='btn btn-sm p-0 m-0' onClick={() => setHaveAccount(!haveAccount)}>{switchInfo}</button>
             </div>
           </form>
         )}

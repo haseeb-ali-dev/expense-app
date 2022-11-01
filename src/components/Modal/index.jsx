@@ -13,12 +13,10 @@ const modal = ({ html }) => {
   const closeModal = (e) => e.target === modalRef.current && dispatch(HIDE_MODAL())
 
   return ReactDom.createPortal(
-    // eslint-disable-next-line max-len
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
     <div className='container' ref={modalRef} onClick={closeModal}>
       <div className='modal'>
         {html}
-        <button className='close' type='button' onClick={() => dispatch(HIDE_MODAL())}>X</button>
+        <button className='close' onClick={() => dispatch(HIDE_MODAL())}>X</button>
       </div>
     </div>,
     document.getElementById('portal'),

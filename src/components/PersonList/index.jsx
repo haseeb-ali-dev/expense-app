@@ -1,86 +1,41 @@
-/* eslint-disable max-len */
-import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react'
+import { Item } from 'components'
 
-import ListItem from 'components/ListItem'
-import Modal from 'components/Modal'
-import SelectBox from 'components/SelectBox'
+import { REMOVE_PERSON_ITEM } from 'store/personList'
+import { SET_MODAL_PERSON } from 'store/modal'
 
-import { ADD_PERSON_ITEM, REMOVE_PERSON_ITEM } from 'store/personList'
-import { HIDE_MODAL, SET_MODAL_ITEM_LIST } from 'store/modal'
+import { editIcon2, removeIcon } from 'assets/icons'
 
-import editIcon from 'assets/icons/edit.svg'
-import removeIcon from 'assets/icons/remove.svg'
-
-const PersonList = () => {
-  const dispatch = useDispatch()
-  const persons = useSelector(state => state.personList)
-  const { items: menuItems } = useSelector(state => state.menu)
-  const { showList, modalItemList } = useSelector(state => state.modal)
-
-  const [selected, setSelected] = useState('')
-  const [editPerson, setEditPerson] = useState({})
-
-  const removePersonItem = (personIdx, itemIdx) => {
-    dispatch(REMOVE_PERSON_ITEM({ personIdx, itemIdx }))
-  }
-  const addPeronItem = (personIdx) => {
-    setEditPerson({ name: persons[personIdx].name, index: personIdx })
-    const filteredItems = menuItems.filter(user => persons[personIdx].items.every(person => (person.name !== user.name)))
-    const updatedItems = filteredItems.map(({ name, price }) => ({
-      name: `${name} -- Rs. ${price}`,
-      value: JSON.stringify({ name, price }),
-      disabled: false,
-    }))
-    dispatch(SET_MODAL_ITEM_LIST({ items: updatedItems }))
-  }
-
-  const handleChange = (e) => {
-    const item = e.target.value
-    if (item !== '') {
-      const itemJson = JSON.parse(item)
-      dispatch(ADD_PERSON_ITEM({ personIdx: editPerson.index, item: itemJson }))
-      setSelected('')
-      dispatch(HIDE_MODAL())
-    }
-  }
-
-  const personList = persons.map((person, index1) => (
-    <div className='mt-2 mx-1 border py-1 px-2 row bg-white' key={`person-${index1.toString()}`}>
-      <div className='col-md-3'><small className='text-muted'>Name:</small> {person.name}</div>
-      <div className='col-md-3'><small className='text-muted'>Total:</small> Rs. {person.total}</div>
+export default ({ dispatch, menuItems, persons }) => persons.length !== 0 && (
+  persons.map(({ name: personName, total, items }, personIdx) => (
+    <div className='mt-2 mx-1 border py-1 px-2 row bg-white' key={`person-${personIdx.toString()}`}>
+      <div className='col-md-3'><small className='text-muted'>Name:</small> {personName}</div>
+      <div className='col-md-3'><small className='text-muted'>Total:</small> Rs. {total}</div>
       <div className='col-md-5'>
-        {person.items.map((item, index2) => (
-          <div className='d-flex flex-row align-items-center' key={`person-item-${index2.toString()}`} role='group'>
-            <button type='button' className='btn btn-sm' onClick={() => removePersonItem(index1, index2)}>
+        {items.map((item, itemIdx) => (
+          <div className='d-flex flex-row align-items-center' key={`person-item-${itemIdx.toString()}`} role='group'>
+            <button className='btn btn-sm' onClick={() => dispatch(REMOVE_PERSON_ITEM({ personIdx, itemIdx }))}>
               <img src={removeIcon} alt='x' />
             </button>
-            <ListItem item={item} />
+            <Item item={item} />
           </div>
         ))}
       </div>
       <div className='col-sm-1'>
-        <button type='button' className='btn btn-sm' onClick={() => addPeronItem(index1)}>
-          <img src={editIcon} alt='+' />
+        <button
+          className='btn btn-sm'
+          onClick={() => {
+            dispatch(SET_MODAL_PERSON({
+              personIdx,
+              items: menuItems.filter(mItm => items.every(pItm => (pItm.name !== mItm.name)))
+                .map(({ name, price }) => ({
+                  label: `${name} @ Rs. ${price}`,
+                  value: JSON.stringify({ name, price }),
+                })),
+            }))
+          }}
+        ><img src={editIcon2} alt='+' />
         </button>
       </div>
     </div>
   ))
-
-  return (
-    <div>
-      {persons.length !== 0 && personList}
-      {showList && (
-        <Modal html={(
-          <div className='mx-2'>
-            <p className='mb-2'>Select Item to add For {`${editPerson.index}-${editPerson.name}`}</p>
-            <SelectBox name='items' options={modalItemList} onChange={handleChange} value={selected} />
-          </div>
-        )}
-        />
-      )}
-    </div>
-  )
-}
-
-export default PersonList
+)

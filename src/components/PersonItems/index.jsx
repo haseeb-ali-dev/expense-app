@@ -1,33 +1,20 @@
-import { useDispatch, useSelector } from 'react-redux'
-
-import ListItem from 'components/ListItem'
-
+import Item from 'components/Item'
 import { REMOVE_PERSON_ITEM } from 'store/person'
 
-import removeIcon from 'assets/icons/remove.svg'
+import { removeIcon } from 'assets/icons'
 
-const personItems = () => {
-  const dispatch = useDispatch()
-  const { items } = useSelector(state => state.person)
-  const removePersonItem = (item) => dispatch(REMOVE_PERSON_ITEM(item))
-
-  const itemList = (
-    <fieldset className='border border-2 p-2'>
-      <legend className='float-none w-auto px-1 fs-5'>Selected Items</legend>
-      {items.map(item => (
-        <div className='d-inline-flex mx-2 my-1 border p-2 position-relative' key={item.name}>
-          <ListItem item={item} />
-          <button type='button' className='btn btn-sm bg-light position-absolute top-0 start-100 translate-middle rounded-circle' onClick={() => removePersonItem(item)}>
-            <img src={removeIcon} alt='x' />
-          </button>
-        </div>
-      ))}
-    </fieldset>
-  )
-
-  return (
-    <div>{items.length !== 0 && itemList}</div>
-  )
-}
-
-export default personItems
+export default ({ dispatch, name, items }) => name !== '' && (
+  <fieldset className='border border-2 p-2 mt-1'>
+    <legend className='float-none w-auto px-1 fs-5'>{name}</legend>
+    {items.map(item => (
+      <div className='d-inline-flex mx-2 my-1 border p-2 position-relative' key={item.name}>
+        <Item item={item} />
+        <button
+          className='btn btn-sm bg-light position-absolute top-0 start-100 translate-middle rounded-circle'
+          onClick={() => dispatch(REMOVE_PERSON_ITEM(item))}
+        ><img src={removeIcon} alt='x' />
+        </button>
+      </div>
+    ))}
+  </fieldset>
+)
