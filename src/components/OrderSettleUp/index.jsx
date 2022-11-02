@@ -31,7 +31,7 @@ const orderSettleUp = ({ order, loading, setLoading }) => {
   }
 
   return (
-    <div className='w-100 mt-1 p-1'>
+    <div className='w-100 mt-1 p-1 text-end'>
       {!order.settleUp ? (
         <button className='btn btn-outline-success rounded-pill' onClick={() => settleUpOrder(order.id)}>
           {loading && <span className='spinner-border spinner-border-sm mx-1' role='status' aria-hidden='true' />}

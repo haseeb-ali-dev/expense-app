@@ -31,12 +31,6 @@
   position: absolute;
   top: 7px;
   right: 7px;
-  background: crimson;
-  color: white;
-  font-weight: bold;
-  border: none;
-  outline: none;
-  border-radius: 50%;
   cursor: pointer;
 }
 

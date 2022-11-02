@@ -5,6 +5,7 @@ import { useRef } from 'react'
 import { HIDE_MODAL } from 'store/modal'
 
 import 'components/Modal/style.css'
+import { closeIcon } from 'assets/icons'
 
 const modal = ({ html }) => {
   const dispatch = useDispatch()
@@ -16,7 +17,9 @@ const modal = ({ html }) => {
     <div className='container' ref={modalRef} onClick={closeModal}>
       <div className='modal'>
         {html}
-        <button className='close' onClick={() => dispatch(HIDE_MODAL())}>X</button>
+        <button className='btn p-0 close' onClick={() => dispatch(HIDE_MODAL())}>
+          <img src={closeIcon} alt='X' />
+        </button>
       </div>
     </div>,
     document.getElementById('portal'),

@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { HIDE_MODAL } from 'store/modal'
+import ReactTooltip from 'react-tooltip'
 import { settleUp } from 'api/order'
 import { UPDATE_ORDER_PERSONS } from 'store/orderList'
 
@@ -50,16 +51,16 @@ const receivables = ({
             {person.from.map((s, sIndex) => (
               <li className='list-group-item bg-light fst-italic p-0' key={s.name}>
                 Rs. {s.amount.toLocaleString('en-US')} from {s.name}
-                {loading ? <span className='text-success mx-1 p-0 float-end'>...</span>
+                {loading ? <span className='text-success mx-2 p-0 float-end'>...</span>
                   : (
-                    <button className='btn btn-sm p-0 float-end' onClick={() => settleUpReceivable(pIndex, s, sIndex)}>
-                      <img src={okIcon} alt='ok' />
+                    <button className='btn btn-sm mx-1 p-0 float-end' data-tip={`Settle Up ${person.name}`} onClick={() => settleUpReceivable(pIndex, s, sIndex)}><img src={okIcon} alt='ok' />
                     </button>
                   )}
               </li>
             ))}
           </ul>
         </div>
+        <ReactTooltip />
       </>
     )
 }

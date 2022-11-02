@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { HIDE_MODAL } from 'store/modal'
+import ReactTooltip from 'react-tooltip'
 import { settleUp } from 'api/order'
 import { UPDATE_ORDER_PERSONS } from 'store/orderList'
 
@@ -52,7 +53,7 @@ const payables = ({
                 Rs. {r.amount} to {r.name}
                 {loading ? <span className='text-danger mx-1 p-0 float-end'>...</span>
                   : (
-                    <button className='btn btn-sm p-0 float-end' onClick={() => settleUpPayable(pIndex, r, rIndex)}>
+                    <button className='btn btn-sm mx-1 p-0 float-end' data-tip={`Settle Up ${person.name}`} onClick={() => settleUpPayable(pIndex, r, rIndex)}>
                       <img src={ok2Icon} alt='ok' />
                     </button>
                   )}
@@ -60,6 +61,7 @@ const payables = ({
             ))}
           </ul>
         </div>
+        <ReactTooltip />
       </>
     )
 }

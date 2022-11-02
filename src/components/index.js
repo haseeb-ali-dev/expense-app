@@ -9,6 +9,7 @@ import Modal from 'components/Modal'
 import Main from 'components/Main'
 import Navbar from 'components/Navbar'
 import OrderSummary from 'components/OrderSummary'
+import OrderActions from 'components/OrderActions'
 import OrderPersonItems from 'components/OrderPersonItems'
 import OrderSettleUp from 'components/OrderSettleUp'
 import PersonItems from 'components/PersonItems'
@@ -25,7 +26,7 @@ import Tax from 'components/Tax'
 export {
   Delivery, EditItemForm, Loader, Item,
   ItemForm, ItemSelect, MenuItems, Modal,
-  Main, Navbar, OrderSummary, OrderPersonItems,
+  Main, Navbar, OrderSummary, OrderActions, OrderPersonItems,
   OrderSettleUp, PersonItems, PersonList, PersonSelect,
   PersonDetail, Payables, Resturant, Receivables,
   Select, Tip, Tax,
