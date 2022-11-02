@@ -1,7 +1,6 @@
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
 /* eslint-disable max-len */
-/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
 
 const slice = createSlice({
@@ -10,6 +9,7 @@ const slice = createSlice({
   reducers: {
     ADD_PERSON: (personList, action) => {
       personList.push(action.payload.person)
+      personList.sort((a, b) => a.name.localeCompare(b.name))
     },
     APPLY_DEDUCTIONS: (personList, action) => {
       const { tip, delivery, tax } = action.payload
@@ -62,12 +62,16 @@ const slice = createSlice({
       const { personIdx, item } = action.payload
       personList[personIdx].total += parseFloat(item.price)
       personList[personIdx].items.push(item)
+      personList[personIdx].items.sort((a, b) => a.name.localeCompare(b.name))
     },
     REMOVE_PERSON_ITEM: (personList, action) => {
       const { personIdx, itemIdx } = action.payload
       personList[personIdx].total -= personList[personIdx].items[itemIdx].price
       personList[personIdx].items.splice(itemIdx, 1)
       if (personList[personIdx].items.length === 0) personList.splice(personIdx, 1)
+    },
+    REMOVE_PERSON: (personList, action) => {
+      personList.splice(action.payload.personIdx, 1)
     },
     RESET_PERSON_LIST: (personList) => {
       personList = []
@@ -77,6 +81,6 @@ const slice = createSlice({
 })
 
 export const {
-  ADD_PERSON, APPLY_DEDUCTIONS, PAY_AMOUNTS, RESET_PERSON_LIST, ADD_PERSON_ITEM, REMOVE_PERSON_ITEM, SPLIT,
+  ADD_PERSON, APPLY_DEDUCTIONS, PAY_AMOUNTS, RESET_PERSON_LIST, ADD_PERSON_ITEM, REMOVE_PERSON_ITEM, SPLIT, REMOVE_PERSON,
 } = slice.actions
 export default slice.reducer

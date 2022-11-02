@@ -8,9 +8,11 @@ import plusIcon from './plus.svg'
 import removeIcon from './remove.svg'
 import settleUpIcon from './settleup.svg'
 import signOutIcon from './signout.svg'
+import trashIcon from './trash.svg'
 
 export {
   removeIcon, editIcon, editIcon2,
   googleIcon, facebookIcon, settleUpIcon,
   okIcon, ok2Icon, plusIcon, signOutIcon,
+  trashIcon,
 }

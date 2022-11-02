@@ -6,17 +6,22 @@ import { addOrder } from 'api/order'
 import { RESET_ORDER } from 'store/order'
 import { RESET_PERSON_LIST } from 'store/personList'
 import { UPDATE_ABLE_TO_SAVE } from 'store/menu'
+import { ADD_ORDER } from 'store/orderList'
+import { useState } from 'react'
 
 const splitArea = () => {
   const { ableToSave } = useSelector(state => state.menu)
   const dispatch = useDispatch()
+  const [disabled, setDisabled] = useState(ableToSave)
   const order = useSelector(state => state.order)
   const persons = useSelector(state => state.personList)
   const redirect = useNavigate()
 
   const saveOrder = async e => {
+    setDisabled(true)
     e.preventDefault()
     await addOrder(order).then(() => alert('order added successfully!')).then(() => {
+      dispatch(ADD_ORDER({ order }))
       dispatch(RESET_PERSON_LIST())
       dispatch(RESET_ORDER())
       dispatch(UPDATE_ABLE_TO_SAVE())
@@ -72,7 +77,7 @@ const splitArea = () => {
           </tfoot>
         </table>
         <div className='text-end'>
-          <button type='submit' className='btn btn-sm btn-success rounded-pill' disabled={!ableToSave}>Save</button>
+          <button type='submit' className='btn btn-sm btn-success rounded-pill' disabled={disabled}>Save</button>
         </div>
       </form>
     </div>

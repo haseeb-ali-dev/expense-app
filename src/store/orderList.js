@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
 
 const slice = createSlice({
@@ -11,6 +10,9 @@ const slice = createSlice({
       orderList.sort((a, b) => a.resturant.localeCompare(b.resturant))
       return orderList
     },
+    ADD_ORDER: (orderList, action) => {
+      orderList.push(action.payload.order)
+    },
     UPDATE_ORDER_PERSONS: (orderList, action) => {
       const { orderId, persons, all } = action.payload
       const orderIndex = orderList.findIndex(el => el.id === orderId)
@@ -18,6 +20,9 @@ const slice = createSlice({
       orderList[orderIndex].receivers = []
       orderList[orderIndex].settleUp = all
       return orderList
+    },
+    REMOVE_ORDER: (orderList, action) => {
+      orderList.splice(action.payload.orderIdx, 1)
     },
     RESET_ORDER_LIST: (orderList) => {
       orderList = []
@@ -27,6 +32,6 @@ const slice = createSlice({
 })
 
 export const {
-  ADD_ORDER_LIST, RESET_ORDER_LIST, UPDATE_ORDER_PERSONS,
+  ADD_ORDER_LIST, RESET_ORDER_LIST, UPDATE_ORDER_PERSONS, REMOVE_ORDER, ADD_ORDER,
 } = slice.actions
 export default slice.reducer

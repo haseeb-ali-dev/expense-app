@@ -76,7 +76,7 @@ const payArea = () => {
           </tbody>
           <tfoot>
             <tr>
-              <td colSpan='3' className='text-end'><strong>Remaining: </strong>Rs. {remain.toLocaleString('en-US')}</td>
+              <td colSpan='3' className='text-end text-danger'><strong>Remaining: </strong>Rs. {remain.toLocaleString('en-US')}</td>
             </tr>
           </tfoot>
         </table>

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -31,7 +32,7 @@ const ordersList = () => {
     setOrdersss(orderList)
   }, [orderList])
 
-  const ordersListing = ordersss.map(order => <OrderListItem order={order} key={order.id} />)
+  const ordersListing = ordersss.map((order, index) => <OrderListItem order={order} orderIdx={index} key={order.id} />)
   const displayOrders = (
     <div className='d-inline-flex flex-wrap p-2'>
       {ordersListing}

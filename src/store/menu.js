@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
 
 const menuInitialState = {
@@ -26,11 +25,11 @@ const slice = createSlice({
     UPDATE_ITEM: (menu, action) => {
       const found = menu.items.find(item => item.name === action.payload.key)
       found.name = action.payload.updated.name
-      found.price = action.payload.updated.price
+      found.price = Number(action.payload.updated.price)
       return menu
     },
     UPDATE_ABLE_TO_SAVE: (menu) => {
-      menu.ableToSave = !menu.ableToSave
+      menu.ableToSave = true
       return menu
     },
   },

@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
 
 const personInitialState = {
@@ -21,6 +20,7 @@ const slice = createSlice({
     },
     ADD_PERSON_ITEM: (person, action) => {
       person.items.push(action.payload.item)
+      person.items.sort((a, b) => a.name.localeCompare(b.name))
       person.total += action.payload.item.price
     },
     REMOVE_PERSON_ITEM: (person, action) => {

@@ -1,9 +1,9 @@
 import { Item } from 'components'
 
-import { REMOVE_PERSON_ITEM } from 'store/personList'
+import { REMOVE_PERSON_ITEM, REMOVE_PERSON } from 'store/personList'
 import { SET_MODAL_PERSON } from 'store/modal'
 
-import { editIcon2, removeIcon } from 'assets/icons'
+import { editIcon2, removeIcon, trashIcon } from 'assets/icons'
 
 export default ({ dispatch, menuItems, persons }) => persons.length !== 0 && (
   persons.map(({ name: personName, total, items }, personIdx) => (
@@ -20,9 +20,9 @@ export default ({ dispatch, menuItems, persons }) => persons.length !== 0 && (
           </div>
         ))}
       </div>
-      <div className='col-sm-1'>
+      <div className='col-sm-1 d-flex flex-row align-items-start'>
         <button
-          className='btn btn-sm'
+          className='btn btn-sm px-0'
           onClick={() => {
             dispatch(SET_MODAL_PERSON({
               personIdx,
@@ -34,6 +34,9 @@ export default ({ dispatch, menuItems, persons }) => persons.length !== 0 && (
             }))
           }}
         ><img src={editIcon2} alt='+' />
+        </button>
+        <button className='btn btn-sm' onClick={() => confirm('Do you want to delete') && dispatch(REMOVE_PERSON({ personIdx }))}>
+          <img src={trashIcon} alt='x' />
         </button>
       </div>
     </div>
