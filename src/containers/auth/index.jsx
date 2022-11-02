@@ -3,14 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import Loader from 'components/Loader'
+import { Loader } from 'components'
 
 import { signedIn, signedUp, loginWithGoogle } from 'api/auth'
 import { SET_GLOBAL_USER } from 'store/user'
 
 import 'containers/auth/style.css'
-import googleIcon from 'assets/icons/google.svg'
-import facebookIcon from 'assets/icons/facebook.svg'
+import { googleIcon, facebookIcon } from 'assets/icons'
 
 const auth = ({ haveAccount, setHaveAccount }) => {
   const redirect = useNavigate()
@@ -25,7 +24,7 @@ const auth = ({ haveAccount, setHaveAccount }) => {
       dispatch(SET_GLOBAL_USER({ name: user.displayName }))
       redirect('/')
     } catch (error) {
-      console.log('Sign Up Error: ', error.message)
+      alert('Sign Up Error: ', error.message)
     }
     setLoading(false)
   }
@@ -37,7 +36,7 @@ const auth = ({ haveAccount, setHaveAccount }) => {
       dispatch(SET_GLOBAL_USER({ name: user.displayName }))
       redirect('/')
     } catch (error) {
-      console.log('Sign In Error: ', error.message)
+      alert('Sign In Error: ', error.message)
     }
     setLoading(false)
   }

@@ -5,7 +5,7 @@ export default ({ dispatch }) => (
     <label className='col-sm-3 col-form-label'>Tax (%) </label>
     <div className='col-sm-9 m-auto '>
       {[0, 5, 16].map(value => (
-        <div className='form-check form-check-inline'>
+        <div className='form-check form-check-inline' key={value}>
           <input
             className='form-check-input'
             type='radio'

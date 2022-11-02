@@ -1,5 +1,3 @@
-import Main from 'components/Main'
+import { Main } from 'components'
 
-const app = () => <Main />
-
-export default app
+export default () => <Main />

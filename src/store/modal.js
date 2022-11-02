@@ -24,6 +24,7 @@ const slice = createSlice({
     },
     SET_MODAL_ORDER: (modal, action) => {
       modal.modalOrder = action.payload.order
+      modal.showOrder = true
     },
     SET_MODAL_PERSON: (modal, action) => {
       modal.modalPerson.items = action.payload.items

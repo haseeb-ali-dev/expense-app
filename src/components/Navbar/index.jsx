@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { auth } from 'Database'
 import { RESET_USER } from 'store/user'
 
-import signOutIcon from 'assets/icons/signout.svg'
+import { signOutIcon } from 'assets/icons'
 
 const navbar = ({ haveAccount, setHaveAccount }) => {
-  const redirect = useNavigate()
   const dispatch = useDispatch()
   const { isLogged, name } = useSelector(state => state.user)
+  const redirect = useNavigate()
 
   const signedOut = async () => {
     await signOut(auth)

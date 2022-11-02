@@ -7,8 +7,8 @@ import { HIDE_MODAL } from 'store/modal'
 import 'components/Modal/style.css'
 
 const modal = ({ html }) => {
-  const modalRef = useRef()
   const dispatch = useDispatch()
+  const modalRef = useRef()
 
   const closeModal = (e) => e.target === modalRef.current && dispatch(HIDE_MODAL())
 

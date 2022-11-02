@@ -1,4 +1,4 @@
-import Item from 'components/Item'
+import { Item } from 'components'
 import { REMOVE_PERSON_ITEM } from 'store/person'
 
 import { removeIcon } from 'assets/icons'

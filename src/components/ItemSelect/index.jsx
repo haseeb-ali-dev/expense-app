@@ -12,7 +12,7 @@ const itemSelect = () => {
 
   useEffect(() => {
     setItems(() => menuItems.filter(item => personItems.every(pItem => item.name !== pItem.name))
-      .map(({ name, price }) => ({ label: `${name} @ Rs. ${price}`, value: JSON.stringify({ name, price }) })))
+      .map(({ name, price }) => ({ label: `${name} @ Rs. ${price.toLocaleString('en-US')}`, value: JSON.stringify({ name, price }) })))
   }, [menuItems, personItems])
 
   return (

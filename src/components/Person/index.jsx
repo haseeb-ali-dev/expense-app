@@ -11,9 +11,9 @@ import { HIDE_MODAL } from 'store/modal'
 
 const personDetails = () => {
   const dispatch = useDispatch()
+  const { items: menuItems } = useSelector(state => state.menu)
   const person = useSelector(state => state.person)
   const persons = useSelector(state => state.personList)
-  const { items: menuItems } = useSelector(state => state.menu)
   const { showPerson, modalPerson: { personIdx, items } } = useSelector(state => state.modal)
 
   const addToPersons = () => {

@@ -5,7 +5,7 @@ import { EditItemForm, Item, Modal } from 'components'
 import { REMOVE_ITEM } from 'store/menu'
 import { SET_MODAL_ITEM } from 'store/modal'
 
-import { removeIcon, editIcon } from 'assets/icons'
+import { editIcon, removeIcon } from 'assets/icons'
 
 const menuItems = () => {
   const dispatch = useDispatch()

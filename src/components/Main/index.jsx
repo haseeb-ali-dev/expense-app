@@ -1,20 +1,18 @@
 /* eslint-disable no-nested-ternary */
 import {
-  BrowserRouter as Router, Route, Routes, Navigate,
+  BrowserRouter as Router, Navigate, Route, Routes,
 } from 'react-router-dom'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 
+import {
+  Auth, Order, OrdersList, Payment,
+} from 'containers'
+import { Loader, Navbar } from 'components'
+
 import { auth } from 'Database'
 import { SET_GLOBAL_USER } from 'store/user'
-
-import Auth from 'containers/auth'
-import Loader from 'components/Loader'
-import Navbar from 'components/Navbar'
-import Order from 'containers/order'
-import OrdersList from 'containers/ordersList'
-import Payment from 'containers/payment'
 
 const main = () => {
   const dispatch = useDispatch()

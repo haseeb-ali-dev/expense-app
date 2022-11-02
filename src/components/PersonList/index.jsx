@@ -9,7 +9,7 @@ export default ({ dispatch, menuItems, persons }) => persons.length !== 0 && (
   persons.map(({ name: personName, total, items }, personIdx) => (
     <div className='mt-2 mx-1 border py-1 px-2 row bg-white' key={`person-${personIdx.toString()}`}>
       <div className='col-md-3'><small className='text-muted'>Name:</small> {personName}</div>
-      <div className='col-md-3'><small className='text-muted'>Total:</small> Rs. {total}</div>
+      <div className='col-md-3'><small className='text-muted'>Total:</small> Rs. {total.toLocaleString('en-US')}</div>
       <div className='col-md-5'>
         {items.map((item, itemIdx) => (
           <div className='d-flex flex-row align-items-center' key={`person-item-${itemIdx.toString()}`} role='group'>
@@ -28,7 +28,7 @@ export default ({ dispatch, menuItems, persons }) => persons.length !== 0 && (
               personIdx,
               items: menuItems.filter(mItm => items.every(pItm => (pItm.name !== mItm.name)))
                 .map(({ name, price }) => ({
-                  label: `${name} @ Rs. ${price}`,
+                  label: `${name} @ Rs. ${price.toLocaleString('en-US')}`,
                   value: JSON.stringify({ name, price }),
                 })),
             }))

@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import { ADD_ITEM, UPDATE_ITEM } from 'store/menu'
 
-import plusIcon from 'assets/icons/plus.svg'
+import { plusIcon } from 'assets/icons'
 
 const itemForm = () => {
   const dispatch = useDispatch()

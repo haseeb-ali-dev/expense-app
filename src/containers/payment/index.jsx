@@ -8,7 +8,7 @@ import SplitArea from 'components/SplitArea'
 
 const paymentSection = () => {
   const { ableToSave } = useSelector(state => state.menu)
-  const styling = { gridTemplateColumns: '1fr 1fr' }
+  const styling = { gridTemplateColumns: '0.5fr 1fr 1.5fr' }
 
   return (
     <div className='container-fluid pb-3'>
@@ -19,11 +19,11 @@ const paymentSection = () => {
         <div className='bg-light border rounded-2'>
           <Deductions />
         </div>
-      </div>
-      <div className='d-grid gap-2' style={styling}>
         <div className='bg-light border rounded-2'>
           <PayArea />
         </div>
+      </div>
+      <div className='d-grid gap-2'>
         <div className='bg-light border rounded-2'>
           <SplitArea />
         </div>

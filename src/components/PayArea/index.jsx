@@ -6,12 +6,12 @@ import { UPDATE_ABLE_TO_SAVE } from 'store/menu'
 import { UPDATE_PERSONS } from 'store/order'
 
 const payArea = () => {
-  const dispatch = useDispatch()
-  const persons = useSelector(state => state.personList)
-  const order = useSelector(state => state.order)
   const { ableToSave } = useSelector(state => state.menu)
-  const [remain, setRemain] = useState(0)
+  const dispatch = useDispatch()
+  const order = useSelector(state => state.order)
+  const persons = useSelector(state => state.personList)
   const [paidAmounts, setPaidAmounts] = useState({})
+  const [remain, setRemain] = useState(0)
 
   useEffect(() => setRemain(order.grand), [order.grand])
 
@@ -57,14 +57,15 @@ const payArea = () => {
               persons.map((person, idx) => (
                 <tr key={`${idx.toString()}`}>
                   <td>{person.name}</td>
-                  <td>{person.total}</td>
+                  <td>{person.total.toLocaleString('en-US')}</td>
                   <td>
                     <input
                       className='form-control form-control-sm'
                       type='number'
                       onBlur={handleBlur}
                       onFocus={handleFocus}
-                      min='0'
+                      min={0}
+                      defaultValue={0}
                       name={person.name}
                       step={0.01}
                     />
@@ -75,7 +76,7 @@ const payArea = () => {
           </tbody>
           <tfoot>
             <tr>
-              <td colSpan='3' className='text-end'><strong>Remaining: </strong>Rs. {remain.toFixed(2)}</td>
+              <td colSpan='3' className='text-end'><strong>Remaining: </strong>Rs. {remain.toLocaleString('en-US')}</td>
             </tr>
           </tfoot>
         </table>

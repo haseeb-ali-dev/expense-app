@@ -11,7 +11,7 @@ import OrderListItem from 'components/OrderListItem'
 
 const ordersList = () => {
   const dispatch = useDispatch()
-  const { show, modalOrder } = useSelector(state => state.modal)
+  const { showOrder, modalOrder } = useSelector(state => state.modal)
   const orderList = useSelector(state => state.orderList)
   const { name } = useSelector(state => state.user)
 
@@ -35,7 +35,7 @@ const ordersList = () => {
   const displayOrders = (
     <div className='d-inline-flex flex-wrap p-2'>
       {ordersListing}
-      {show && <Modal html={<OrderListItem order={modalOrder} showDetails />} />}
+      {showOrder && <Modal html={<OrderListItem order={modalOrder} showDetails />} />}
     </div>
   )
   const loading = <Loader />

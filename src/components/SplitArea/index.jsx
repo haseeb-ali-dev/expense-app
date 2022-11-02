@@ -8,15 +8,15 @@ import { RESET_PERSON_LIST } from 'store/personList'
 import { UPDATE_ABLE_TO_SAVE } from 'store/menu'
 
 const splitArea = () => {
-  const redirect = useNavigate()
-  const dispatch = useDispatch()
-  const persons = useSelector(state => state.personList)
-  const order = useSelector(state => state.order)
   const { ableToSave } = useSelector(state => state.menu)
+  const dispatch = useDispatch()
+  const order = useSelector(state => state.order)
+  const persons = useSelector(state => state.personList)
+  const redirect = useNavigate()
 
   const saveOrder = async e => {
     e.preventDefault()
-    await addOrder(order).then(() => console.log('order added successfully!')).then(() => {
+    await addOrder(order).then(() => alert('order added successfully!')).then(() => {
       dispatch(RESET_PERSON_LIST())
       dispatch(RESET_ORDER())
       dispatch(UPDATE_ABLE_TO_SAVE())
@@ -42,8 +42,8 @@ const splitArea = () => {
               persons.map((person, idx) => (
                 <tr key={`${idx.toString()}`}>
                   <td>{person.name}</td>
-                  <td>{person.total}</td>
-                  <td>{person.paid}</td>
+                  <td>{person.total.toLocaleString('en-US')}</td>
+                  <td>{person.paid.toLocaleString('en-US')}</td>
                   <td className={person.balance > 0 ? 'text-success' : 'text-danger'}>
                     {person.balance > 0 ? `+${person.balance}` : person.balance}
                   </td>
@@ -51,13 +51,13 @@ const splitArea = () => {
                     {person.to.length > 0
                       && (
                         <ul className='list-group'>
-                          {person.to.map(r => <li className='list-group-item bg-light fst-italic p-0' key={r.name}>{r.amount} Rs. to {r.name}</li>)}
+                          {person.to.map(r => <li className='list-group-item bg-light fst-italic p-0' key={r.name}>{r.amount.toLocaleString('en-US')} Rs. to {r.name}</li>)}
                         </ul>
                       )}
                     {person.from.length > 0
                       && (
                         <ul className='list-group'>
-                          {person.from.map(s => <li className='list-group-item bg-light fst-italic p-0' key={s.name}>{s.amount} Rs. from {s.name}</li>)}
+                          {person.from.map(s => <li className='list-group-item bg-light fst-italic p-0' key={s.name}>{s.amount.toLocaleString('en-US')} Rs. from {s.name}</li>)}
                         </ul>
                       )}
                   </td>
@@ -67,7 +67,7 @@ const splitArea = () => {
           </tbody>
           <tfoot>
             <tr>
-              <td colSpan='6' className='text-end'><strong>Grand Total: </strong>Rs. {order.grand}</td>
+              <td colSpan='6' className='text-end'><strong>Grand Total: </strong>Rs. {order.grand.toLocaleString('en-US')}</td>
             </tr>
           </tfoot>
         </table>

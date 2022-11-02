@@ -1,13 +1,12 @@
-import * as ref from './ref'
-import personReducer from './person'
-import personListReducer from './personList'
 import menu from './menu'
-import orderReducer from './order'
-import userReducer from './user'
-import modalReducer from './modal'
-import orderListReducer from './orderList'
+import modal from './modal'
+import order from './order'
+import orderList from './orderList'
+import person from './person'
+import personList from './personList'
+import user from './user'
 
 export {
-  ref, personReducer, personListReducer, menu,
-  orderReducer, userReducer, modalReducer, orderListReducer,
+  menu, modal, order, orderList,
+  person, personList, user,
 }
