@@ -16,43 +16,36 @@ import { SET_GLOBAL_USER } from 'store/user'
 
 const Main = () => {
   const dispatch = useDispatch()
-  const [authChecked, setAuthChecked] = useState(false)
   const personList = useSelector(state => state.personList)
-  const [isLoggedIn, setIsLoggedIn] = useState(() => !!auth.currentUser)
+  const { isLogged } = useSelector(state => state.user)
   const [haveAccount, setHaveAccount] = useState(true)
+  const [authenticated, setAuthenticated] = useState(isLogged)
 
   useEffect(() => {
     onAuthStateChanged(auth, user => {
       if (user) {
-        setIsLoggedIn(!isLoggedIn)
         dispatch(SET_GLOBAL_USER({ name: user.displayName }))
       }
-      setAuthChecked(true)
+      setAuthenticated(true)
     })
   }, [])
 
-  return (
+  return authenticated ? (
     <Router>
-      {authChecked
-        ? (
-          <>
-            <Navbar haveAccount={haveAccount} setHaveAccount={setHaveAccount} />
-            <Routes>
-              <Route path='/' element={isLoggedIn ? <OrdersList /> : <Navigate to='/auth' />} />
-              <Route path='/create' element={isLoggedIn ? <Order /> : <Navigate to='/auth' />} />
-              <Route
-                path='/payment'
-                element={isLoggedIn
-                  ? (personList.length > 0 ? <Payment /> : <Navigate to='/create' />)
-                  : <Navigate to='/auth' />}
-              />
-              <Route path='/auth' element={<Auth haveAccount={haveAccount} setHaveAccount={setHaveAccount} />} />
-            </Routes>
-          </>
-        )
-        : <Loader />}
+      <Navbar haveAccount={haveAccount} setHaveAccount={setHaveAccount} />
+      <Routes>
+        <Route path='/' element={isLogged ? <OrdersList /> : <Navigate to='/auth' />} />
+        <Route path='/create' element={isLogged ? <Order /> : <Navigate to='/auth' />} />
+        <Route
+          path='/payment'
+          element={isLogged
+            ? (personList.length > 0 ? <Payment /> : <Navigate to='/create' />)
+            : <Navigate to='/auth' />}
+        />
+        <Route path='/auth' element={<Auth haveAccount={haveAccount} setHaveAccount={setHaveAccount} />} />
+      </Routes>
     </Router>
-  )
+  ) : <Loader />
 }
 
 export default Main

@@ -18,24 +18,18 @@ export const signedUp = async (email, password, name) => {
 
 export const signedIn = async (email, password) => {
   const { user } = await signInWithEmailAndPassword(auth, email, password)
-  return user
+  return { user }
 }
 export const loginWithGoogle = async () => {
   const provider = new GoogleAuthProvider()
-  await signInWithPopup(auth, provider)
-    .then(result => {
-      const { accessToken } = GoogleAuthProvider.credentialFromResult(result)
-      const { user: { displayName, email } } = result
-      getDocs(query(usersCollection, where('email', '==', email)))
-        .then(res => res.empty
-          && addDoc(usersCollection, { email, name: displayName, accessToken }))
-    }).catch(error => {
-      const { code, message, customData: { email } } = error
-      const credential = GoogleAuthProvider.credentialFromError(error)
-      return {
-        code, message, customData: { email }, credential,
-      }
-    })
+  const result = await signInWithPopup(auth, provider)
+  const { accessToken } = GoogleAuthProvider.credentialFromResult(result)
+  const { user: { displayName, email } } = result
+  await getDocs(query(usersCollection, where('email', '==', email)))
+    .then(res => res.empty && addDoc(usersCollection, { email, name: displayName, accessToken }))
+  // const { code, message, customData: { email } } = error
+  // const credential = GoogleAuthProvider.credentialFromError(error)
+  return { accessToken, displayName, email }
 }
 
 export const getUsers = async () => {

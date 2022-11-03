@@ -36,13 +36,21 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
       dispatch(SET_GLOBAL_USER({ name: user.displayName }))
       redirect('/')
     } catch (error) {
-      alert('Sign In Error: ', error.message)
+      console.log('Sign In Error: ', error)
     }
     setLoading(false)
   }
 
   const googleLoggin = async () => {
-    await loginWithGoogle().then(() => redirect('/create'))
+    setLoading(true)
+    try {
+      const { displayName } = await loginWithGoogle()
+      dispatch(SET_GLOBAL_USER({ name: displayName }))
+      redirect('/')
+    } catch (error) {
+      alert('Sign In Error: ', error.message)
+    }
+    setLoading(false)
   }
   const label = haveAccount ? 'Please Sign In' : 'Create Account'
   const buttonText = haveAccount ? 'Sign In' : 'Sign Up'
