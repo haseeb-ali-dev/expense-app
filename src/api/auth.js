@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword, signInWithEmailAndPassword,
   updateProfile, signInWithPopup, GoogleAuthProvider,
+  FacebookAuthProvider,
 } from 'firebase/auth'
 import { auth, db } from 'Database'
 import {
@@ -30,6 +31,25 @@ export const loginWithGoogle = async () => {
   // const { code, message, customData: { email } } = error
   // const credential = GoogleAuthProvider.credentialFromError(error)
   return { accessToken, displayName, email }
+}
+
+export const loginWithFacebook = async () => {
+  const provider = new FacebookAuthProvider()
+  provider.addScope('email')
+  await signInWithPopup(auth, provider)
+    .then(result => {
+      const { accessToken } = FacebookAuthProvider.credentialFromResult(result)
+      const { user: { displayName, email } } = result
+      getDocs(query(usersCollection, where('email', '==', email)))
+        .then(res => res.empty
+          && addDoc(usersCollection, { email, name: displayName, accessToken }))
+    }).catch(error => {
+      const { code, message, customData: { email } } = error
+      const credential = FacebookAuthProvider.credentialFromError(error)
+      return {
+        code, message, customData: { email }, credential,
+      }
+    })
 }
 
 export const getUsers = async () => {

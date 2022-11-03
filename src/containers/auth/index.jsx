@@ -5,7 +5,9 @@ import { useDispatch } from 'react-redux'
 
 import { Loader } from 'components'
 
-import { signedIn, signedUp, loginWithGoogle } from 'api/auth'
+import {
+  signedIn, signedUp, loginWithGoogle, loginWithFacebook,
+} from 'api/auth'
 import { SET_GLOBAL_USER } from 'store/user'
 
 import 'containers/auth/style.css'
@@ -52,6 +54,14 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
     }
     setLoading(false)
   }
+
+  const facebookLoggin = async () => {
+    setLoading(true)
+    await loginWithFacebook().then(() => {
+      redirect('/create')
+      setLoading(false)
+    })
+  }
   const label = haveAccount ? 'Please Sign In' : 'Create Account'
   const buttonText = haveAccount ? 'Sign In' : 'Sign Up'
   const switchInfo = haveAccount ? 'Not have account yet?' : 'Already have account!'
@@ -85,11 +95,11 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
             <button className='w-100 btn btn-light border border-2 rounded-pill mb-1' onClick={googleLoggin}>
               <span className='me-2 text-center'> <img src={googleIcon} alt='g' width={24} height={24} /></span>{buttonText} with Google
             </button>
-            <button className='w-100 btn btn-primary rounded-pill mt-1' onClick={googleLoggin}>
+            <button className='w-100 btn btn-primary rounded-pill mt-1' type='button' onClick={facebookLoggin}>
               <span className='me-2 text-center'> <img src={facebookIcon} alt='g' width={24} height={24} /></span>{buttonText} with Facebook
             </button>
             <div className='text-center'>
-              <button className='btn btn-sm p-0 m-0' onClick={() => setHaveAccount(!haveAccount)}>{switchInfo}</button>
+              <button type='button' className='btn btn-sm p-0 m-0' onClick={() => setHaveAccount(!haveAccount)}>{switchInfo}</button>
             </div>
           </form>
         )}
