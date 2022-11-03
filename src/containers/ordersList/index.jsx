@@ -8,7 +8,7 @@ import { getUserOrders } from 'api/order'
 
 import { Loader, Modal, OrderListItem } from 'components'
 
-const ordersList = () => {
+const OrdersList = () => {
   const dispatch = useDispatch()
   const { showOrder, modalOrder } = useSelector(state => state.modal)
   const orderList = useSelector(state => state.orderList)
@@ -43,4 +43,4 @@ const ordersList = () => {
   return fetched ? (orderList.length === 0 ? noOrders : displayOrders) : loading
 }
 
-export default ordersList
+export default OrdersList

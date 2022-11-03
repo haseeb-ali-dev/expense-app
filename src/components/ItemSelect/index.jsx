@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Select } from 'components'
 import { ADD_PERSON_ITEM } from 'store/person'
 
-const itemSelect = () => {
+const ItemSelect = () => {
   const dispatch = useDispatch()
   const { items: menuItems } = useSelector(state => state.menu)
   const { items: personItems, name: personName } = useSelector(state => state.person)
@@ -28,4 +28,4 @@ const itemSelect = () => {
   )
 }
 
-export default memo(itemSelect)
+export default memo(ItemSelect)

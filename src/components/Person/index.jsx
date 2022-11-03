@@ -9,7 +9,7 @@ import { ADD_PERSON, ADD_PERSON_ITEM } from 'store/personList'
 import { RESET_PERSON } from 'store/person'
 import { HIDE_MODAL } from 'store/modal'
 
-const personDetails = () => {
+const PersonDetails = () => {
   const dispatch = useDispatch()
   const { items: menuItems } = useSelector(state => state.menu)
   const person = useSelector(state => state.person)
@@ -55,4 +55,4 @@ const personDetails = () => {
   )
 }
 
-export default personDetails
+export default PersonDetails

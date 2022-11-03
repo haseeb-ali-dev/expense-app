@@ -6,7 +6,7 @@ import { Select } from 'components'
 import { ADD_PERSON_NAME } from 'store/person'
 import { getUsers } from 'api/auth'
 
-const personSelect = ({ dispatch, personList, personName }) => {
+const PersonSelect = ({ dispatch, personList, personName }) => {
   const [users, setUsers] = useState([])
 
   useEffect(() => {
@@ -31,4 +31,4 @@ const personSelect = ({ dispatch, personList, personName }) => {
   )
 }
 
-export default memo(personSelect)
+export default memo(PersonSelect)

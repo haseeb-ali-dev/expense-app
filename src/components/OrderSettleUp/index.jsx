@@ -6,7 +6,7 @@ import { HIDE_MODAL } from 'store/modal'
 import { settleUp } from 'api/order'
 import { UPDATE_ORDER_PERSONS } from 'store/orderList'
 
-const orderSettleUp = ({ order, loading, setLoading }) => {
+const OrderSettleUp = ({ order, loading, setLoading }) => {
   const dispatch = useDispatch()
 
   const settleUpOrder = async (orderId) => {
@@ -45,4 +45,4 @@ const orderSettleUp = ({ order, loading, setLoading }) => {
   )
 }
 
-export default memo(orderSettleUp)
+export default memo(OrderSettleUp)

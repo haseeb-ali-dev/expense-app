@@ -14,7 +14,7 @@ import { Loader, Navbar } from 'components'
 import { auth } from 'Database'
 import { SET_GLOBAL_USER } from 'store/user'
 
-const main = () => {
+const Main = () => {
   const dispatch = useDispatch()
   const [authChecked, setAuthChecked] = useState(false)
   const personList = useSelector(state => state.personList)
@@ -55,4 +55,4 @@ const main = () => {
   )
 }
 
-export default main
+export default Main

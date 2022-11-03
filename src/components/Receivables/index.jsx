@@ -7,7 +7,7 @@ import { UPDATE_ORDER_PERSONS } from 'store/orderList'
 
 import { okIcon } from 'assets/icons'
 
-const receivables = ({
+const Receivables = ({
   person, order, loading, setLoading, dispatch, pIndex,
 }) => {
   const settleUpReceivable = async (personIdx, { name: sNamee, amount }, sIndex) => {
@@ -66,4 +66,4 @@ const receivables = ({
     )
 }
 
-export default memo(receivables)
+export default memo(Receivables)

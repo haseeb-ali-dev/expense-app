@@ -7,7 +7,7 @@ import {
   Payables, OrderActions, PersonDetail, Receivables,
 } from 'components'
 
-const orderItem = ({ order, orderIdx, showDetails = false }) => {
+const OrderItem = ({ order, orderIdx, showDetails = false }) => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
 
@@ -49,4 +49,4 @@ const orderItem = ({ order, orderIdx, showDetails = false }) => {
   )
 }
 
-export default orderItem
+export default OrderItem

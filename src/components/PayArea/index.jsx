@@ -5,7 +5,7 @@ import { PAY_AMOUNTS, SPLIT } from 'store/personList'
 import { UPDATE_ABLE_TO_SAVE } from 'store/menu'
 import { UPDATE_PERSONS } from 'store/order'
 
-const payArea = () => {
+const PayArea = () => {
   const { ableToSave } = useSelector(state => state.menu)
   const dispatch = useDispatch()
   const order = useSelector(state => state.order)
@@ -88,4 +88,4 @@ const payArea = () => {
   )
 }
 
-export default memo(payArea)
+export default memo(PayArea)

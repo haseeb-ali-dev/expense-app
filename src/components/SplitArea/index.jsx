@@ -9,7 +9,7 @@ import { RESET_ORDER } from 'store/order'
 import { RESET_PERSON_LIST } from 'store/personList'
 import { UPDATE_ABLE_TO_SAVE } from 'store/menu'
 
-const splitArea = () => {
+const SplitArea = () => {
   const { ableToSave } = useSelector(state => state.menu)
   const dispatch = useDispatch()
   const [disabled, setDisabled] = useState(ableToSave)
@@ -84,4 +84,4 @@ const splitArea = () => {
   )
 }
 
-export default memo(splitArea)
+export default memo(SplitArea)

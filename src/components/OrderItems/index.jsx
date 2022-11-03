@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { useSelector } from 'react-redux'
 
-const orderItems = () => {
+const OrderItems = () => {
   const { grand } = useSelector(state => state.order)
   const { items: menuItems } = useSelector(state => state.menu)
   const persons = useSelector(state => state.personList)
@@ -30,4 +30,4 @@ const orderItems = () => {
   )
 }
 
-export default memo(orderItems)
+export default memo(OrderItems)

@@ -7,7 +7,7 @@ import { RESET_USER } from 'store/user'
 
 import { signOutIcon } from 'assets/icons'
 
-const navbar = ({ haveAccount, setHaveAccount }) => {
+const Navbar = ({ haveAccount, setHaveAccount }) => {
   const dispatch = useDispatch()
   const { isLogged, name } = useSelector(state => state.user)
   const redirect = useNavigate()
@@ -48,4 +48,4 @@ const navbar = ({ haveAccount, setHaveAccount }) => {
   )
 }
 
-export default navbar
+export default Navbar

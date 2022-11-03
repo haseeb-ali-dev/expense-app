@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { HIDE_MODAL } from 'store/modal'
 import { UPDATE_ITEM } from 'store/menu'
 
-const editItemForm = ({ item }) => {
+const EditItemForm = ({ item }) => {
   const dispatch = useDispatch()
 
   const submitHandler = (e) => {
@@ -33,4 +33,4 @@ const editItemForm = ({ item }) => {
   )
 }
 
-export default editItemForm
+export default EditItemForm

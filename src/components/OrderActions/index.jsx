@@ -5,7 +5,7 @@ import { removeOrder } from 'api/order'
 import { REMOVE_ORDER } from 'store/orderList'
 import { SET_MODAL_ORDER } from 'store/modal'
 
-const orderActions = ({
+const OrderActions = ({
   loading, order, orderIdx, setLoading,
 }) => {
   const dispatch = useDispatch()
@@ -29,4 +29,4 @@ const orderActions = ({
   )
 }
 
-export default memo(orderActions)
+export default memo(OrderActions)

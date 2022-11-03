@@ -6,7 +6,7 @@ import { Delivery, Tip, Tax } from 'components'
 import { APPLY_DEDUCTIONS } from 'store/personList'
 import { UPDATE_GRAND } from 'store/order'
 
-const deductions = () => {
+const Deductions = () => {
   const dispatch = useDispatch()
   const { delivery, tip, tax } = useSelector(state => state.order)
   const [disabled, useDisbaled] = useState(false)
@@ -38,4 +38,4 @@ const deductions = () => {
   )
 }
 
-export default deductions
+export default Deductions

@@ -5,7 +5,7 @@ import { ADD_ITEM, UPDATE_ITEM } from 'store/menu'
 
 import { plusIcon } from 'assets/icons'
 
-const itemForm = () => {
+const ItemForm = () => {
   const dispatch = useDispatch()
   const { items } = useSelector(state => state.menu)
   const initialItem = { name: '', price: 0 }
@@ -42,4 +42,4 @@ const itemForm = () => {
   )
 }
 
-export default memo(itemForm)
+export default memo(ItemForm)

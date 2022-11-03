@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { ADD_RESTURANT } from 'store/order'
 
-const resturantForm = () => {
+const ResturantForm = () => {
   const dispatch = useDispatch()
   const { resturant } = useSelector(state => state.order)
 
@@ -19,4 +19,4 @@ const resturantForm = () => {
     </div>
   )
 }
-export default (resturantForm)
+export default (ResturantForm)

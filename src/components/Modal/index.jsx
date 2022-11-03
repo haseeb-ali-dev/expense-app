@@ -7,7 +7,7 @@ import { HIDE_MODAL } from 'store/modal'
 import 'components/Modal/style.css'
 import { closeIcon } from 'assets/icons'
 
-const modal = ({ html }) => {
+const Modal = ({ html }) => {
   const dispatch = useDispatch()
   const modalRef = useRef()
 
@@ -26,4 +26,4 @@ const modal = ({ html }) => {
   )
 }
 
-export default modal
+export default Modal

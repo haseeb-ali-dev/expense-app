@@ -6,7 +6,7 @@ import OrderItems from 'components/OrderItems'
 import PayArea from 'components/PayArea'
 import SplitArea from 'components/SplitArea'
 
-const paymentSection = () => {
+const PaymentSection = () => {
   const { ableToSave } = useSelector(state => state.menu)
   const styling = { gridTemplateColumns: '0.5fr 1fr 1.5fr' }
 
@@ -32,4 +32,4 @@ const paymentSection = () => {
     </div>
   )
 }
-export default paymentSection
+export default PaymentSection

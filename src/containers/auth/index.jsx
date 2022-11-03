@@ -11,7 +11,7 @@ import { SET_GLOBAL_USER } from 'store/user'
 import 'containers/auth/style.css'
 import { googleIcon, facebookIcon } from 'assets/icons'
 
-const auth = ({ haveAccount, setHaveAccount }) => {
+const Auth = ({ haveAccount, setHaveAccount }) => {
   const redirect = useNavigate()
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
@@ -89,4 +89,4 @@ const auth = ({ haveAccount, setHaveAccount }) => {
   )
 }
 
-export default auth
+export default Auth

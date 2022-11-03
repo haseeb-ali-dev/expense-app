@@ -8,7 +8,7 @@ import { SET_MODAL_ITEM } from 'store/modal'
 
 import { editIcon, removeIcon } from 'assets/icons'
 
-const menuItems = () => {
+const MenuItems = () => {
   const dispatch = useDispatch()
   const { items } = useSelector(state => state.menu)
   const { showItem, modalItem } = useSelector(state => state.modal)
@@ -34,4 +34,4 @@ const menuItems = () => {
   )
 }
 
-export default memo(menuItems)
+export default memo(MenuItems)
