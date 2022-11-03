@@ -26,7 +26,7 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
       dispatch(SET_GLOBAL_USER({ name: user.displayName }))
       redirect('/')
     } catch (error) {
-      alert('Sign Up Error: ', error.message)
+      alert(`User can't signup due to ${error.code}`)
     }
     setLoading(false)
   }
@@ -38,7 +38,7 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
       dispatch(SET_GLOBAL_USER({ name: user.displayName }))
       redirect('/')
     } catch (error) {
-      console.log('Sign In Error: ', error)
+      alert(`User can't signin due to ${error.code}`)
     }
     setLoading(false)
   }
@@ -50,7 +50,7 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
       dispatch(SET_GLOBAL_USER({ name: displayName }))
       redirect('/')
     } catch (error) {
-      alert('Sign In Error: ', error.message)
+      alert(`User can't login with google due to ${error.code}`)
     }
     setLoading(false)
   }
