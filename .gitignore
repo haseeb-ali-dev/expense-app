@@ -6,7 +6,7 @@
 .pnp.js
 
 .eslintrc.js
-jsconfig.json
+# jsconfig.json
 
 # testing
 /coverage
