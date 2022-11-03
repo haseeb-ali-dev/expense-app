@@ -9,7 +9,7 @@ import { UPDATE_GRAND } from 'store/order'
 const Deductions = () => {
   const dispatch = useDispatch()
   const { delivery, tip, tax } = useSelector(state => state.order)
-  const [disabled, useDisbaled] = useState(false)
+  const [disabled, setDisabled] = useState(false)
   const persons = useSelector(state => state.personList)
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const Deductions = () => {
     const tipAmount = tip / persons.length
     const deliveryCharges = delivery / persons.length
     dispatch(APPLY_DEDUCTIONS({ tip: tipAmount, tax, delivery: deliveryCharges }))
-    useDisbaled(!disabled)
+    setDisabled(!disabled)
   }
 
   return (
