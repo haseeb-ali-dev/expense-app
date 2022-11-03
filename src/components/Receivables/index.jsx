@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { HIDE_MODAL } from 'store/modal'
 import ReactTooltip from 'react-tooltip'
+import { memo } from 'react'
 import { settleUp } from 'api/order'
 import { UPDATE_ORDER_PERSONS } from 'store/orderList'
 
@@ -65,4 +66,4 @@ const receivables = ({
     )
 }
 
-export default receivables
+export default memo(receivables)

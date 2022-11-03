@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { PAY_AMOUNTS, SPLIT } from 'store/personList'
@@ -88,4 +88,4 @@ const payArea = () => {
   )
 }
 
-export default payArea
+export default memo(payArea)

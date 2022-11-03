@@ -37,15 +37,15 @@ const slice = createSlice({
               const temp = p1.tempBalance + p2.tempBalance
               if (temp < 0) {
                 if (p1.tempBalance !== 0) {
-                  p2.to.push({ amount: Math.abs(p1.tempBalance), name: p1.name })
-                  p1.from.push({ amount: Math.abs(p1.tempBalance), name: p2.name })
+                  p2.to.push({ amount: Math.abs(p1.tempBalance.toFixed(2)), name: p1.name })
+                  p1.from.push({ amount: Math.abs(p1.tempBalance.toFixed(2)), name: p2.name })
                 }
                 p2.tempBalance = temp
                 p1.tempBalance = 0
               } else {
                 if (p2.tempBalance !== 0) {
-                  p2.to.push({ amount: Math.abs(p2.tempBalance), name: p1.name })
-                  p1.from.push({ amount: Math.abs(p2.tempBalance), name: p2.name })
+                  p2.to.push({ amount: Math.abs(p2.tempBalance.toFixed(2)), name: p1.name })
+                  p1.from.push({ amount: Math.abs(p2.tempBalance.toFixed(2)), name: p2.name })
                 }
                 p1.tempBalance = temp
                 p2.tempBalance = 0

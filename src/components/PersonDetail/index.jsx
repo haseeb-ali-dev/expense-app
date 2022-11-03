@@ -1,4 +1,6 @@
-export default ({ person }) => (
+import { memo } from 'react'
+
+export default memo(({ person }) => (
   <>
     <div className='d-flex flex-row justify-content-between p-1'>
       {person.name}
@@ -11,4 +13,4 @@ export default ({ person }) => (
       </span>
     </div>
   </>
-)
+))

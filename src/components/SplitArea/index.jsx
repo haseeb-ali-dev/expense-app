@@ -1,13 +1,13 @@
 /* eslint-disable array-callback-return */
+import { memo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { addOrder } from 'api/order'
+import { ADD_ORDER } from 'store/orderList'
 import { RESET_ORDER } from 'store/order'
 import { RESET_PERSON_LIST } from 'store/personList'
 import { UPDATE_ABLE_TO_SAVE } from 'store/menu'
-import { ADD_ORDER } from 'store/orderList'
-import { useState } from 'react'
 
 const splitArea = () => {
   const { ableToSave } = useSelector(state => state.menu)
@@ -84,4 +84,4 @@ const splitArea = () => {
   )
 }
 
-export default splitArea
+export default memo(splitArea)

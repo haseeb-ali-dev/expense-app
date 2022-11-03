@@ -1,5 +1,5 @@
+import { memo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react'
 
 import { ADD_ITEM, UPDATE_ITEM } from 'store/menu'
 
@@ -42,4 +42,4 @@ const itemForm = () => {
   )
 }
 
-export default itemForm
+export default memo(itemForm)

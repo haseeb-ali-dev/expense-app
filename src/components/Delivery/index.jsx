@@ -1,6 +1,8 @@
+import { memo } from 'react'
+
 import { ADD_DEDUCTION } from 'store/order'
 
-export default ({ dispatch }) => (
+export default memo(({ dispatch }) => (
   <div className='mb-3 row'>
     <label className='col-sm-3 col-form-label'>Delivery</label>
     <div className='col-sm-9'>
@@ -13,4 +15,4 @@ export default ({ dispatch }) => (
       />
     </div>
   </div>
-)
+))

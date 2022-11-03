@@ -12,6 +12,7 @@ import OrderSummary from 'components/OrderSummary'
 import OrderActions from 'components/OrderActions'
 import OrderPersonItems from 'components/OrderPersonItems'
 import OrderSettleUp from 'components/OrderSettleUp'
+import OrderListItem from 'components/OrderListItem'
 import PersonItems from 'components/PersonItems'
 import PersonList from 'components/PersonList'
 import PersonSelect from 'components/PersonSelect'
@@ -24,10 +25,29 @@ import Tip from 'components/Tip'
 import Tax from 'components/Tax'
 
 export {
-  Delivery, EditItemForm, Loader, Item,
-  ItemForm, ItemSelect, MenuItems, Modal,
-  Main, Navbar, OrderSummary, OrderActions, OrderPersonItems,
-  OrderSettleUp, PersonItems, PersonList, PersonSelect,
-  PersonDetail, Payables, Resturant, Receivables,
-  Select, Tip, Tax,
+  Delivery,
+  EditItemForm,
+  Loader,
+  Item,
+  ItemForm,
+  ItemSelect,
+  MenuItems,
+  Modal,
+  Main,
+  Navbar,
+  OrderSummary,
+  OrderActions,
+  OrderListItem,
+  OrderPersonItems,
+  OrderSettleUp,
+  PersonItems,
+  PersonList,
+  PersonSelect,
+  PersonDetail,
+  Payables,
+  Resturant,
+  Receivables,
+  Select,
+  Tip,
+  Tax,
 }

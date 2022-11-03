@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { removeOrder } from 'api/order'
@@ -28,4 +29,4 @@ const orderActions = ({
   )
 }
 
-export default orderActions
+export default memo(orderActions)

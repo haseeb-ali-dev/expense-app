@@ -1,9 +1,11 @@
-import { Item } from 'components'
-import { REMOVE_PERSON_ITEM } from 'store/person'
+import { memo } from 'react'
 
+import { Item } from 'components'
+
+import { REMOVE_PERSON_ITEM } from 'store/person'
 import { removeIcon } from 'assets/icons'
 
-export default ({ dispatch, name, items }) => name !== '' && (
+export default memo(({ dispatch, name, items }) => name !== '' && (
   <fieldset className='border border-2 p-2 mt-1'>
     <legend className='float-none w-auto px-1 fs-5'>{name}</legend>
     {items.map(item => (
@@ -17,4 +19,4 @@ export default ({ dispatch, name, items }) => name !== '' && (
       </div>
     ))}
   </fieldset>
-)
+))

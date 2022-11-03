@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { EditItemForm, Item, Modal } from 'components'
@@ -33,4 +34,4 @@ const menuItems = () => {
   )
 }
 
-export default menuItems
+export default memo(menuItems)

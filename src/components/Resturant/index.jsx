@@ -19,4 +19,4 @@ const resturantForm = () => {
     </div>
   )
 }
-export default resturantForm
+export default (resturantForm)

@@ -1,7 +1,7 @@
-import Select from 'react-select'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { Select } from 'components'
 import { ADD_PERSON_ITEM } from 'store/person'
 
 const itemSelect = () => {
@@ -28,4 +28,4 @@ const itemSelect = () => {
   )
 }
 
-export default itemSelect
+export default memo(itemSelect)

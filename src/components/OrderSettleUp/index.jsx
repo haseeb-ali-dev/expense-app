@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import { memo } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { HIDE_MODAL } from 'store/modal'
@@ -44,4 +45,4 @@ const orderSettleUp = ({ order, loading, setLoading }) => {
   )
 }
 
-export default orderSettleUp
+export default memo(orderSettleUp)

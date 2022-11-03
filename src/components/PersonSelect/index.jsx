@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
-import Select from 'react-select'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
+
+import { Select } from 'components'
 
 import { ADD_PERSON_NAME } from 'store/person'
 import { getUsers } from 'api/auth'
@@ -30,4 +31,4 @@ const personSelect = ({ dispatch, personList, personName }) => {
   )
 }
 
-export default personSelect
+export default memo(personSelect)

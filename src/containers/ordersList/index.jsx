@@ -6,9 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ADD_ORDER_LIST } from 'store/orderList'
 import { getUserOrders } from 'api/order'
 
-import Loader from 'components/Loader'
-import Modal from 'components/Modal'
-import OrderListItem from 'components/OrderListItem'
+import { Loader, Modal, OrderListItem } from 'components'
 
 const ordersList = () => {
   const dispatch = useDispatch()
