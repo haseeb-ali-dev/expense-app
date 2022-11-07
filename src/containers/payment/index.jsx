@@ -23,12 +23,13 @@ const PaymentSection = () => {
           <PayArea />
         </div>
       </div>
-      <div className='d-grid gap-2'>
-        <div className='bg-light border rounded-2'>
-          <SplitArea />
+      {ableToSave ? (
+        <div className='d-grid gap-2'>
+          <div className='bg-light border rounded-2'>
+            <SplitArea />
+          </div>
         </div>
-      </div>
-      {!ableToSave && <Link to='/create' className='btn btn-secondary rounded-pill float-start m-2'>Back</Link>}
+      ) : <Link to='/create' className='btn btn-secondary rounded-pill float-start m-2'>Back</Link>}
     </div>
   )
 }

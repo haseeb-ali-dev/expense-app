@@ -26,7 +26,7 @@ const SplitArea = () => {
       dispatch(RESET_ORDER())
       dispatch(UPDATE_ABLE_TO_SAVE())
     })
-    redirect('/')
+    redirect('/all')
   }
 
   return (

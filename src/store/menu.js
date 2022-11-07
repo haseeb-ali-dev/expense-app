@@ -29,7 +29,7 @@ const slice = createSlice({
       return menu
     },
     UPDATE_ABLE_TO_SAVE: (menu) => {
-      menu.ableToSave = true
+      menu.ableToSave = !menu.ableToSave
       return menu
     },
   },
