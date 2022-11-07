@@ -24,7 +24,7 @@ const Order = () => {
           <Person />
         </div>
       </div>
-      {flag && <Link to='/payment' className='btn btn-primary rounded-pill float-end m-2' onClick={updateGrand}>Proceed to payment section -&gt;</Link>}
+      {flag && <Link to='/payment' className='btn btn-primary rounded-pill float-end my-2' onClick={updateGrand}>Proceed to payment section -&gt;</Link>}
     </div>
   )
 }

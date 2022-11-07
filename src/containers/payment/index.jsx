@@ -13,7 +13,7 @@ const PaymentSection = () => {
   return (
     <div className='container-fluid pb-3'>
       <div className='d-grid gap-2 mb-2' style={styling}>
-        <div className='bg-light border rounded-2'>
+        <div className='bg-light border rounded-2 position-relative'>
           <OrderItems />
         </div>
         <div className='bg-light border rounded-2'>

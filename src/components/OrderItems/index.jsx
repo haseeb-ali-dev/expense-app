@@ -21,8 +21,8 @@ const OrderItems = () => {
       <div className='d-flex flex-column justify-content-center'>
         {Object.keys(itemsObj).map(key => <p className='m-1' key={key}>{itemsObj[key]} x {key} {itemsObj[key] > 1 && '(s)'}</p>)}
       </div>
-      <div className='text-end my-1'>
-        <div className='border'>
+      <div className='position-absolute bottom-0 end-0 my-2'>
+        <div className='border p-1 bg-white'>
           Grand Total: Rs. {grand.toLocaleString('en-US')}
         </div>
       </div>

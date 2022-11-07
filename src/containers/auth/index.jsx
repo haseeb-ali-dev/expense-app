@@ -24,7 +24,7 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
     try {
       const { user } = await signedUp(e.target.email.value, e.target.password.value, e.target.full_name.value)
       dispatch(SET_GLOBAL_USER({ name: user.displayName }))
-      redirect('/')
+      redirect('/all')
     } catch (error) {
       alert(`User can't signup due to ${error.code}`)
     }
@@ -36,7 +36,7 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
     try {
       const { user } = await signedIn(e.target.email.value, e.target.password.value)
       dispatch(SET_GLOBAL_USER({ name: user.displayName }))
-      redirect('/')
+      redirect('/all')
     } catch (error) {
       alert(`User can't signin due to ${error.code}`)
     }
@@ -48,7 +48,7 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
     try {
       const { displayName } = await loginWithGoogle()
       dispatch(SET_GLOBAL_USER({ name: displayName }))
-      redirect('/')
+      redirect('/all')
     } catch (error) {
       alert(`User can't login with google due to ${error.code}`)
     }
