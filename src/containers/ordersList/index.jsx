@@ -3,10 +3,12 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { Loader, Modal, OrderListItem } from 'components'
+
 import { ADD_ORDER_LIST } from 'store/orderList'
 import { getUserOrders } from 'api/order'
 
-import { Loader, Modal, OrderListItem } from 'components'
+import { emptyIcon } from 'assets/icons'
 
 const OrdersList = () => {
   const dispatch = useDispatch()
@@ -37,10 +39,9 @@ const OrdersList = () => {
       {showOrder && <Modal html={<OrderListItem order={modalOrder} showDetails />} />}
     </div>
   )
-  const loading = <Loader />
-  const noOrders = <p className='text-center h6'>No order found!</p>
+  const placeholder = <img className='position-fixed top-50 start-50 translate-middle' src={emptyIcon} alt='no orders' width={200} height={200} />
 
-  return fetched ? (orderList.length === 0 ? noOrders : displayOrders) : loading
+  return fetched ? (orderList.length === 0 ? placeholder : displayOrders) : <Loader />
 }
 
 export default OrdersList
