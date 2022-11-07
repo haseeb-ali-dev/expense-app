@@ -11,7 +11,7 @@ const ItemForm = () => {
   const initialItem = { name: '', price: 0 }
   const [item, setItem] = useState(initialItem)
 
-  const handleChange = e => setItem({ ...item, [e.target.name]: e.target.value.trim() })
+  const handleChange = e => setItem({ ...item, [e.target.name]: e.target.value.trimLeft() })
 
   const submitHandler = e => {
     e.preventDefault()
@@ -32,10 +32,10 @@ const ItemForm = () => {
       <div className='mb-2 d-flex flex-row'>
         <div className='w-100'>
           <label className='form-label'>Price</label>
-          <input type='number' name='price' className='form-control' placeholder='Enter Price' min={1} required onChange={handleChange} value={item.price} />
+          <input type='number' name='price' className='form-control' placeholder='Enter Price' min={1} required onChange={handleChange} />
         </div>
         <button type='submit' className='btn btn-sm btn-success rounded-circle mt-auto ms-3'>
-          <img src={plusIcon} alt='+' />
+          <img className='py-1' src={plusIcon} alt='+' />
         </button>
       </div>
     </form>
