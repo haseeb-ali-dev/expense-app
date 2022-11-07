@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { signOut } from 'firebase/auth'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -24,8 +24,8 @@ const Navbar = ({ haveAccount, setHaveAccount }) => {
     <>
       <header className='d-flex justify-content-between p-2 ps-3'>
         <ul className='nav nav-pills'>
-          <li className='nav-item'><Link to='/' className='nav-link'>Expense App</Link></li>
-          <li className='nav-item'><Link to='/create' className='nav-link'>New Expense</Link></li>
+          <li className='nav-item'><NavLink to='/all' className='nav-link' activeClassName='active'>Expense App</NavLink></li>
+          <li className='nav-item'><NavLink to='/create' className='nav-link' activeClassName='active'>New Expense</NavLink></li>
         </ul>
         {isLogged
           ? (

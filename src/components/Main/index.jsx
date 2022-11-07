@@ -34,7 +34,7 @@ const Main = () => {
     <Router>
       <Navbar haveAccount={haveAccount} setHaveAccount={setHaveAccount} />
       <Routes>
-        <Route path='/' element={isLogged ? <OrdersList /> : <Navigate to='/auth' />} />
+        <Route path='/all' element={isLogged ? <OrdersList /> : <Navigate to='/auth' />} />
         <Route path='/create' element={isLogged ? <Order /> : <Navigate to='/auth' />} />
         <Route
           path='/payment'
