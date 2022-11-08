@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 
 import {
-  Auth, Order, OrdersList, Payment,
+  Auth, Order, OrdersList, Payment, Profile,
 } from 'containers'
 import { Loader, Navbar } from 'components'
 
@@ -24,7 +24,7 @@ const Main = () => {
   useEffect(() => {
     onAuthStateChanged(auth, user => {
       if (user) {
-        dispatch(SET_GLOBAL_USER({ name: user.displayName }))
+        dispatch(SET_GLOBAL_USER({ name: user.displayName, avatar: user.photoURL }))
       }
       setAuthenticated(true)
     })
@@ -36,6 +36,7 @@ const Main = () => {
       <Routes>
         <Route path='/all' element={isLogged ? <OrdersList /> : <Navigate to='/auth' />} />
         <Route path='/create' element={isLogged ? <Order /> : <Navigate to='/auth' />} />
+        <Route path='/profile' element={isLogged ? <Profile /> : <Navigate to='/auth' />} />
         <Route
           path='/payment'
           element={isLogged

@@ -12,7 +12,16 @@ const PersonSelect = ({ dispatch, personList, personName }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       const fetchedUsers = await getUsers()
-      const updatedUsers = fetchedUsers.map(({ name }) => ({ value: name, label: name }))
+      const updatedUsers = fetchedUsers.map(({ name, avatar }) => (
+        {
+          value: name,
+          label: (
+            <div className='d-flex align-items-center'>
+              <img src={avatar} height='25' width='25' alt='avatar' className='me-2 rounded-circle' />
+              {name}
+            </div>
+          ),
+        }))
         .filter(user => (personList.every(person => (person.name !== user.value))))
       setUsers(updatedUsers)
     }

@@ -3,17 +3,20 @@ import {
   updateProfile, signInWithPopup, GoogleAuthProvider,
   FacebookAuthProvider,
 } from 'firebase/auth'
-import { auth, db } from 'Database'
+import { auth, db, storage } from 'Database'
 import {
-  addDoc, collection, getDocs, query, where,
+  setDoc, collection, getDocs, query, updateDoc, where, doc,
 } from 'firebase/firestore'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+
+import defaultAvatar from 'utils/constants/defaultAvatar'
 
 export const usersCollection = collection(db, 'users')
 
 export const signedUp = async (email, password, name) => {
   const { user } = await createUserWithEmailAndPassword(auth, email, password)
-  await addDoc(usersCollection, { email, name })
-  await updateProfile(user, { displayName: name })
+  await setDoc(doc(db, 'users', user.uid), { email, name, avatar: defaultAvatar })
+  await updateProfile(user, { displayName: name, photoURL: defaultAvatar })
   return { user }
 }
 
@@ -25,12 +28,21 @@ export const loginWithGoogle = async () => {
   const provider = new GoogleAuthProvider()
   const result = await signInWithPopup(auth, provider)
   const { accessToken } = GoogleAuthProvider.credentialFromResult(result)
-  const { user: { displayName, email } } = result
+  const {
+    user: {
+      displayName, email, photoURL, uid,
+    },
+  } = result
   await getDocs(query(usersCollection, where('email', '==', email)))
-    .then(res => res.empty && addDoc(usersCollection, { email, name: displayName, accessToken }))
+    .then(res => res.empty
+      && setDoc(doc(db, 'users', uid), {
+        email, name: displayName, accessToken, avatar: photoURL ?? defaultAvatar,
+      }))
   // const { code, message, customData: { email } } = error
   // const credential = GoogleAuthProvider.credentialFromError(error)
-  return { accessToken, displayName, email }
+  return {
+    accessToken, displayName, email, photoURL,
+  }
 }
 
 export const loginWithFacebook = async () => {
@@ -39,10 +51,16 @@ export const loginWithFacebook = async () => {
   await signInWithPopup(auth, provider)
     .then(result => {
       const { accessToken } = FacebookAuthProvider.credentialFromResult(result)
-      const { user: { displayName, email } } = result
+      const {
+        user: {
+          displayName, email, photoURL, uid,
+        },
+      } = result
       getDocs(query(usersCollection, where('email', '==', email)))
         .then(res => res.empty
-          && addDoc(usersCollection, { email, name: displayName, accessToken }))
+          && setDoc(doc(db, 'users', uid), {
+            email, name: displayName, accessToken, avatar: photoURL,
+          }))
     }).catch(error => {
       const { code, message, customData: { email } } = error
       const credential = FacebookAuthProvider.credentialFromError(error)
@@ -50,6 +68,15 @@ export const loginWithFacebook = async () => {
         code, message, customData: { email }, credential,
       }
     })
+}
+
+export const avatarUpload = async file => {
+  const fileRef = ref(storage, `${auth.currentUser.uid}.png`)
+  await uploadBytes(fileRef, file)
+  const photoURL = await getDownloadURL(fileRef)
+  await updateDoc(doc(db, 'users', auth.currentUser.uid), { avatar: photoURL })
+  await updateProfile(auth.currentUser, { photoURL })
+  return { photoURL, name: auth.currentUser.displayName }
 }
 
 export const getUsers = async () => {

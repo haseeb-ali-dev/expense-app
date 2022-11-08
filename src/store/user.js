@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const userInitialState = {
   isLogged: false,
   name: '',
+  avatar: '',
 }
 
 const slice = createSlice({
@@ -12,6 +13,7 @@ const slice = createSlice({
     SET_GLOBAL_USER: (user, action) => {
       user.isLogged = true
       user.name = action.payload.name
+      user.avatar = action.payload.avatar
       return user
     },
     RESET_USER: (user) => {

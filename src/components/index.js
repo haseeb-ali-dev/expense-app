@@ -21,6 +21,7 @@ import Payables from 'components/Payables'
 import Resturant from 'components/Resturant'
 import Receivables from 'components/Receivables'
 import Select from 'react-select'
+import swal from 'sweetalert'
 import Tip from 'components/Tip'
 import Tax from 'components/Tax'
 
@@ -48,6 +49,7 @@ export {
   Resturant,
   Receivables,
   Select,
+  swal,
   Tip,
   Tax,
 }

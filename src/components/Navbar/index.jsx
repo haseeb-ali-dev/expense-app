@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { signOut } from 'firebase/auth'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -9,8 +9,10 @@ import { signOutIcon } from 'assets/icons'
 
 const Navbar = ({ haveAccount, setHaveAccount }) => {
   const dispatch = useDispatch()
-  const { isLogged, name } = useSelector(state => state.user)
+  const { isLogged, name, avatar } = useSelector(state => state.user)
   const redirect = useNavigate()
+
+  const active = ({ isActive }) => (isActive ? 'active-style' : 'none')
 
   const signedOut = async () => {
     await signOut(auth)
@@ -24,13 +26,18 @@ const Navbar = ({ haveAccount, setHaveAccount }) => {
     <>
       <header className='d-flex justify-content-between p-2 ps-3'>
         <ul className='nav nav-pills'>
-          <li className='nav-item'><NavLink to='/all' className='nav-link' activeClassName='active'>Expense App</NavLink></li>
-          <li className='nav-item'><NavLink to='/create' className='nav-link' activeClassName='active'>New Expense</NavLink></li>
+          <li className='nav-item'><NavLink to='/all' className={`nav-link ${active}`}>Expense App</NavLink></li>
+          <li className='nav-item'><NavLink to='/create' className={`nav-link ${active}`}>New Expense</NavLink></li>
         </ul>
         {isLogged
           ? (
             <div className='btn-group' role='group'>
-              <button className='btn btn-sm btn-outline-primary'><div className='mx-1'>{name}</div></button>
+              <button className='btn btn-sm border-primary m-0'>
+                <img src={avatar} alt='noimage' width={30} height={30} className='rounded-pill' />
+              </button>
+              <button className='btn btn-sm border-primary'>
+                <Link to='/profile' className='btn btn-sm m-0 p-0'>{name}</Link>
+              </button>
               <button onClick={signedOut} className='btn btn-sm btn-danger'>
                 <img src={signOutIcon} alt='signout' />
               </button>

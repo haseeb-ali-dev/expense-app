@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { Loader } from 'components'
+import { Loader, swal } from 'components'
 
 import {
   signedIn, signedUp, loginWithGoogle, loginWithFacebook,
 } from 'api/auth'
 import { SET_GLOBAL_USER } from 'store/user'
+import validate from 'utils/helpers/authValidate'
 
 import 'containers/auth/style.css'
 import { googleIcon, facebookIcon } from 'assets/icons'
@@ -23,10 +24,10 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
     setLoading(true)
     try {
       const { user } = await signedUp(e.target.email.value, e.target.password.value, e.target.full_name.value)
-      dispatch(SET_GLOBAL_USER({ name: user.displayName }))
+      dispatch(SET_GLOBAL_USER({ name: user.displayName, avatar: user.photoURL }))
       redirect('/all')
     } catch (error) {
-      alert(`User can't signup due to ${error.code}`)
+      swal({ text: validate(error.code), icon: 'error' })
     }
     setLoading(false)
   }
@@ -35,10 +36,10 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
     setLoading(true)
     try {
       const { user } = await signedIn(e.target.email.value, e.target.password.value)
-      dispatch(SET_GLOBAL_USER({ name: user.displayName }))
+      dispatch(SET_GLOBAL_USER({ name: user.displayName, avatar: user.photoURL }))
       redirect('/all')
     } catch (error) {
-      alert(`User can't signin due to ${error.code}`)
+      swal({ text: validate(error.code), icon: 'error' })
     }
     setLoading(false)
   }
@@ -46,11 +47,11 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
   const googleLoggin = async () => {
     setLoading(true)
     try {
-      const { displayName } = await loginWithGoogle()
-      dispatch(SET_GLOBAL_USER({ name: displayName }))
+      const { displayName, photoURL } = await loginWithGoogle()
+      dispatch(SET_GLOBAL_USER({ name: displayName, avatar: photoURL }))
       redirect('/all')
     } catch (error) {
-      alert(`User can't login with google due to ${error.code}`)
+      swal({ text: validate(error.code), icon: 'error' })
     }
     setLoading(false)
   }
