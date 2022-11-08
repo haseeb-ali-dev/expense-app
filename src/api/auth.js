@@ -79,6 +79,12 @@ export const avatarUpload = async file => {
   return { photoURL, name: auth.currentUser.displayName }
 }
 
+export const updateName = async name => {
+  await updateDoc(doc(db, 'users', auth.currentUser.uid), { name })
+  await updateProfile(auth.currentUser, { name })
+  return { name, photoURL: auth.currentUser.photoURL }
+}
+
 export const getUsers = async () => {
   const querySnapshot = await getDocs(usersCollection)
   return querySnapshot.docs.map(document => ({ id: document.id, ...document.data() }))
