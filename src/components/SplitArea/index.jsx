@@ -3,6 +3,8 @@ import { memo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
+import { swal } from 'components'
+
 import { addOrder } from 'api/order'
 import { ADD_ORDER } from 'store/orderList'
 import { RESET_ORDER } from 'store/order'
@@ -12,7 +14,7 @@ import { UPDATE_ABLE_TO_SAVE } from 'store/menu'
 const SplitArea = () => {
   const { ableToSave } = useSelector(state => state.menu)
   const dispatch = useDispatch()
-  const [disabled, setDisabled] = useState(ableToSave)
+  const [disabled, setDisabled] = useState(!ableToSave)
   const order = useSelector(state => state.order)
   const persons = useSelector(state => state.personList)
   const redirect = useNavigate()
@@ -20,7 +22,7 @@ const SplitArea = () => {
   const saveOrder = async e => {
     setDisabled(true)
     e.preventDefault()
-    await addOrder(order).then(() => alert('order added successfully!')).then(() => {
+    await addOrder(order).then(() => swal({ text: 'Password updated successfully!', icon: 'success' })).then(() => {
       dispatch(ADD_ORDER({ order }))
       dispatch(RESET_PERSON_LIST())
       dispatch(RESET_ORDER())
@@ -77,7 +79,7 @@ const SplitArea = () => {
           </tfoot>
         </table>
         <div className='text-end'>
-          <button type='submit' className='btn btn-sm btn-success rounded-pill' disabled={disabled}>Save</button>
+          <button type='submit' className='btn btn-sm btn-success rounded-0' disabled={disabled}>Save</button>
         </div>
       </form>
     </div>

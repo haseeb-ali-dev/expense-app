@@ -37,7 +37,7 @@ const PersonDetails = () => {
         {showPerson && (
           <Modal html={(
             <Select
-              className='mx-2 my-2'
+              className='mt-5 p-2'
               options={items}
               placeholder='Select a item to add........'
               onChange={({ value }) => {

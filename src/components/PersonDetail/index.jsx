@@ -2,7 +2,7 @@ import { memo } from 'react'
 
 export default memo(({ person }) => (
   <>
-    <div className='d-flex flex-row justify-content-between p-1'>
+    <div className='d-flex flex-row justify-content-between mx-auto p-1 fs-6'>
       {person.name}
     </div>
     <div><small className='text-muted'>Total: Rs. </small> {person.total.toLocaleString('en-US')}</div>

@@ -1,30 +1,32 @@
-import Delivery from 'components/Delivery'
-import EditItemForm from 'components/ItemForm/edit'
-import ForgotPassword from 'components/ForgotPassword'
-import Loader from 'components/Loader'
-import Item from 'components/Item'
-import ItemForm from 'components/ItemForm'
-import ItemSelect from 'components/ItemSelect'
-import MenuItems from 'components/MenuItems'
-import Modal from 'components/Modal'
-import Main from 'components/Main'
-import Navbar from 'components/Navbar'
-import OrderSummary from 'components/OrderSummary'
-import OrderActions from 'components/OrderActions'
-import OrderPersonItems from 'components/OrderPersonItems'
-import OrderSettleUp from 'components/OrderSettleUp'
-import OrderListItem from 'components/OrderListItem'
-import PersonItems from 'components/PersonItems'
-import PersonList from 'components/PersonList'
-import PersonSelect from 'components/PersonSelect'
-import PersonDetail from 'components/PersonDetail'
-import Payables from 'components/Payables'
-import Resturant from 'components/Resturant'
-import Receivables from 'components/Receivables'
+import { lazy } from 'react'
 import Select from 'react-select'
 import swal from 'sweetalert'
-import Tip from 'components/Tip'
-import Tax from 'components/Tax'
+
+const Delivery = lazy(() => import('components/Delivery'))
+const EditItemForm = lazy(() => import('components/ItemForm/edit'))
+const ForgotPassword = lazy(() => import('components/ForgotPassword'))
+const Loader = lazy(() => import('components/Loader'))
+const Item = lazy(() => import('components/Item'))
+const ItemForm = lazy(() => import('components/ItemForm'))
+const ItemSelect = lazy(() => import('components/ItemSelect'))
+const MenuItems = lazy(() => import('components/MenuItems'))
+const Modal = lazy(() => import('components/Modal'))
+const Main = lazy(() => import('components/Main'))
+const Navbar = lazy(() => import('components/Navbar'))
+const OrderSummary = lazy(() => import('components/OrderSummary'))
+const OrderActions = lazy(() => import('components/OrderActions'))
+const OrderPersonItems = lazy(() => import('components/OrderPersonItems'))
+const OrderSettleUp = lazy(() => import('components/OrderSettleUp'))
+const OrderListItem = lazy(() => import('components/OrderListItem'))
+const PersonItems = lazy(() => import('components/PersonItems'))
+const PersonList = lazy(() => import('components/PersonList'))
+const PersonSelect = lazy(() => import('components/PersonSelect'))
+const PersonDetail = lazy(() => import('components/PersonDetail'))
+const Payables = lazy(() => import('components/Payables'))
+const Resturant = lazy(() => import('components/Resturant'))
+const Receivables = lazy(() => import('components/Receivables'))
+const Tip = lazy(() => import('components/Tip'))
+const Tax = lazy(() => import('components/Tax'))
 
 export {
   Delivery,

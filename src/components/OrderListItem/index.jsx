@@ -15,9 +15,9 @@ const OrderItem = ({ order, orderIdx, showDetails = false }) => {
   const orderSettlup = <OrderSettleUp order={order} loading={loading} setLoading={setLoading} />
 
   return (
-    <div className='border border-1 rounded-2 m-1 p-2 overflow-auto'>
+    <div className={`m-1 px-1 overflow-auto ${!showDetails && 'border border-1 rounded-2'}`}>
       <div className='d-flex w-100 justify-content-between'>
-        <h5 className='mb-1'>{order.resturant}</h5>
+        <h5 className='my-1'>{order.resturant}</h5>
       </div>
       <div className='mb-1 d-inline-flex flex-wrap'>
         <OrderSummary order={order} />

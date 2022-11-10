@@ -27,7 +27,7 @@ const ForgotPassword = () => {
         Send Password Reset Link
       </button>
       <div className='text-center'>
-        <button type='button' className='btn btn-sm p-0 m-0' onClick={() => redirect('/auth')}>
+        <button type='button' className='btn btn-sm btn-success p-0 m-0 rounded-0' onClick={() => redirect('/auth')}>
           <span className='d-flex align-items-center'>
             <img src={ok3Icon} alt='ok' className='me-1' /><span>Back to Login</span>
           </span>

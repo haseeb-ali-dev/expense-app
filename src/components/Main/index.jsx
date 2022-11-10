@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 
 import {
   Auth, Order, OrdersList, Payment, Profile,
@@ -31,22 +31,24 @@ const Main = () => {
   }, [])
 
   return authenticated ? (
-    <Router>
-      <Navbar haveAccount={haveAccount} setHaveAccount={setHaveAccount} />
-      <Routes>
-        <Route path='/all' element={isLogged ? <OrdersList /> : <Navigate to='/auth' />} />
-        <Route path='/create' element={isLogged ? <Order /> : <Navigate to='/auth' />} />
-        <Route path='/profile' element={isLogged ? <Profile /> : <Navigate to='/auth' />} />
-        <Route
-          path='/payment'
-          element={isLogged
-            ? (personList.length > 0 ? <Payment /> : <Navigate to='/create' />)
-            : <Navigate to='/auth' />}
-        />
-        <Route path='/auth' element={<Auth haveAccount={haveAccount} setHaveAccount={setHaveAccount} />} />
-        <Route path='/forgot-password' element={<ForgotPassword />} />
-      </Routes>
-    </Router>
+    <Suspense fallback={<Loader />}>
+      <Router>
+        <Navbar haveAccount={haveAccount} setHaveAccount={setHaveAccount} />
+        <Routes>
+          <Route path='/all' element={isLogged ? <OrdersList /> : <Navigate to='/auth' />} />
+          <Route path='/create' element={isLogged ? <Order /> : <Navigate to='/auth' />} />
+          <Route path='/profile' element={isLogged ? <Profile /> : <Navigate to='/auth' />} />
+          <Route
+            path='/payment'
+            element={isLogged
+              ? (personList.length > 0 ? <Payment /> : <Navigate to='/create' />)
+              : <Navigate to='/auth' />}
+          />
+          <Route path='/auth' element={<Auth haveAccount={haveAccount} setHaveAccount={setHaveAccount} />} />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
+        </Routes>
+      </Router>
+    </Suspense>
   ) : <Loader />
 }
 

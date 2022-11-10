@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const personInitialState = {
   name: '',
+  picture: '',
   total: 0,
   paid: 0,
   items: [],
@@ -17,6 +18,7 @@ const slice = createSlice({
   reducers: {
     ADD_PERSON_NAME: (person, action) => {
       person.name = action.payload.name
+      person.picture = action.payload.avatar
     },
     ADD_PERSON_ITEM: (person, action) => {
       person.items.push(action.payload.item)

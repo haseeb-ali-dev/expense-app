@@ -15,7 +15,7 @@ const EditItemForm = ({ item }) => {
   }
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={submitHandler} className='pt-5 px-2'>
       <div className='mb-2'>
         <div className='input-group mb-3'>
           <span className='input-group-text'>Item Name</span>

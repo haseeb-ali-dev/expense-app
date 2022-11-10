@@ -31,8 +31,8 @@ const Deductions = () => {
       <Tip dispatch={dispatch} />
       <Delivery dispatch={dispatch} />
       <Tax dispatch={dispatch} />
-      <div className='my-2 text-end'>
-        <button className='btn btn-sm btn-success rounded-pill' onClick={applyDeductions} disabled={disabled}>Apply</button>
+      <div className='my-2 text-end '>
+        <button className='btn btn-sm btn-success w-25 rounded-0' onClick={applyDeductions} disabled={disabled}>Apply</button>
       </div>
     </div>
   )

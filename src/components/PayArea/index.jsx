@@ -82,7 +82,7 @@ const PayArea = () => {
           </tfoot>
         </table>
         <div className='text-end'>
-          {!ableToSave && <button type='submit' className='btn btn-success btn-sm rounded-pill' disabled={remain !== 0}>Pay and Split</button>}
+          {!ableToSave && <button type='submit' className='btn btn-success btn-sm rounded-0 w-25' disabled={remain !== 0}>Pay and Split</button>}
         </div>
       </form>
     </div>
