@@ -8,26 +8,29 @@ import SplitArea from 'components/SplitArea'
 
 const PaymentSection = () => {
   const { ableToSave } = useSelector(state => state.menu)
-  const styling = { gridTemplateColumns: '0.5fr 1fr 1.5fr' }
 
   return (
-    <div className='container-fluid pb-3'>
-      <div className='d-grid gap-2 mb-2' style={styling}>
-        <div className='bg-light border rounded-2 position-relative'>
-          <OrderItems />
+    <div className='container-fluid'>
+      <div className='row'>
+        <div className='col-md-3 p-0'>
+          <div className='bg-light border rounded-2 m-1 position-relative'>
+            <OrderItems />
+          </div>
         </div>
-        <div className='bg-light border rounded-2'>
-          <Deductions />
+        <div className='col-md-4 p-0'>
+          <div className='bg-light border rounded-2 m-1'>
+            <Deductions />
+          </div>
         </div>
-        <div className='bg-light border rounded-2'>
-          <PayArea />
+        <div className='col-md-5 p-0'>
+          <div className='bg-light border rounded-2 m-1'>
+            <PayArea />
+          </div>
         </div>
       </div>
       {ableToSave ? (
-        <div className='d-grid gap-2'>
-          <div className='bg-light border rounded-2'>
-            <SplitArea />
-          </div>
+        <div className='bg-light border rounded-2'>
+          <SplitArea />
         </div>
       ) : <Link to='/create' className='btn btn-secondary rounded-pill float-start m-2'>Back</Link>}
     </div>

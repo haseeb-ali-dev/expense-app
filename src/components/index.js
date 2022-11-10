@@ -1,5 +1,6 @@
 import Delivery from 'components/Delivery'
 import EditItemForm from 'components/ItemForm/edit'
+import ForgotPassword from 'components/ForgotPassword'
 import Loader from 'components/Loader'
 import Item from 'components/Item'
 import ItemForm from 'components/ItemForm'
@@ -28,6 +29,7 @@ import Tax from 'components/Tax'
 export {
   Delivery,
   EditItemForm,
+  ForgotPassword,
   Loader,
   Item,
   ItemForm,

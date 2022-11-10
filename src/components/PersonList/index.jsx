@@ -11,7 +11,7 @@ export default memo(({ dispatch, menuItems, persons }) => persons.length !== 0 &
   persons.map(({ name: personName, total, items }, personIdx) => (
     <div className='mt-2 mx-1 border py-1 px-2 row bg-white' key={`person-${personIdx.toString()}`}>
       <div className='col-md-3'><small className='text-muted'>Name:</small> {personName}</div>
-      <div className='col-md-3'><small className='text-muted'>Total:</small> Rs. {total.toLocaleString('en-US')}</div>
+      <div className='col-md-2'><small className='text-muted'>Total:</small> Rs. {total.toLocaleString('en-US')}</div>
       <div className='col-md-5'>
         {items.map((item, itemIdx) => (
           <div className='d-flex flex-row align-items-center' key={`person-item-${itemIdx.toString()}`} role='group'>
@@ -22,7 +22,7 @@ export default memo(({ dispatch, menuItems, persons }) => persons.length !== 0 &
           </div>
         ))}
       </div>
-      <div className='col-sm-1 d-flex flex-row align-items-start'>
+      <div className='col-sm-2 d-flex flex-row align-items-start'>
         <button
           className='btn btn-sm px-0'
           onClick={() => {

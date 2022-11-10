@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react'
 import {
   Auth, Order, OrdersList, Payment, Profile,
 } from 'containers'
-import { Loader, Navbar } from 'components'
+import { ForgotPassword, Loader, Navbar } from 'components'
 
 import { auth } from 'Database'
 import { SET_GLOBAL_USER } from 'store/user'
@@ -44,6 +44,7 @@ const Main = () => {
             : <Navigate to='/auth' />}
         />
         <Route path='/auth' element={<Auth haveAccount={haveAccount} setHaveAccount={setHaveAccount} />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
       </Routes>
     </Router>
   ) : <Loader />

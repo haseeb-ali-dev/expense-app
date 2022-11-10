@@ -63,6 +63,7 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
       setLoading(false)
     })
   }
+
   const label = haveAccount ? 'Please Sign In' : 'Create Account'
   const buttonText = haveAccount ? 'Sign In' : 'Sign Up'
   const switchInfo = haveAccount ? 'Not have account yet?' : 'Already have account!'
@@ -90,6 +91,11 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
                 </div>
               )}
             <button className='w-100 btn btn-primary rounded-pill mb-1' type='submit'>{buttonText}</button>
+            {haveAccount && (
+              <div className='text-center'>
+                <button type='button' className='btn btn-sm p-0 m-0' onClick={() => redirect('/forgot-password')}>Forgot password?</button>
+              </div>
+            )}
             <div className='w-100 text-center my-1'>
               <span className='text-muted'>--OR--</span>
             </div>

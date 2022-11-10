@@ -1,7 +1,7 @@
 import {
   createUserWithEmailAndPassword, signInWithEmailAndPassword,
   updateProfile, signInWithPopup, GoogleAuthProvider,
-  FacebookAuthProvider,
+  FacebookAuthProvider, sendPasswordResetEmail,
 } from 'firebase/auth'
 import { auth, db, storage } from 'Database'
 import {
@@ -83,6 +83,14 @@ export const updateName = async name => {
   await updateDoc(doc(db, 'users', auth.currentUser.uid), { name })
   await updateProfile(auth.currentUser, { name })
   return { name, photoURL: auth.currentUser.photoURL }
+}
+
+export const sendResetLink = async email => {
+  const actionCodeSettings = {
+    url: 'https://www.example.com/afterPasswordReset',
+    handleCodeInApp: false,
+  }
+  await sendPasswordResetEmail(auth, email, actionCodeSettings)
 }
 
 export const getUsers = async () => {

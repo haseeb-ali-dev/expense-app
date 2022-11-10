@@ -6,6 +6,7 @@ import facebookIcon from './facebook.svg'
 import googleIcon from './google.svg'
 import okIcon from './ok.svg'
 import ok2Icon from './ok2.svg'
+import ok3Icon from './ok3.svg'
 import plusIcon from './plus.svg'
 import removeIcon from './remove.svg'
 import settleUpIcon from './settleup.svg'
@@ -24,6 +25,7 @@ export {
   settleUpIcon,
   okIcon,
   ok2Icon,
+  ok3Icon,
   plusIcon,
   signOutIcon,
   saveIcon,
