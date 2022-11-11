@@ -11,7 +11,7 @@ const Modal = ({ html }) => {
   const dispatch = useDispatch()
   const modalRef = useRef()
 
-  const closeModal = (e) => e.target === modalRef.current && dispatch(HIDE_MODAL())
+  const closeModal = e => e.target === modalRef.current && dispatch(HIDE_MODAL())
 
   return ReactDom.createPortal(
     <div className='modal' ref={modalRef} onClick={closeModal}>
@@ -27,13 +27,3 @@ const Modal = ({ html }) => {
 }
 
 export default Modal
-
-// eslint-disable-next-line no-lone-blocks
-{ /* <div className='container' ref={modalRef} onClick={closeModal}>
-<div className='modal'>
-  {html}
-  <button className='btn p-0 close' onClick={() => dispatch(HIDE_MODAL())}>
-    <img src={closeIcon} alt='X' />
-  </button>
-</div>
-</div>, */ }

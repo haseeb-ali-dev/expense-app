@@ -2,6 +2,7 @@
 import { HIDE_MODAL } from 'store/modal'
 import { memo } from 'react'
 import ReactTooltip from 'react-tooltip'
+
 import { settleUp } from 'api/order'
 import { UPDATE_ORDER_PERSONS } from 'store/orderList'
 

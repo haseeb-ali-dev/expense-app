@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Loader, swal } from 'components'
+
 import { avatarUpload, updateName } from 'api/auth'
 import { SET_GLOBAL_USER } from 'store/user'
 import validate from 'utils/helpers/authValidate'

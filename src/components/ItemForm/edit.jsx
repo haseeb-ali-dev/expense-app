@@ -6,7 +6,7 @@ import { UPDATE_ITEM } from 'store/menu'
 const EditItemForm = ({ item }) => {
   const dispatch = useDispatch()
 
-  const submitHandler = (e) => {
+  const submitHandler = e => {
     e.preventDefault()
     const name = e.target.name.value
     const price = e.target.price.value

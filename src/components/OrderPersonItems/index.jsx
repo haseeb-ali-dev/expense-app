@@ -1,4 +1,5 @@
 import { memo } from 'react'
+
 import { Item } from 'components'
 
 export default memo(({ person }) => (
