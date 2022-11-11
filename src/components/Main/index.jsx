@@ -24,7 +24,7 @@ const Main = () => {
   useEffect(() => {
     onAuthStateChanged(auth, user => {
       if (user) {
-        dispatch(SET_GLOBAL_USER({ name: user.displayName, avatar: user.photoURL }))
+        dispatch(SET_GLOBAL_USER({ name: user.displayName, avatar: user.photoURL, id: user.uid }))
       }
       setAuthenticated(true)
     })

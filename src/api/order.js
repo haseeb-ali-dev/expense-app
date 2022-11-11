@@ -19,8 +19,8 @@ export const removeOrder = async (orderId) => {
   await deleteDoc(doc(db, 'orders', orderId))
 }
 
-export const getUserOrders = async (name) => {
-  const queryResyult = query(orderCollection, where('users', 'array-contains', name))
+export const getUserOrders = async (id) => {
+  const queryResyult = query(orderCollection, where('users', 'array-contains', id))
   const querySnapshot = await getDocs(queryResyult)
   const userOrders = querySnapshot.docs.map(document => ({ id: document.id, ...document.data() }))
   return userOrders

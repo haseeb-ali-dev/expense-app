@@ -12,9 +12,9 @@ const PersonSelect = ({ dispatch, personList, personName }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       const fetchedUsers = await getUsers()
-      const updatedUsers = fetchedUsers.map(({ name, avatar }) => (
+      const updatedUsers = fetchedUsers.map(({ id, name, avatar }) => (
         {
-          value: name,
+          value: { id, name },
           label: (
             <div className='d-flex align-items-center'>
               <img src={avatar} height='25' width='25' alt='avatar' className='me-2 rounded-circle' />
@@ -22,7 +22,7 @@ const PersonSelect = ({ dispatch, personList, personName }) => {
             </div>
           ),
         }))
-        .filter(user => (personList.every(person => (person.name !== user.value))))
+        .filter(user => (personList.every(person => (person.name !== user.value.name))))
       setUsers(updatedUsers)
     }
     fetchUsers()
@@ -33,7 +33,7 @@ const PersonSelect = ({ dispatch, personList, personName }) => {
       <Select
         options={users}
         placeholder='Select a person'
-        onChange={({ value }) => dispatch(ADD_PERSON_NAME({ name: value }))}
+        onChange={({ value: { id, name } }) => dispatch(ADD_PERSON_NAME({ id, name }))}
         value={personName || ''}
       />
     </div>

@@ -22,7 +22,7 @@ const SplitArea = () => {
   const saveOrder = async e => {
     setDisabled(true)
     e.preventDefault()
-    await addOrder(order).then(() => swal({ text: 'Password updated successfully!', icon: 'success' })).then(() => {
+    await addOrder(order).then(() => swal({ text: 'Order added successfully!', icon: 'success' })).then(() => {
       dispatch(ADD_ORDER({ order }))
       dispatch(RESET_PERSON_LIST())
       dispatch(RESET_ORDER())

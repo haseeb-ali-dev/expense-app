@@ -81,7 +81,7 @@ export const avatarUpload = async file => {
 
 export const updateName = async name => {
   await updateDoc(doc(db, 'users', auth.currentUser.uid), { name })
-  await updateProfile(auth.currentUser, { name })
+  await updateProfile(auth.currentUser, { displayName: name })
   return { name, photoURL: auth.currentUser.photoURL }
 }
 

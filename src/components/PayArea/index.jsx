@@ -16,7 +16,7 @@ const PayArea = () => {
   useEffect(() => setRemain(order.grand), [order.grand])
 
   useEffect(() => {
-    const users = persons.map(p => p.name)
+    const users = persons.map(p => p.id)
     dispatch(UPDATE_PERSONS({ persons, users }))
   }, [paidAmounts, persons])
 

@@ -24,7 +24,7 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
     setLoading(true)
     try {
       const { user } = await signedUp(e.target.email.value, e.target.password.value, e.target.full_name.value)
-      dispatch(SET_GLOBAL_USER({ name: user.displayName, avatar: user.photoURL }))
+      dispatch(SET_GLOBAL_USER({ name: user.displayName, avatar: user.photoURL, id: user.uid }))
       redirect('/all')
     } catch (error) {
       swal({ text: validate(error.code), icon: 'error' })
@@ -36,7 +36,7 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
     setLoading(true)
     try {
       const { user } = await signedIn(e.target.email.value, e.target.password.value)
-      dispatch(SET_GLOBAL_USER({ name: user.displayName, avatar: user.photoURL }))
+      dispatch(SET_GLOBAL_USER({ name: user.displayName, avatar: user.photoURL, id: user.uid }))
       redirect('/all')
     } catch (error) {
       swal({ text: validate(error.code), icon: 'error' })
@@ -47,8 +47,8 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
   const googleLoggin = async () => {
     setLoading(true)
     try {
-      const { displayName, photoURL } = await loginWithGoogle()
-      dispatch(SET_GLOBAL_USER({ name: displayName, avatar: photoURL }))
+      const { displayName, photoURL, uid } = await loginWithGoogle()
+      dispatch(SET_GLOBAL_USER({ name: displayName, avatar: photoURL, id: uid }))
       redirect('/all')
     } catch (error) {
       swal({ text: validate(error.code), icon: 'error' })

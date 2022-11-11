@@ -4,6 +4,7 @@ const userInitialState = {
   isLogged: false,
   name: '',
   avatar: '',
+  id: '',
 }
 
 const slice = createSlice({
@@ -14,6 +15,7 @@ const slice = createSlice({
       user.isLogged = true
       user.name = action.payload.name
       user.avatar = action.payload.avatar
+      user.id = action.payload.id
       return user
     },
     RESET_USER: (user) => {

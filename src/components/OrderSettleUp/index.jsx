@@ -2,6 +2,8 @@
 import { memo } from 'react'
 import { useDispatch } from 'react-redux'
 
+import { swal } from 'components'
+
 import { HIDE_MODAL } from 'store/modal'
 import { settleUp } from 'api/order'
 import { UPDATE_ORDER_PERSONS } from 'store/orderList'
@@ -9,23 +11,26 @@ import { UPDATE_ORDER_PERSONS } from 'store/orderList'
 const OrderSettleUp = ({ order, loading, setLoading }) => {
   const dispatch = useDispatch()
 
-  const settleUpOrder = async (orderId) => {
+  const settleUpOrder = async orderId => {
     const answer = confirm('Confirm to settle up!')
     if (answer) {
       setLoading(true)
       const newPersons = order.persons.map(({
-        paid, receivable, payable, total, items, name,
+        paid, balance, tempBalance, total, items, name, id, to, from,
       }) => {
         paid = total
-        receivable = 0
-        payable = 0
+        balance = 0
+        tempBalance = 0
+        to = []
+        from = []
         return {
-          items, name, paid, receivable, payable, total,
+          paid, balance, tempBalance, total, items, name, id, to, from,
         }
       })
-      await settleUp(orderId, newPersons).then(() => {
+      await settleUp(orderId, newPersons, true).then(() => {
         setLoading(false)
         dispatch(UPDATE_ORDER_PERSONS({ orderId, persons: newPersons, all: true }))
+        swal({ text: 'Order is completely settled up', icon: 'success' })
         dispatch(HIDE_MODAL())
       })
     }

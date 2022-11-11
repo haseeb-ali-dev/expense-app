@@ -14,25 +14,25 @@ const OrdersList = () => {
   const dispatch = useDispatch()
   const { showOrder, modalOrder } = useSelector(state => state.modal)
   const orderList = useSelector(state => state.orderList)
-  const { name } = useSelector(state => state.user)
+  const { name, id } = useSelector(state => state.user)
 
   const [fetched, setFetched] = useState(false)
   const [ordersss, setOrdersss] = useState(orderList)
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const fetchedOrders = await getUserOrders(name)
+      const fetchedOrders = await getUserOrders(id)
       setFetched(!fetched)
       dispatch(ADD_ORDER_LIST({ list: fetchedOrders }))
     }
     fetchOrders()
-  }, [name])
+  }, [name, id])
 
   useEffect(() => {
     setOrdersss(orderList)
   }, [orderList])
 
-  const ordersListing = ordersss.map((order, index) => <OrderListItem order={order} orderIdx={index} key={order.id} />)
+  const ordersListing = ordersss.map((order, index) => <OrderListItem order={order} orderIdx={index} key={`order-${index.toString()}`} />)
   const displayOrders = (
     <div className='d-inline-flex flex-wrap p-2'>
       {ordersListing}
