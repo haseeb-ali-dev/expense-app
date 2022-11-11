@@ -33,7 +33,7 @@ const Main = () => {
   return authenticated ? (
     <Suspense fallback={<Loader />}>
       <Router>
-        <Navbar haveAccount={haveAccount} setHaveAccount={setHaveAccount} />
+        <Navbar />
         <Routes>
           <Route path='/all' element={isLogged ? <OrdersList /> : <Navigate to='/auth' />} />
           <Route path='/create' element={isLogged ? <Order /> : <Navigate to='/auth' />} />
