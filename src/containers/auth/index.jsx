@@ -3,16 +3,16 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { Loader, swal } from 'components'
-
 import {
-  signedIn, signedUp, loginWithGoogle, loginWithFacebook,
-} from 'api/auth'
+  FacebookLogin, GoogleLogin, Loader, swal,
+} from 'components'
+
+import { signedIn, signedUp } from 'api/auth'
 import { SET_GLOBAL_USER } from 'store/user'
 import validate from 'utils/helpers/authValidate'
+// import authFields from 'utils/constants/authFields'
 
 import 'containers/auth/style.css'
-import { googleIcon, facebookIcon } from 'assets/icons'
 
 const Auth = ({ haveAccount, setHaveAccount }) => {
   const redirect = useNavigate()
@@ -42,26 +42,6 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
       swal({ text: validate(error.code), icon: 'error' })
     }
     setLoading(false)
-  }
-
-  const googleLoggin = async () => {
-    setLoading(true)
-    try {
-      const { displayName, photoURL, uid } = await loginWithGoogle()
-      dispatch(SET_GLOBAL_USER({ name: displayName, avatar: photoURL, id: uid }))
-      redirect('/all')
-    } catch (error) {
-      swal({ text: validate(error.code), icon: 'error' })
-    }
-    setLoading(false)
-  }
-
-  const facebookLoggin = async () => {
-    setLoading(true)
-    await loginWithFacebook().then(() => {
-      redirect('/create')
-      setLoading(false)
-    })
   }
 
   const label = haveAccount ? 'Please Sign In' : 'Create Account'
@@ -99,12 +79,8 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
             <div className='w-100 text-center my-1'>
               <span className='text-muted'>--OR--</span>
             </div>
-            <button className='w-100 btn btn-light border border-2 rounded-pill mb-1' onClick={googleLoggin}>
-              <span className='me-2 text-center'> <img src={googleIcon} alt='g' width={24} height={24} /></span>{buttonText} with Google
-            </button>
-            <button className='w-100 btn btn-primary rounded-pill mt-1' type='button' onClick={facebookLoggin}>
-              <span className='me-2 text-center'> <img src={facebookIcon} alt='g' width={24} height={24} /></span>{buttonText} with Facebook
-            </button>
+            <GoogleLogin setLoading={setLoading} text={buttonText} />
+            <FacebookLogin setLoading={setLoading} text={buttonText} />
             <div className='text-center'>
               <button type='button' className='btn btn-sm p-0 m-0' onClick={() => setHaveAccount(!haveAccount)}>{switchInfo}</button>
             </div>
