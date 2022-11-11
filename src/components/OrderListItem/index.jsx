@@ -22,7 +22,7 @@ const OrderItem = ({ order, orderIdx, showDetails = false }) => {
       <div className='mb-1 d-inline-flex flex-wrap'>
         <OrderSummary order={order} />
         {showDetails && order.persons.map((person, index) => (
-          <div className='mt-2 mx-1 border py-1 px-2 d-flex flex-column bg-light flex-wrap' key={`person-${index.toString()}`}>
+          <div className='mt-2 mx-1 border py-1 px-2 bg-light d-flex flex-column flex-grow-1' key={`person-${index.toString()}`}>
             <PersonDetail person={person} />
             <Payables
               person={person}

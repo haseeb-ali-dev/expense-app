@@ -1,7 +1,7 @@
 import { memo } from 'react'
 
 export default memo(({ order }) => (
-  <div className='mt-2 mx-1 border py-1 px-2 d-flex flex-column bg-light'>
+  <div className='mt-2 mx-1 border py-1 px-2 d-flex flex-column bg-light flex-grow-1'>
     <p className='fs-5 p-1 mx-5'>
       Summary
     </p>
