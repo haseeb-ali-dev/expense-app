@@ -17,9 +17,8 @@ const ItemForm = () => {
     e.preventDefault()
     if (items.some(({ name }) => name === item.name)) {
       if (confirm('This menu item is already existed. Do you want update that?')) dispatch(UPDATE_ITEM({ key: item.name, updated: item }))
-    } else {
-      dispatch(ADD_ITEM({ item }))
-    }
+    } else dispatch(ADD_ITEM({ item }))
+
     setItem(initialItem)
   }
 

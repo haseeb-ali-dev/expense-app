@@ -5,6 +5,7 @@ const userInitialState = {
   name: '',
   avatar: '',
   id: '',
+  provider: null,
 }
 
 const slice = createSlice({
@@ -16,6 +17,7 @@ const slice = createSlice({
       user.name = action.payload.name
       user.avatar = action.payload.avatar
       user.id = action.payload.id
+      user.provider = action.payload.provider ?? null
       return user
     },
     RESET_USER: (user) => {

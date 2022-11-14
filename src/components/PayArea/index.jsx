@@ -5,13 +5,17 @@ import { PAY_AMOUNTS, SPLIT } from 'store/personList'
 import { UPDATE_ABLE_TO_SAVE } from 'store/menu'
 import { UPDATE_PERSONS } from 'store/order'
 
+import 'components/PayArea/style.css'
+
 const PayArea = () => {
   const { ableToSave } = useSelector(state => state.menu)
   const dispatch = useDispatch()
+  const { id: uid } = useSelector(state => state.user)
   const order = useSelector(state => state.order)
   const persons = useSelector(state => state.personList)
   const [paidAmounts, setPaidAmounts] = useState({})
-  const [remain, setRemain] = useState(0)
+  const [remain, setRemain] = useState(order.grand)
+  const [disabled, setDisabled] = useState(true)
 
   useEffect(() => setRemain(order.grand), [order.grand])
 
@@ -34,11 +38,13 @@ const PayArea = () => {
       ...paidAmounts,
       [e.target.name]: value,
     })
+    setDisabled((remain - value) !== 0)
   }
 
   const handleFocus = e => {
+    setDisabled(true)
     const value = e.target.value === '' ? 0 : parseFloat(e.target.value)
-    setRemain(remain + value)
+    if (value > remain) setRemain(remain + value)
   }
 
   return (
@@ -57,7 +63,7 @@ const PayArea = () => {
             {
               persons.map((person, idx) => (
                 <tr key={`${idx.toString()}`}>
-                  <td>{person.name}</td>
+                  <td className='text-truncate person-name-cell'>{person.name}</td>
                   <td>{person.total.toLocaleString('en-US')}</td>
                   <td>
                     <input
@@ -66,7 +72,7 @@ const PayArea = () => {
                       onBlur={handleBlur}
                       onFocus={handleFocus}
                       min={0}
-                      defaultValue={0}
+                      defaultValue={uid === person.id ? remain : 0}
                       name={person.name}
                       step={0.01}
                     />
@@ -82,7 +88,7 @@ const PayArea = () => {
           </tfoot>
         </table>
         <div className='text-end'>
-          {!ableToSave && <button type='submit' className='btn btn-success btn-sm rounded-0 w-25' disabled={remain !== 0}>Pay and Split</button>}
+          {!ableToSave && <button type='submit' className='btn btn-success btn-sm rounded-0 px-4' disabled={disabled}>Pay and Split</button>}
         </div>
       </form>
     </div>

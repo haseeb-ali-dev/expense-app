@@ -36,17 +36,20 @@ const PersonDetails = () => {
         <PersonList dispatch={dispatch} menuItems={menuItems} persons={persons} />
         {showPerson && (
           <Modal html={(
-            <Select
-              className='mt-5 p-2'
-              options={items}
-              placeholder='Select a item to add........'
-              onChange={({ value }) => {
-                dispatch(ADD_PERSON_ITEM({ personIdx, item: JSON.parse(value) }))
-                dispatch(HIDE_MODAL())
-              }}
-              value=''
-              menuPortalTarget={document.body}
-            />
+            <>
+              <label className='mt-4 p-2'>Please Select Item to add</label>
+              <Select
+                className='p-2'
+                options={items}
+                placeholder='Select a item to add........'
+                onChange={({ value }) => {
+                  dispatch(ADD_PERSON_ITEM({ personIdx, item: JSON.parse(value) }))
+                  dispatch(HIDE_MODAL())
+                }}
+                value=''
+                menuPortalTarget={document.body}
+              />
+            </>
           )}
           />
         )}

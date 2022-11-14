@@ -12,7 +12,7 @@ import UpdatePassword from 'components/UpdatePassword'
 
 const Profile = () => {
   const dispatch = useDispatch()
-  const { name, avatar } = useSelector(state => state.user)
+  const { name, avatar, provider } = useSelector(state => state.user)
   const [loading, setLoading] = useState(false)
   const [username, setUsername] = useState(name)
   const styling = { maxWidth: '540px' }
@@ -62,7 +62,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <UpdatePassword styling={styling} setLoading={setLoading} />
+      {provider === null && <UpdatePassword styling={styling} setLoading={setLoading} />}
     </>
   )
 }

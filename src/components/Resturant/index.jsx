@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { ADD_RESTURANT } from 'store/order'
@@ -19,4 +20,4 @@ const ResturantForm = () => {
     </div>
   )
 }
-export default (ResturantForm)
+export default memo(ResturantForm)

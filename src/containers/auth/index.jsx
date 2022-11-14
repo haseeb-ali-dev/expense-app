@@ -55,6 +55,13 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
           <form onSubmit={haveAccount ? signin : signup}>
             <h1 className='h3 mb-3 fw-normal text-center'>Expense App</h1>
             <h1 className='h6 mb-3 fw-normal text-center'>{label}</h1>
+            {!haveAccount
+              && (
+                <div className='form-floating  my-2'>
+                  <input type='text' name='full_name' className='form-control' id='floatingPassword' placeholder='Name' />
+                  <label htmlFor='floatingPassword'>Full Name</label>
+                </div>
+              )}
             <div className='form-floating my-2'>
               <input type='email' name='email' className='form-control' id='floatingInput' placeholder='name@example.com' required />
               <label htmlFor='floatingInput'>Email address</label>
@@ -63,13 +70,6 @@ const Auth = ({ haveAccount, setHaveAccount }) => {
               <input type='password' name='password' className='form-control' id='floatingPassword' placeholder='Password' required />
               <label htmlFor='floatingPassword'>Password</label>
             </div>
-            {!haveAccount
-              && (
-                <div className='form-floating  my-2'>
-                  <input type='text' name='full_name' className='form-control' id='floatingPassword' placeholder='Name' />
-                  <label htmlFor='floatingPassword'>Full Name</label>
-                </div>
-              )}
             <button className='w-100 btn btn-primary rounded-pill mb-1' type='submit'>{buttonText}</button>
             {haveAccount && (
               <div className='text-center'>

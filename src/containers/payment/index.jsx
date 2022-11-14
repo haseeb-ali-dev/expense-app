@@ -12,17 +12,13 @@ const PaymentSection = () => {
   return (
     <div className='container-fluid'>
       <div className='row'>
-        <div className='col-md-3 p-0'>
+        <div className='col-md-4 p-0'>
           <div className='bg-light border rounded-2 m-1 position-relative'>
             <OrderItems />
-          </div>
-        </div>
-        <div className='col-md-4 p-0'>
-          <div className='bg-light border rounded-2 m-1'>
             <Deductions />
           </div>
         </div>
-        <div className='col-md-5 p-0'>
+        <div className='col-md-8 p-0'>
           <div className='bg-light border rounded-2 m-1'>
             <PayArea />
           </div>

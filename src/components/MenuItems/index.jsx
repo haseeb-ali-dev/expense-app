@@ -15,10 +15,10 @@ const MenuItems = () => {
 
   const itemsList = items.map((item, index) => (
     <div className='d-flex flex-row align-items-center' key={`item-${index.toString()}`}>
-      <button className='btn btn-sm mx-0' onClick={() => dispatch(REMOVE_ITEM({ index }))}>
+      <button className='btn btn-sm mx-0 px-1' onClick={() => dispatch(REMOVE_ITEM({ index }))}>
         <img src={removeIcon} alt='X' />
       </button>
-      <button className='btn btn-sm me-1' onClick={() => dispatch(SET_MODAL_ITEM({ item }))}>
+      <button className='btn btn-sm mx-0 px-1' onClick={() => dispatch(SET_MODAL_ITEM({ item }))}>
         <img src={editIcon} alt='E' />
       </button>
       <Item item={item} />

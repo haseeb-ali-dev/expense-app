@@ -1,8 +1,11 @@
 import { memo } from 'react'
 
-export default memo(({ item: { name, price } }) => (
+const Item = ({ item: { name, price } }) => (
   <div className='d-flex flex-row pb-1'>
-    <small className='pe-2 fw-light'><small className='text-muted'>Name:</small> {name}</small>
-    <small className='ps-2 fw-light'><small className='text-muted'>Price:</small> Rs. {price.toLocaleString('en-US') ?? 0}</small>
+    <small className='pe-1 fw-light'>{name}</small>
+    <small className='text-muted'>@</small>
+    <small className='ps-1 fw-light'>Rs. {price.toLocaleString('en-US') ?? 0}</small>
   </div>
-))
+)
+
+export default memo(Item)

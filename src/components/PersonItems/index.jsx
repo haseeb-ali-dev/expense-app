@@ -5,9 +5,9 @@ import { Item } from 'components'
 import { REMOVE_PERSON_ITEM } from 'store/person'
 import { removeIcon } from 'assets/icons'
 
-export default memo(({ dispatch, name, items }) => name !== '' && (
+const PersonItems = ({ dispatch, name, items }) => name !== '' && (
   <fieldset className='border border-2 p-2 mt-1'>
-    <legend className='float-none w-auto px-1 fs-5'>{name}</legend>
+    <legend className='float-none w-auto px-1 fs-5 text-truncate'>{name}</legend>
     {items.map(item => (
       <div className='d-inline-flex mx-2 my-1 border p-2 position-relative' key={item.name}>
         <Item item={item} />
@@ -19,4 +19,6 @@ export default memo(({ dispatch, name, items }) => name !== '' && (
       </div>
     ))}
   </fieldset>
-))
+)
+
+export default memo(PersonItems)
