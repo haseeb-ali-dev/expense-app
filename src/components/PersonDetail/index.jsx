@@ -1,6 +1,6 @@
 import { memo } from 'react'
 
-export default memo(({ person }) => (
+const PersonDetail = ({ person }) => (
   <>
     <div className='d-flex flex-row justify-content-between mx-auto px-1 py-2 my-1 fs-6'>
       {person.name}
@@ -13,4 +13,6 @@ export default memo(({ person }) => (
       </span>
     </div>
   </>
-))
+)
+
+export default memo(PersonDetail)

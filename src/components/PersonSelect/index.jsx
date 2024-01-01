@@ -18,7 +18,7 @@ const PersonSelect = ({ dispatch, personList, personName }) => {
           label: (
             <div className='d-flex align-items-center'>
               <img src={avatar} height='25' width='25' alt='avatar' className='me-2 rounded-circle' />
-              {name}
+              <span className='text-truncate'>{name}</span>
             </div>
           ),
         }))
