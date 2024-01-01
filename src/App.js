@@ -1,7 +1,3 @@
-const App = () => (
-  <div>
-    <h1>Expense App</h1>
-  </div>
-)
+import { Main } from 'components'
 
-export default App
+export default () => <Main />
